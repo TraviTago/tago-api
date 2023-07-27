@@ -1,6 +1,7 @@
 package com.api.tago.member;
 
 
+import com.api.tago.auth.domain.oauth.OAuthProvider;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

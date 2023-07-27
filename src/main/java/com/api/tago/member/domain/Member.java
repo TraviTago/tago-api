@@ -1,4 +1,4 @@
-package com.api.tago.member;
+package com.api.tago.member.domain;
 
 
 import com.api.tago.auth.domain.oauth.OAuthProvider;

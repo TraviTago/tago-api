@@ -1,0 +1,9 @@
+jwt:
+  secret-key: Z29nby10bS1zZXJ2ZXItZGxyamVvYW9yb3JodG9kZ290c3Atam9vbmdhbmduaW0teWVvbHNpbWhpaGFsZ2VveW8K
+
+oauth:
+  kakao:
+    client-id: 7c23a4698af0305322df23868977b5f2
+    url:
+      auth: https://kauth.kakao.com
+      api: https://kapi.kakao.com

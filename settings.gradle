@@ -1,1 +1,3 @@
 rootProject.name = 'tago'
+include('api')
+include('domain')

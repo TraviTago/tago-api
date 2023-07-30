@@ -1,4 +1,4 @@
-package com.tago.domain.auth;
+package com.tago.domain.auth.jwt;
 
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -13,6 +13,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final Key key;
+
 
     public JwtTokenProvider(@Value("${jwt.secret-key}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);

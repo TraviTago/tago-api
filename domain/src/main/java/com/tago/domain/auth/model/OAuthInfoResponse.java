@@ -1,4 +1,4 @@
-package com.tago.domain.auth.domain.oauth;
+package com.tago.domain.auth.model;
 
 public interface OAuthInfoResponse {
     String getEmail();

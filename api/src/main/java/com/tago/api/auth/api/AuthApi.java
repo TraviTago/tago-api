@@ -1,7 +1,8 @@
-package com.tago.api.auth.application;
+package com.tago.api.auth.api;
 
 
-import com.tago.domain.auth.domain.AuthTokens;
+import com.tago.api.auth.application.OAuthLoginService;
+import com.tago.api.auth.dto.LoginResponse;
 import com.tago.api.auth.infra.kakao.KakaoLoginParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
-public class AuthController {
+public class AuthApi {
     private final OAuthLoginService oAuthLoginService;
 
     @PostMapping("/kakao")
-    public ResponseEntity<AuthTokens> loginKakao(@RequestBody KakaoLoginParams params) {
+    public ResponseEntity<LoginResponse> loginKakao(@RequestBody KakaoLoginParams params) {
         return ResponseEntity.ok(oAuthLoginService.login(params));
     }
 

@@ -1,4 +1,4 @@
-package com.tago.domain.auth.domain.oauth;
+package com.tago.domain.auth.model;
 
 import org.springframework.util.MultiValueMap;
 

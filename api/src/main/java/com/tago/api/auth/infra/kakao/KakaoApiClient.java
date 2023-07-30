@@ -1,9 +1,9 @@
 package com.tago.api.auth.infra.kakao;
 
-import com.tago.domain.auth.domain.oauth.OAuthApiClient;
-import com.tago.domain.auth.domain.oauth.OAuthInfoResponse;
-import com.tago.domain.auth.domain.oauth.OAuthLoginParams;
-import com.tago.domain.auth.domain.oauth.OAuthProvider;
+import com.tago.domain.auth.model.OAuthApiClient;
+import com.tago.domain.auth.model.OAuthInfoResponse;
+import com.tago.domain.auth.model.OAuthLoginParams;
+import com.tago.domain.auth.model.OAuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;

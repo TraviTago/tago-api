@@ -1,12 +1,10 @@
 package com.tago.api.auth.application;
 
-import com.tago.domain.auth.domain.oauth.OAuthInfoResponse;
-import com.tago.domain.auth.domain.oauth.OAuthLoginParams;
-import com.tago.domain.auth.domain.oauth.RequestOAuthInfoService;
-import com.tago.domain.auth.domain.AuthTokens;
-import com.tago.domain.auth.domain.AuthTokensGenerator;
-import com.tago.domain.domain.MemberRepository;
-import com.tago.domain.domain.Member;
+import com.tago.domain.auth.model.OAuthInfoResponse;
+import com.tago.domain.auth.model.OAuthLoginParams;
+import com.tago.api.auth.dto.LoginResponse;
+import com.tago.domain.member.dao.repository.MemberRepository;
+import com.tago.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +12,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OAuthLoginService {
     private final MemberRepository memberRepository;
-    private final AuthTokensGenerator authTokensGenerator;
-    private final RequestOAuthInfoService requestOAuthInfoService;
+    private final TokenGenerateService tokenGenerateService;
+    private final OAuthInfoService oAuthInfoService;
 
-    public AuthTokens login(OAuthLoginParams params) {
-        OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
+    public LoginResponse login(OAuthLoginParams params) {
+        OAuthInfoResponse oAuthInfoResponse = oAuthInfoService.request(params);
         Long memberId = findOrCreateMember(oAuthInfoResponse);
-        return authTokensGenerator.generate(memberId);
+        return tokenGenerateService.generate(memberId);
     }
 
     private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
                 .map(Member::getId)
-                .orElseGet(() -> newMember(oAuthInfoResponse));
+                .orElseGet(() -> createMember(oAuthInfoResponse));
     }
 
-    private Long newMember(OAuthInfoResponse oAuthInfoResponse) {
+    private Long createMember(OAuthInfoResponse oAuthInfoResponse) {
         Member member = Member.builder()
                 .email(oAuthInfoResponse.getEmail())
                 .nickname(oAuthInfoResponse.getNickname())

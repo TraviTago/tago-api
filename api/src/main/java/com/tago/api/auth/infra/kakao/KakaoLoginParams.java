@@ -1,8 +1,8 @@
 package com.tago.api.auth.infra.kakao;
 
 
-import com.tago.domain.auth.domain.oauth.OAuthLoginParams;
-import com.tago.domain.auth.domain.oauth.OAuthProvider;
+import com.tago.domain.auth.model.OAuthLoginParams;
+import com.tago.domain.auth.model.OAuthProvider;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.LinkedMultiValueMap;

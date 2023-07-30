@@ -1,7 +1,7 @@
-package com.tago.domain.domain;
+package com.tago.domain.member.domain;
 
 
-import com.tago.domain.auth.domain.oauth.OAuthProvider;
+import com.tago.domain.auth.model.OAuthProvider;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

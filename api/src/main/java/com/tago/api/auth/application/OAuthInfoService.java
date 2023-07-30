@@ -1,6 +1,10 @@
-package com.tago.domain.auth.domain.oauth;
+package com.tago.api.auth.application;
 
 
+import com.tago.domain.auth.model.OAuthApiClient;
+import com.tago.domain.auth.model.OAuthInfoResponse;
+import com.tago.domain.auth.model.OAuthLoginParams;
+import com.tago.domain.auth.model.OAuthProvider;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,10 +13,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class RequestOAuthInfoService {
+public class OAuthInfoService {
     private final Map<OAuthProvider, OAuthApiClient> clients;
 
-    public RequestOAuthInfoService(List<OAuthApiClient> clients) {
+    public OAuthInfoService(List<OAuthApiClient> clients) {
         this.clients = clients.stream().collect(
                 Collectors.toUnmodifiableMap(OAuthApiClient::oAuthProvider, Function.identity())
         );

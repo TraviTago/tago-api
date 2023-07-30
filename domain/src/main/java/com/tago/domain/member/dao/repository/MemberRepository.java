@@ -1,6 +1,7 @@
-package com.tago.domain.domain;
+package com.tago.domain.member.dao.repository;
 
 
+import com.tago.domain.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

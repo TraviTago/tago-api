@@ -1,19 +1,23 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/tago?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/tago?serverTimezone=Asia/Seoul
     username: root
     password: dlgksmf4051
     driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
 
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL57Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
         show_sql: true
+    defer-datasource-initialization: true
 
 jwt:
   secret-key: ${JWT_SECRET_KEY}

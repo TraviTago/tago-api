@@ -1,4 +1,4 @@
-package com.tago.api.auth.api;
+package com.tago.api.auth.presentation;
 
 
 import com.tago.api.auth.application.OAuthLoginService;

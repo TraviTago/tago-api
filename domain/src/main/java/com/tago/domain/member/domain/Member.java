@@ -1,35 +1,29 @@
 package com.tago.domain.member.domain;
 
 
-import com.tago.domain.auth.model.OAuthProvider;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.tago.domain.auth.domain.OAuthProvider;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(name = "nick_name")
     private String nickname;
 
+    @Column(name = "oauth_provider")
+    @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
-
-    @Builder
-    public Member(String email, String nickname, OAuthProvider oAuthProvider){
-        this.email = email;
-        this.nickname = nickname;
-        this.oAuthProvider = oAuthProvider;
-    }
 
 }

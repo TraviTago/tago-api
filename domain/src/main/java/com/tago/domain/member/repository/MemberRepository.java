@@ -1,4 +1,4 @@
-package com.tago.domain.member.dao.repository;
+package com.tago.domain.member.repository;
 
 
 import com.tago.domain.member.domain.Member;

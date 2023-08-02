@@ -1,4 +1,4 @@
-package com.tago.domain.auth.model;
+package com.tago.domain.auth.domain;
 
 public interface OAuthApiClient {
     OAuthProvider oAuthProvider();

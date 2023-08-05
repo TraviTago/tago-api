@@ -2,7 +2,7 @@ package com.tago.api.auth.jwt;
 
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Authority;
-import com.tago.domain.member.service.MemberGetService;
+import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtProvider {
     private final JwtTokenExtractor jwtTokenExtractor;
-    private final MemberGetService memberGetService;
+    private final MemberQueryService memberGetService;
 
     public Authentication authenticate(String token) {
         Long memberId = jwtTokenExtractor.extract(token);

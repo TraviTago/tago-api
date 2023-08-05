@@ -3,7 +3,6 @@ package com.tago.api.auth.application;
 import com.tago.api.auth.infra.OAuthInfoResponse;
 import com.tago.api.auth.infra.OAuthLoginParams;
 import com.tago.api.auth.dto.response.LoginResponse;
-import com.tago.api.auth.jwt.JwtTokenExtractor;
 import com.tago.api.auth.jwt.JwtTokenGenerator;
 import com.tago.domain.member.repository.MemberRepository;
 import com.tago.domain.member.domain.Member;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class OAuthLoginService {
+public class OAuthLoginRestAPIService {
     private final MemberRepository memberRepository;
     private final JwtTokenGenerator jwtTokenGenerator;
     private final OAuthInfoService oAuthInfoService;
@@ -22,8 +21,6 @@ public class OAuthLoginService {
         Long memberId = findOrCreateMember(oAuthInfoResponse);
         return generateTokenToDto(memberId);
     }
-
-
 
     private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
         return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
@@ -35,7 +32,7 @@ public class OAuthLoginService {
         Member member = Member.builder()
                 .email(oAuthInfoResponse.getEmail())
                 .name(oAuthInfoResponse.getNickname())
-                .oAuthProvider(oAuthInfoResponse.getOAuthProvider())
+                .oauthProvider(oAuthInfoResponse.getOAuthProvider())
                 .build();
 
         return memberRepository.save(member).getId();

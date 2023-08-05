@@ -1,7 +1,8 @@
 package com.tago.domain.member.domain;
 
 
-import com.tago.domain.auth.domain.OAuthProvider;
+import com.tago.domain.member.domain.vo.Authority;
+import com.tago.domain.member.domain.vo.OAuthProvider;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,10 +20,14 @@ public class Member {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "nick_name")
-    private String nickname;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "oauth_provider")
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @Column(name = "oauth_provider", nullable = false)
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
 

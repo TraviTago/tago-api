@@ -1,6 +1,6 @@
 package com.tago.api.auth.application;
 
-import com.tago.api.auth.dto.LoginRequest;
+import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.dto.LoginResponse;
 import com.tago.domain.auth.domain.OAuthInfoResponse;
 import com.tago.domain.member.domain.Member;

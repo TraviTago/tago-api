@@ -1,4 +1,4 @@
-package com.tago.api.auth.dto;
+package com.tago.api.auth.dto.request;
 
 
 import lombok.AllArgsConstructor;

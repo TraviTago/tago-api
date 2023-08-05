@@ -2,7 +2,9 @@ package com.tago.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
+@ConfigurationPropertiesScan
 @SpringBootApplication(scanBasePackages = {"com.tago.api", "com.tago.domain"})
 public class ApiApplication {
 

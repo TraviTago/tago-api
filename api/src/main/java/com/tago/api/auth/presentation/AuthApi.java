@@ -27,7 +27,7 @@ public class AuthApi {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<LoginResponse> loginKakao(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
         return ResponseDto.ok(oAuthSdkService.login(loginRequest));
     }
 

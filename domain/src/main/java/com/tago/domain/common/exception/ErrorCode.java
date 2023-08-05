@@ -5,8 +5,18 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
+    // Auth
+    UNAUTHORIZED(401, "AU001", "잘못된 토큰입니다."),
+    INVALID_AUTHORIZATION_SCHEMA(401, "AU002", "잘못된 Authorization 스키마입니다."),
+    EMPTY_AUTHORIZATION_SCHEMA(401, "AU003", "Authorization 스키마가 없습니다."),
+    EMPTY_ACCESS_TOKEN(401, "AU004", "헤더에 access token 존재하지 않습니다."),
+    INVALID_AUTHORIZATION_HEADER(400, "AU005", "잘돗된 형식의 Authorization 헤더입니다."),
+
     // Member
-    MEMBER_NOT_FOUND(400, "M001", "존재하지 않는 멤버입니다")
+    MEMBER_NOT_FOUND(400, "M001", "존재하지 않는 멤버입니다"),
+
+    // ETC
+    DEFAULT(500, "-1", "INTERNAL_SERVER_ERROR")
     ;
 
     private int status;

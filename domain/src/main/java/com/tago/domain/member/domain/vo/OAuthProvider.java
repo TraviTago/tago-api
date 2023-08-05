@@ -1,4 +1,4 @@
-package com.tago.domain.auth.domain;
+package com.tago.domain.member.domain.vo;
 
 public enum OAuthProvider {
 

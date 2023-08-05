@@ -29,6 +29,6 @@ public class Member {
 
     @Column(name = "oauth_provider", nullable = false)
     @Enumerated(EnumType.STRING)
-    private OAuthProvider oAuthProvider;
+    private OAuthProvider oauthProvider;
 
 }

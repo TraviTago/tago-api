@@ -1,10 +1,10 @@
 package com.tago.api.auth.application;
 
 
-import com.tago.domain.auth.domain.OAuthApiClient;
-import com.tago.domain.auth.domain.OAuthInfoResponse;
-import com.tago.domain.auth.domain.OAuthLoginParams;
-import com.tago.domain.auth.domain.OAuthProvider;
+import com.tago.api.auth.infra.OAuthApiClient;
+import com.tago.api.auth.infra.OAuthInfoResponse;
+import com.tago.api.auth.infra.OAuthLoginParams;
+import com.tago.domain.member.domain.vo.OAuthProvider;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

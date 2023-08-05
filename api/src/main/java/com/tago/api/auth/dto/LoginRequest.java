@@ -13,4 +13,6 @@ public class LoginRequest {
 
     private String sns;
     private String email;
+    private String name;
+    
 }

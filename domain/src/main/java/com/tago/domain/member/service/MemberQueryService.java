@@ -1,6 +1,7 @@
 package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.vo.OAuthProvider;
 import com.tago.domain.member.exception.MemberNotFoundException;
 import com.tago.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

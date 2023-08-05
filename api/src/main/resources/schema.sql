@@ -1,4 +1,6 @@
-create table if not exists member (
+drop table if exists member;
+
+create table member (
     id bigint auto_increment,
     email varchar(255),
     name varchar(255) not null,

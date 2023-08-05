@@ -1,7 +1,7 @@
 package com.tago.api.auth.infra.kakao;
 
-import com.tago.domain.auth.domain.OAuthInfoResponse;
-import com.tago.domain.auth.domain.OAuthProvider;
+import com.tago.api.auth.infra.OAuthInfoResponse;
+import com.tago.domain.member.domain.vo.OAuthProvider;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

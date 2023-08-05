@@ -1,4 +1,6 @@
-package com.tago.domain.auth.domain;
+package com.tago.api.auth.infra;
+
+import com.tago.domain.member.domain.vo.OAuthProvider;
 
 public interface OAuthApiClient {
     OAuthProvider oAuthProvider();

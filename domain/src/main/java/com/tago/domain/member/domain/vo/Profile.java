@@ -18,7 +18,6 @@ import static lombok.Builder.*;
 @Embeddable
 public class Profile {
 
-    @Default
     @Column(name = "age_range")
     private Integer ageRange;
 

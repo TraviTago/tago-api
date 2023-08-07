@@ -6,6 +6,7 @@ import com.tago.api.auth.jwt.JwtTokenGenerator;
 import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,6 +14,7 @@ public class TokenReissueService {
     private final JwtTokenGenerator jwtTokenGenerator;
     private final MemberQueryService memberGetService;
 
+    @Transactional
     public TokenReissueResponse reissue(Long memberId) {
         existsMember(memberId);
         String accessToken = jwtTokenGenerator.generateAccessToken(memberId);

@@ -21,8 +21,8 @@ public class JwtProvider {
         Long memberId = jwtTokenExtractor.extract(token);
         Member member = memberGetService.getMember(memberId);
         Authority authority = member.getAuthority();
-        return new UsernamePasswordAuthenticationToken(member, "",
-                List.of(new SimpleGrantedAuthority(authority.toString()))
+        return new UsernamePasswordAuthenticationToken(member.getId(), "",
+                List.of(new SimpleGrantedAuthority(authority.getRole()))
         );
     }
 }

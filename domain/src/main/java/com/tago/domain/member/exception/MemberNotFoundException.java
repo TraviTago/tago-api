@@ -1,7 +1,7 @@
 package com.tago.domain.member.exception;
 
-import com.tago.domain.common.exception.BaseBusinessException;
-import com.tago.domain.common.exception.ErrorCode;
+import com.tago.domain.common.error.BaseBusinessException;
+import com.tago.domain.common.error.ErrorCode;
 
 public class MemberNotFoundException extends BaseBusinessException {
     public MemberNotFoundException() {

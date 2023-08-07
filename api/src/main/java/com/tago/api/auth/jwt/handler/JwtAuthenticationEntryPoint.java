@@ -2,9 +2,9 @@ package com.tago.api.auth.jwt.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tago.domain.common.exception.BaseBusinessException;
-import com.tago.domain.common.exception.ErrorCode;
-import com.tago.domain.common.exception.ErrorResponse;
+import com.tago.domain.common.error.BaseBusinessException;
+import com.tago.domain.common.error.ErrorCode;
+import com.tago.domain.common.error.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

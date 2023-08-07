@@ -11,6 +11,7 @@ public enum ErrorCode {
     EMPTY_AUTHORIZATION_SCHEMA(401, "AU003", "Authorization 스키마가 없습니다."),
     EMPTY_ACCESS_TOKEN(401, "AU004", "헤더에 access token 존재하지 않습니다."),
     INVALID_AUTHORIZATION_HEADER(400, "AU005", "잘돗된 형식의 Authorization 헤더입니다."),
+    PRINCIPAL_TYPE_NOT_MATCH(400, "AU006", "Authorization의 principal 객체가 Long 타입이 아닙니다."),
 
     // Member
     MEMBER_NOT_FOUND(400, "M001", "존재하지 않는 멤버입니다"),

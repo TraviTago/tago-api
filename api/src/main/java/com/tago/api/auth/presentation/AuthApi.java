@@ -5,6 +5,7 @@ import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.application.TokenReissueService;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.TokenReissueResponse;
+import com.tago.api.common.annotation.LoginUser;
 import com.tago.api.common.model.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,8 @@ public class AuthApi {
         return ResponseDto.ok(oAuthLoginService.login(loginRequest));
     }
     @PostMapping("/auth/token/reissue")
-    public ResponseEntity<TokenReissueResponse> reissue(
-            @RequestHeader("Authorization") String refreshToken
-    ) {
-        TokenReissueResponse response = tokenReissueService.reissue(refreshToken);
+    public ResponseEntity<TokenReissueResponse> reissue(@LoginUser Long memberId) {
+        TokenReissueResponse response = tokenReissueService.reissue(memberId);
         return ResponseDto.ok(response);
     }
 }

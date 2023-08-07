@@ -11,15 +11,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TokenReissueService {
     private final JwtTokenGenerator jwtTokenGenerator;
-    private final JwtTokenExtractor jwtTokenExtractor;
     private final MemberQueryService memberGetService;
 
-    public TokenReissueResponse reissue(String refreshToken) {
-        Long memberId = jwtTokenExtractor.extract(refreshToken);
+    public TokenReissueResponse reissue(Long memberId) {
         existsMember(memberId);
         String accessToken = jwtTokenGenerator.generateAccessToken(memberId);
         return new TokenReissueResponse(accessToken);
     }
+
     private void existsMember(Long memberId) {
         memberGetService.getMember(memberId);
     }

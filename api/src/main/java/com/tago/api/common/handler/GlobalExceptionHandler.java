@@ -1,4 +1,4 @@
-package com.tago.api.common.exception;
+package com.tago.api.common.handler;
 
 public class GlobalExceptionHandler {
 }

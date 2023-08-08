@@ -35,4 +35,8 @@ public class Profile {
     @Column(name = "trip_types")
     @Convert(converter = TripTypeEnumArrayConverter.class)
     private List<TripType> tripTypes = new ArrayList<>();
+
+    public boolean isSignedUp() {
+        return ageRange != null || gender != null || mbti != null;
+    }
 }

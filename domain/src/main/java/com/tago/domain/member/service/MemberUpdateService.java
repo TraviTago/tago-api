@@ -2,7 +2,6 @@ package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.dto.MemberInfoDto;
-import com.tago.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberUpdateService {
 
-    private final MemberRepository memberRepository;
     private final MemberQueryService memberQueryService;
 
     public Member updateMemberInfo(Long memberId, MemberInfoDto dto) {
@@ -23,7 +21,6 @@ public class MemberUpdateService {
                 dto.getFavorites(),
                 dto.getTripTypes()
         );
-
         return member;
     }
 }

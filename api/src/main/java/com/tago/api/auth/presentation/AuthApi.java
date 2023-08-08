@@ -9,7 +9,7 @@ import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
 import com.tago.api.auth.dto.response.TokenReissueResponse;
 import com.tago.api.common.annotation.LoginMember;
-import com.tago.api.common.model.dto.ResponseDto;
+import com.tago.api.common.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig {
 
-    public static final String HEADER_NAME = "Authetication";
+    public static final String HEADER_NAME = "Authorization";
 
     @Bean
     public OpenAPI openAPI() {

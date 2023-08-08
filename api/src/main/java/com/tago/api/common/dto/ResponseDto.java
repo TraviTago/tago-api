@@ -1,4 +1,4 @@
-package com.tago.api.common.model.dto;
+package com.tago.api.common.dto;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

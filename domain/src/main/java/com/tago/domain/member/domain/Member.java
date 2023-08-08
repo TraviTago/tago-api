@@ -49,4 +49,8 @@ public class Member {
                 .tripTypes(tripTypes)
                 .build();
     }
+
+    public boolean isSignedUp() {
+        return profile.isSignedUp();
+    }
 }

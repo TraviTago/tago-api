@@ -8,6 +8,8 @@ import com.tago.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberQueryService {
@@ -23,18 +25,7 @@ public class MemberQueryService {
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Member getOrCreateMember(String email, OAuthProvider oauthProvider, String name) {
-        return memberRepository.findByEmailAndOauthProvider(email, oauthProvider)
-                .orElseGet(() -> createMember(email, oauthProvider, name));
-    }
-
-    private Member createMember(String email, OAuthProvider oAuthProvider, String name) {
-        Member member = Member.builder()
-                .email(email)
-                .name(name)
-                .oauthProvider(oAuthProvider)
-                .authority(Authority.USER)
-                .build();
-        return memberRepository.save(member);
+    public Optional<Member> getMemberOptional(String email) {
+        return memberRepository.findByEmail(email);
     }
 }

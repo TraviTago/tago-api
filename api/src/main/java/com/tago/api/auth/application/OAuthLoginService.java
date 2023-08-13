@@ -5,7 +5,6 @@ import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.jwt.JwtTokenGenerator;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.service.MemberCreateService;
-import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class OAuthLoginService {
 
-    private final MemberQueryService memberQueryService;
     private final MemberCreateService memberCreateService;
     private final JwtTokenGenerator jwtTokenGenerator;
 
@@ -25,12 +23,7 @@ public class OAuthLoginService {
     }
 
     private Member getOrCreateMember(LoginRequest loginRequest) {
-        return memberQueryService.getMemberOptional(loginRequest.getEmail())
-                .orElseGet(() -> createMember(loginRequest));
-    }
-
-    private Member createMember(LoginRequest loginRequest) {
-        return memberCreateService.create(
+        return memberCreateService.getOrCreateMember(
                 loginRequest.getEmail(),
                 loginRequest.getName(),
                 loginRequest.getOauthProvider()

@@ -15,13 +15,12 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public MemberAuthInfoResponse getAuthInfo(Long memberId) {
-        Member member = memberQueryService.getMember(memberId);
-        boolean isSignedUp = member.isSignedUp();
+        Member member = memberQueryService.findById(memberId);
 
         return new MemberAuthInfoResponse(
                 member.getEmail(),
                 member.getOauthProvider(),
-                isSignedUp
+                member.isSignedUp()
         );
     }
 }

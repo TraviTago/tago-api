@@ -1,7 +1,6 @@
 package com.tago.api.auth.application;
 
 import com.tago.api.auth.dto.response.TokenReissueResponse;
-import com.tago.api.auth.jwt.JwtTokenExtractor;
 import com.tago.api.auth.jwt.JwtTokenGenerator;
 import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TokenReissueService {
     private final JwtTokenGenerator jwtTokenGenerator;
-    private final MemberQueryService memberGetService;
+    private final MemberQueryService memberQueryService;
 
     @Transactional
     public TokenReissueResponse reissue(Long memberId) {
@@ -22,6 +21,6 @@ public class TokenReissueService {
     }
 
     private void existsMember(Long memberId) {
-        memberGetService.getMember(memberId);
+        memberQueryService.findById(memberId);
     }
 }

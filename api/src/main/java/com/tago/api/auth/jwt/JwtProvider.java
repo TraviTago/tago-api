@@ -15,11 +15,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtProvider {
     private final JwtTokenExtractor jwtTokenExtractor;
-    private final MemberQueryService memberGetService;
+    private final MemberQueryService memberQueryService;
 
     public Authentication authenticate(String token) {
         Long memberId = jwtTokenExtractor.extract(token);
-        Member member = memberGetService.getMember(memberId);
+        Member member = memberQueryService.findById(memberId);
         Authority authority = member.getAuthority();
         return new UsernamePasswordAuthenticationToken(member.getId(), "",
                 List.of(new SimpleGrantedAuthority(authority.getRole()))

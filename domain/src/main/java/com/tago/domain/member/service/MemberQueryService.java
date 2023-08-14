@@ -1,7 +1,6 @@
 package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.domain.vo.Authority;
 import com.tago.domain.member.domain.vo.OAuthProvider;
 import com.tago.domain.member.exception.MemberNotFoundException;
 import com.tago.domain.member.repository.MemberRepository;
@@ -15,17 +14,21 @@ import java.util.Optional;
 public class MemberQueryService {
     private final MemberRepository memberRepository;
 
-    public Member getMember(Long memberId) {
+    public Member findById(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Member getMember(String email) {
+    public Member findByEmail(String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Optional<Member> getMemberOptional(String email) {
-        return memberRepository.findByEmail(email);
+    public Optional<Member> findOptionalByEmailAndOauthProvider(String email, OAuthProvider oAuthProvider) {
+        return memberRepository.findByEmailAndOauthProvider(email, oAuthProvider);
+    }
+
+    public boolean existsById(Long memberId) {
+        return memberRepository.existsById(memberId);
     }
 }

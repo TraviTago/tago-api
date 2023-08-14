@@ -3,22 +3,28 @@ package com.tago.domain.member.service;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Authority;
 import com.tago.domain.member.domain.vo.OAuthProvider;
-import com.tago.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class MemberCreateService {
-    private final MemberRepository memberRepository;
 
-    public Member create(String email, String name, OAuthProvider oAuthProvider) {
+    public final MemberQueryService memberQueryService;
+    public final MemberCommandService memberCommandService;
+
+    public Member getOrCreateMember(String email, String name, OAuthProvider oAuthProvider) {
+        return memberQueryService.findOptionalByEmailAndOauthProvider(email, oAuthProvider)
+                .orElseGet(() -> create(email, name, oAuthProvider));
+    }
+
+    private Member create(String email, String name, OAuthProvider oAuthProvider) {
         Member member = Member.builder()
                 .email(email)
                 .name(name)
                 .oauthProvider(oAuthProvider)
                 .authority(Authority.USER)
                 .build();
-        return memberRepository.save(member);
+        return memberCommandService.save(member);
     }
 }

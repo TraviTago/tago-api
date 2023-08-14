@@ -13,7 +13,7 @@ public class MemberUpdateService {
     private final MemberQueryService memberQueryService;
 
     public Member updateMemberInfo(Long memberId, MemberInfoDto dto) {
-        Member member = memberQueryService.getMember(memberId);
+        Member member = memberQueryService.findById(memberId);
         member.updateInfo(
                 dto.getAgeRange(),
                 dto.getGender(),

@@ -42,5 +42,5 @@ public class Trip {
 
     @Default
     @Convert(converter = FavoriteEnumArrayConverter.class)
-    private List<Favorite> favorite = new ArrayList<>();
+    private List<Favorite> favorites = new ArrayList<>();
 }

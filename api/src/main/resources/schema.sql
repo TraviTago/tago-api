@@ -17,17 +17,19 @@ create table member (
 
 drop table if exists trip;
 
+
 create table trip (
-    id bigint auto_increment,
-    user_id bigint,
-    course_id bigint,
-    name varchar(255),
-    meetTime timestamp,
-    meetPlace varchar(255),
-    max_member int,
-    current_member int,
-    same_gender boolean,
-    same_age boolean,
-    is_pet boolean,
-    primary key (id)
+      id bigint auto_increment,
+      name varchar(255),
+      meetTime timestamp,
+      meetPlace varchar(255),
+      max_member int,
+      current_member int,
+      same_gender boolean,
+      same_age boolean,
+      is_pet boolean,
+      favorites varchar(255),
+      user_id bigint,
+      course_id bigint,
+      primary key (id)
 )

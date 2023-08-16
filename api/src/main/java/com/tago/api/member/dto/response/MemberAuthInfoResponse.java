@@ -13,3 +13,8 @@ public class MemberAuthInfoResponse {
     private OAuthProvider oAuthProvider;
     private boolean isSignedUp;
 }
+
+
+
+
+

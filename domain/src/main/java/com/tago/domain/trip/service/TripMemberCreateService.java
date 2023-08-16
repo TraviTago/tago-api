@@ -17,8 +17,8 @@ public class TripMemberCreateService {
 
     private TripMember create(Long trip_id,Long member_id){
         TripMember tripMember = TripMember.builder()
-                .trip_id(trip_id)
-                .member_id(member_id)
+                .tripId(trip_id)
+                .memberId(member_id)
                 .build();
 
         return tripMemberCommandService.save(tripMember);

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TripMemberJoinResponse {
     private Long id;
-    private Long trip_id;
-    private Long member_id;
+    private Long tripId;
+    private Long memberId;
 }
+

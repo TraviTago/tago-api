@@ -32,4 +32,5 @@ create table trip (
       user_id bigint,
       course_id bigint,
       primary key (id)
-)
+);
+

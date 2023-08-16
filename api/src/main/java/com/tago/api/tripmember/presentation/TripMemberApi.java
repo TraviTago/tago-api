@@ -2,6 +2,8 @@ package com.tago.api.tripmember.presentation;
 
 
 import com.tago.api.auth.jwt.JwtProvider;
+import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.tripmember.application.TripMemberService;
 import com.tago.domain.trip.domain.TripMember;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +26,19 @@ public class TripMemberApi {
     private JwtProvider jwtProvider;
 
     @PostMapping("/{trip_id}/join")
-    public ResponseEntity<Map<String, Long>> joinTrip(@PathVariable Long trip_id, @RequestHeader("accesss-Token") String accessToken) {
-        Long member_id = extractMemberIdFromToken(accessToken);
+    public ResponseEntity<Map<String, Long>> joinTrip(@PathVariable Long trip_id, @LoginMember Long memberId) {
 
-        TripMember tripMember = tripMemberService.joinTrip(trip_id, member_id);
+        //Long member_id = extractMemberIdFromToken(accessToken);
+
+        TripMember tripMember = tripMemberService.joinTrip(trip_id, memberId);
+
 
         Map<String, Long> response = new HashMap<>();
         response.put("id", tripMember.getId());
         response.put("trip_id", tripMember.getTrip_id());
         response.put("member_id", tripMember.getMember_id());
 
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return ResponseDto.ok(response);
     }
 
-    private Long extractMemberIdFromToken(String accessToken) {
-        Authentication auth = jwtProvider.authenticate(accessToken);
-        return (Long) auth.getPrincipal();
-    }
 }

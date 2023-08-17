@@ -34,3 +34,9 @@ create table trip (
       primary key (id)
 );
 
+create table trip_member (
+    id bigint auto_increment,
+    trip_id bigint,
+    member_id bigint,
+    primary key (id)
+);

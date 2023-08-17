@@ -13,4 +13,9 @@ public class TripCommandService {
 
     private final TripRepository tripRepository;
 
+    public boolean isValidTripId(Long tripId){
+        return tripRepository.existsById(tripId);
+    }
+
 }
+

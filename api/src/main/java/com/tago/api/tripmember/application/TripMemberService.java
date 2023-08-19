@@ -35,7 +35,7 @@ public class TripMemberService {
             throw new IllegalArgumentException("The trip has reached its maximum members limit");
         }
 
-        //현재이원수 증가
+        //현재 인원수 증가
         tripCommandService.incrementCurrentMember(trip);
 
         TripMember tripMember = create(tripId, memberId);

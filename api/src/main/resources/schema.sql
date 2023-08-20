@@ -1,4 +1,5 @@
 drop table if exists member;
+drop table if exists trip_member;
 
 create table member (
     id bigint auto_increment,

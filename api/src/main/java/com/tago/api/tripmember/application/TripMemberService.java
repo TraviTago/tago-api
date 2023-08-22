@@ -2,10 +2,12 @@ package com.tago.api.tripmember.application;
 
 
 import com.tago.api.tripmember.dto.response.TripMemberJoinResponse;
+import com.tago.domain.member.exception.MaxMemberLimitException;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.domain.TripMember;
 import com.tago.domain.trip.service.TripCommandService;
 import com.tago.domain.trip.service.TripMemberCommandService;
+import com.tago.domain.trip.service.TripQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,25 +16,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TripMemberService {
 
-//    @Autowired
-//    private TripMemberCommandService tripMemberCommandService;
-//    private TripCommandService tripCommandService;
-
     private final TripMemberCommandService tripMemberCommandService;
     private final TripCommandService tripCommandService;
+    private final TripQueryService tripQueryService;
 
     public TripMemberJoinResponse joinTrip(Long tripId, Long memberId){
 
-    //존재하는 tripId인지 확인
-    if (!tripCommandService.isValidTripId(tripId)){
-        throw new IllegalArgumentException("Invalid tripId");
-    }
+        //존재하는 여행인지 확인
+        Trip trip = tripQueryService.findByID(tripId);
 
         //현재 인원수와 최대 인원수 비교하기
-        Trip trip = tripCommandService.getTripById(tripId);
-
         if(trip.getCurrent_member()>=trip.getMax_member()){
-            throw new IllegalArgumentException("The trip has reached its maximum members limit");
+            throw new MaxMemberLimitException();
         }
 
         //현재 인원수 증가

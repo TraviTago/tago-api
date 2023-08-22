@@ -25,12 +25,9 @@ public class TripMemberApi {
 
     @PostMapping("/{tripId}/join")
     public ResponseEntity<?>joinTrip(@PathVariable Long tripId, @LoginMember Long memberId){ //TripMemberJoinResponse
-        try {
-            TripMemberJoinResponse response = tripMemberService.joinTrip(tripId, memberId);
-            return ResponseDto.ok(response);
-        } catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body("Invalid tripId");
-        }
+        TripMemberJoinResponse response = tripMemberService.joinTrip(tripId, memberId);
+        return ResponseDto.ok(response);
+
     }
 
 }

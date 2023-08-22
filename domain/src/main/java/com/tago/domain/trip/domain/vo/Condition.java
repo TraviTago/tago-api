@@ -1,10 +1,12 @@
 package com.tago.domain.trip.domain.vo;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.*;
 
 @Getter
 @Builder
+@Embeddable
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -19,6 +19,7 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
 
+
 jwt:
   secretKey: ${JWT_SECRET_KEY}
 

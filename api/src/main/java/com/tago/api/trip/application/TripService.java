@@ -24,11 +24,7 @@ public class TripService {
     @Transactional(readOnly = true)
     public TripGetAllResponse getAll(Long cursorId, LocalDateTime cursorDate, int limit) {
         List<TripPreviewDto> trips = tripQueryService.findAll(cursorId, cursorDate, limit);
-
-        return new TripGetAllResponse(
-                hasNext(trips),
-                trips
-        );
+        return new TripGetAllResponse(hasNext(trips), trips);
     }
 
     private boolean hasNext(List<TripPreviewDto> trips) {

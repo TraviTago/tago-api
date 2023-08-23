@@ -1,6 +1,7 @@
 package com.tago.domain.trip.domain;
 
 import com.tago.domain.common.converter.FavoriteEnumArrayConverter;
+import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.vo.Condition;
 import com.tago.domain.member.domain.vo.Favorite;
 import jakarta.persistence.*;
@@ -23,19 +24,19 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-
-    private Long courseId;
-
     private String name;
 
-    private LocalDateTime meetTime;
+    @Column(name = "date_time")
+    private LocalDateTime dateTime;
 
+    @Column(name = "meet_place")
     private String meetPlace;
 
-    private int max_member;
+    @Column(name = "max_cnt")
+    private int maxCnt;
 
-    private int current_member;
+    @Column(name = "current_cnt")
+    private int currentCnt;
 
     @Embedded
     private Condition condition;
@@ -44,11 +45,17 @@ public class Trip {
     @Convert(converter = FavoriteEnumArrayConverter.class)
     private List<Favorite> favorites = new ArrayList<>();
 
-    //현재 멤버 수 증가 메서드 추가
-    public void incrementCurrentMember() {
-        this.current_member +=1;
-    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
+    @Default
+    @OneToMany(mappedBy = "trip")
+    private List<TripPlace> tripPlaces = new ArrayList<>();
+
+    public void incrementCurrentMember() {
+        this.current_member += 1;
+    }
 }
 
 

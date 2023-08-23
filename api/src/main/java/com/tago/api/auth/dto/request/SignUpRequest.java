@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -18,18 +19,18 @@ import java.util.List;
 @AllArgsConstructor
 public class SignUpRequest {
     private int ageRange;
-    private Gender gender;
+    private String gender;
     private Mbti mbti;
-    private List<Favorite> favorites;
-    private List<TripType> tripTypes;
+    private List<String> favorites;
+    private List<String> tripTypes;
 
     public MemberInfoDto toMemberInfoDto() {
         return MemberInfoDto.builder()
                 .ageRange(ageRange)
-                .gender(gender)
+                .gender(Gender.valueOf(gender))
                 .mbti(mbti)
-                .favorites(favorites)
-                .tripTypes(tripTypes)
+                .favorites(Favorite.from(favorites))
+                .tripTypes(TripType.from(tripTypes))
                 .build();
     }
 }

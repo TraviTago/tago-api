@@ -1,6 +1,6 @@
 package com.tago.api.auth.presentation;
 
-import com.tago.api.auth.application.OAuthLoginService;
+import com.tago.api.auth.application.LoginService;
 import com.tago.api.auth.application.SignUpService;
 import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.application.TokenReissueService;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 public class AuthApi {
-    private final OAuthLoginService oAuthLoginService;
+    private final LoginService loginService;
     private final TokenReissueService tokenReissueService;
     private final SignUpService signUpService;
 
     @PostMapping("/auth/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
-        return ResponseDto.ok(oAuthLoginService.login(request));
+        return ResponseDto.ok(loginService.login(request));
     }
 
     @PatchMapping("/auth/sign-up")

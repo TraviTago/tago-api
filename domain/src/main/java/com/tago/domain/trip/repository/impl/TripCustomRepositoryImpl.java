@@ -29,7 +29,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                         isNotDone(),
                         cursorGt(cursorId, cursorDate)
                 )
-                .orderBy(trip.dateTime.desc(), tripPlace.order.asc())
+                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
                 .limit(limit)
                 .fetch();
     }

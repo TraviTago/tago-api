@@ -27,6 +27,9 @@ public class Member {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "img_url", nullable = false)
+    private String imgUrl;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Authority authority;

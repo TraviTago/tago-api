@@ -1,33 +1,41 @@
 package com.tago.api.auth.application;
 
-import com.tago.api.auth.dto.request.LoginRequest;
+import com.tago.api.auth.infra.OAuthInfoResponse;
+import com.tago.api.auth.infra.OAuthLoginParams;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.jwt.JwtTokenGenerator;
+import com.tago.domain.member.repository.MemberRepository;
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.service.MemberCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class OAuthLoginService {
-
-    private final MemberCreateService memberCreateService;
+    private final MemberRepository memberRepository;
     private final JwtTokenGenerator jwtTokenGenerator;
+    private final OAuthInfoService oAuthInfoService;
 
-    @Transactional
-    public LoginResponse login(LoginRequest loginRequest){
-        Member member = getOrCreateMember(loginRequest);
-        return generateTokenToDto(member.getId());
+    public LoginResponse login(OAuthLoginParams params) {
+        OAuthInfoResponse oAuthInfoResponse = oAuthInfoService.request(params);
+        Long memberId = findOrCreateMember(oAuthInfoResponse);
+        return generateTokenToDto(memberId);
     }
 
-    private Member getOrCreateMember(LoginRequest loginRequest) {
-        return memberCreateService.getOrCreateMember(
-                loginRequest.getEmail(),
-                loginRequest.getName(),
-                loginRequest.getOauthProvider()
-        );
+    private Long findOrCreateMember(OAuthInfoResponse oAuthInfoResponse) {
+        return memberRepository.findByEmail(oAuthInfoResponse.getEmail())
+                .map(Member::getId)
+                .orElseGet(() -> createMember(oAuthInfoResponse));
+    }
+
+    private Long createMember(OAuthInfoResponse oAuthInfoResponse) {
+        Member member = Member.builder()
+                .email(oAuthInfoResponse.getEmail())
+                .name(oAuthInfoResponse.getNickname())
+                .oauthProvider(oAuthInfoResponse.getOAuthProvider())
+                .build();
+
+        return memberRepository.save(member).getId();
     }
 
     public LoginResponse generateTokenToDto(Long memberId) {

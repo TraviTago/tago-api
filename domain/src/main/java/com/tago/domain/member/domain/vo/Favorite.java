@@ -2,6 +2,8 @@ package com.tago.domain.member.domain.vo;
 
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public enum Favorite {
     INSTAGRAM("인스타그램"),
@@ -14,5 +16,11 @@ public enum Favorite {
 
     private Favorite(String description) {
         this.description = description;
+    }
+
+    public static List<Favorite> from(List<String> favorites) {
+        return favorites.stream()
+                .map(Favorite::valueOf)
+                .toList();
     }
 }

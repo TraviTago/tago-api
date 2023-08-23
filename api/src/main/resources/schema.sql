@@ -3,6 +3,7 @@ create table member (
     id bigint auto_increment,
     email varchar(255) not null,
     `name` varchar(255) not null,
+    img_url varchar(255) not null,
     authority varchar(255) not null,
     oauth_provider varchar(255) not null,
     age_range int,

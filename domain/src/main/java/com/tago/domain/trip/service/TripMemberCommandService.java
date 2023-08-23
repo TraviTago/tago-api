@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 public class TripMemberCommandService {
     private final TripMemberRepository tripMemberRepository;
     public TripMember save(TripMember tripMember) {return tripMemberRepository.save(tripMember); }
+
+
 }
 
 

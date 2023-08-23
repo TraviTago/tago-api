@@ -33,10 +33,8 @@ public class Trip {
 
     private String meetPlace;
 
-    @Setter
     private int max_member;
 
-    @Setter
     private int current_member;
 
     @Embedded
@@ -45,41 +43,15 @@ public class Trip {
     @Default
     @Convert(converter = FavoriteEnumArrayConverter.class)
     private List<Favorite> favorites = new ArrayList<>();
+
+    //현재 멤버 수 증가 메서드 추가
+    public void incrementCurrentMember() {
+        this.current_member +=1;
+    }
+
 }
 
 
-//@Service
-//@RequiredArgsConstructor
-//public class TripMemberService {
-//
-//    private final TripMemberCommandService tripMemberCommandService;
-//    private final TripCommandService tripCommandService;
-//
-//    public TripMemberJoinResponse joinTrip(Long tripId, Long memberId){
-//
-//        // Check if the tripId is valid
-//        if (!tripCommandService.isValidTripId(tripId)){
-//            throw new IllegalArgumentException("Invalid tripId");
-//        }
-//
-//        // Get the current members and max members of the trip
-//        Trip trip = tripCommandService.getTripById(tripId);
-//
-//        // Check if the current members exceed or equal to max members
-//        if(trip.getCurrent_member() >= trip.getMax_member()){
-//            throw new IllegalArgumentException("The trip has reached its maximum members limit");
-//        }
-//
-//        // Increase the current members by 1
-//        tripCommandService.incrementCurrentMember(trip);
-//
-//        // Create a new trip member and return
-//        TripMember tripMember = create(tripId, memberId);
-//        return new TripMemberJoinResponse(tripMember.getId(),tripMember.getTripId(),tripMember.getMemberId());
-//    }
-//
-//    // ... Other methods remain unchanged ...
-//}
 
 
 

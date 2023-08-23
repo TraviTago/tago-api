@@ -20,13 +20,10 @@ public class TripCommandService {
 
     //Trip 참여시, 현재 멤버 수 증가
     public void incrementCurrentMember(Trip trip){
-        trip.setCurrent_member(trip.getCurrent_member() + 1);
-        tripRepository.save(trip);
+        trip.incrementCurrentMember();
+        //tripRepository.save(trip);
     }
 
-//    public Trip getTripById(Long tripId) {
-//        return tripRepository.findById(tripId).orElseThrow(TripNotFoundException::new);
-//    }
 
 }
 

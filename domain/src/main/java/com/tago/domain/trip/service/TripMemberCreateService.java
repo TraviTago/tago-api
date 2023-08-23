@@ -15,7 +15,7 @@ public class TripMemberCreateService {
 
     public final TripMemberCommandService tripMemberCommandService;
 
-    private TripMember create(Long trip_id,Long member_id){
+    public TripMember create(Long trip_id,Long member_id){
         TripMember tripMember = TripMember.builder()
                 .tripId(trip_id)
                 .memberId(member_id)

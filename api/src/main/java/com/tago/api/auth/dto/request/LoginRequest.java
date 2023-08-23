@@ -17,4 +17,5 @@ public class LoginRequest {
     private OAuthProvider oauthProvider;
     private String email;
     private String name;
+    private String imgUrl;
 }

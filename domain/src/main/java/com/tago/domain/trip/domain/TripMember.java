@@ -19,7 +19,6 @@ public class TripMember {
     private Long tripId;
 
     private Long memberId;
-
 }
 
 

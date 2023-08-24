@@ -1,12 +1,12 @@
 package com.tago.api.trip.presentation;
 
+import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripPlaceService;
 import com.tago.api.trip.application.TripService;
-import com.tago.api.trip.dto.response.TripGetAllResponse;
+import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.api.trip.dto.response.TripStatusResponse;
-import com.tago.domain.trip.service.TripQueryService;
-import com.tago.api.trip.dto.response.TripPlaceGetResponse;
+import com.tago.domain.trip.dto.TripPreviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +22,12 @@ public class TripController {
     private final TripPlaceService tripPlaceService;
 
     @GetMapping("/trips")
-    public ResponseEntity<TripGetAllResponse> getAll(
+    public ResponseEntity<PageResponseDto<TripPreviewDto>> getAll(
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("cursorDate") LocalDateTime cursorDate,
             @RequestParam("limit") int limit
     ) {
-        TripGetAllResponse response = tripService.getAll(cursorId, cursorDate, limit);
+        PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit);
         return ResponseDto.ok(response);
     }
 
@@ -39,10 +39,10 @@ public class TripController {
     }
       
     @GetMapping("/trips/{tripId}")
-    public ResponseEntity<TripPlaceGetResponse> getOne(
+    public ResponseEntity<TripGetOneResponse> getOne(
             @PathVariable Long tripId
     ) {
-        TripPlaceGetResponse response = tripPlaceService.getTripAndPlaces(tripId);
+        TripGetOneResponse response = tripPlaceService.getTripAndPlaces(tripId);
         return ResponseDto.ok(response);
     }
 }

@@ -25,7 +25,7 @@ public class TripQueryService {
     private final TripRepository tripRepository;
     private final TripMemberRepository tripMemberRepository;
 
-    public Trip findByID(Long tripId) {
+    public Trip findById(Long tripId) {
         return tripRepository.findById(tripId)
                 .orElseThrow(TripNotFoundException::new);
     }

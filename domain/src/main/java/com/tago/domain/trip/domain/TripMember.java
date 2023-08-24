@@ -20,10 +20,12 @@ public class TripMember {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id")
     private Trip trip;
-
+  
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    private Long memberId;
 
 }
 

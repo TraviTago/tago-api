@@ -56,6 +56,10 @@ public class Trip {
     public void incrementCurrentMember() {
         this.currentCnt += 1;
     }
+
+    public boolean isLimitMember() {
+        return this.currentCnt == this.maxCnt;
+    }
 }
 
 

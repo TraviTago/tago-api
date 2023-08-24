@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TripPlaceGetResponse {
+public class TripGetOneResponse {
     private String tripName;
     private int currentCnt;
     private int maxCnt;

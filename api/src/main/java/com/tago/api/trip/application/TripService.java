@@ -1,17 +1,13 @@
 package com.tago.api.trip.application;
 
-import com.tago.api.trip.dto.response.TripGetAllResponse;
+import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.trip.dto.response.TripStatusResponse;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Gender;
-import com.tago.domain.place.domain.Place;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.domain.TripMember;
-import com.tago.domain.trip.domain.TripPlace;
 import com.tago.domain.trip.dto.TripPreviewDto;
-import com.tago.domain.trip.mapper.TripDtoMapper;
 import com.tago.domain.trip.repository.TripMemberRepository;
-import com.tago.domain.trip.repository.TripRepository;
 import com.tago.domain.trip.service.TripQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,18 +28,14 @@ public class TripService {
     private final TripMemberRepository tripMemberRepository;
 
     @Transactional(readOnly = true)
-    public TripGetAllResponse getAll(Long cursorId, LocalDateTime cursorDate, int limit) {
+    public PageResponseDto<TripPreviewDto> getAll(Long cursorId, LocalDateTime cursorDate, int limit) {
         List<TripPreviewDto> trips = tripQueryService.findAll(cursorId, cursorDate, limit);
-        return new TripGetAllResponse(hasNext(trips), trips);
-    }
-
-    private boolean hasNext(List<TripPreviewDto> trips) {
-        return !trips.isEmpty();
+        return PageResponseDto.from(trips);
     }
 
     public TripStatusResponse getTripStatus(Long tripId){
 
-        Trip trip = tripQueryService.findByID(tripId);
+        Trip trip = tripQueryService.findById(tripId);
 
         //해당 여행에 참여하는 사람들 조회
         List<TripMember> tripMembers = tripMemberRepository.findByTripId(tripId);

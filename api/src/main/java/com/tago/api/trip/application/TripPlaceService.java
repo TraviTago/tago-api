@@ -1,8 +1,7 @@
 package com.tago.api.trip.application;
 
-import com.tago.api.trip.dto.response.TripPlaceGetResponse;
+import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.domain.trip.domain.Trip;
-import com.tago.domain.trip.domain.TripPlace;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.service.TripPlaceQueryService;
 import com.tago.domain.trip.service.TripQueryService;
@@ -20,11 +19,11 @@ public class TripPlaceService {
     private final TripPlaceQueryService tripPlaceQueryService;
 
     @Transactional(readOnly = true)
-    public TripPlaceGetResponse getTripAndPlaces(Long tripId) {
+    public TripGetOneResponse getTripAndPlaces(Long tripId) {
         Trip trip = tripQueryService.findById(tripId);
         List<TripPlaceDto> tripPlaces = tripPlaceQueryService.findAll(trip);
 
-        return new TripPlaceGetResponse(
+        return new TripGetOneResponse(
                 trip.getName(),
                 trip.getCurrentCnt(),
                 trip.getMaxCnt(),

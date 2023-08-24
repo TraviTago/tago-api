@@ -8,6 +8,7 @@ import com.tago.domain.trip.service.TripPlaceQueryService;
 import com.tago.domain.trip.service.TripQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class TripPlaceService {
     private final TripQueryService tripQueryService;
     private final TripPlaceQueryService tripPlaceQueryService;
 
+    @Transactional(readOnly = true)
     public TripPlaceGetResponse getTripAndPlaces(Long tripId) {
         Trip trip = tripQueryService.findById(tripId);
         List<TripPlaceDto> tripPlaces = tripPlaceQueryService.findAll(trip);

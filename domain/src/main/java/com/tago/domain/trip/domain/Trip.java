@@ -54,7 +54,11 @@ public class Trip {
     private List<TripPlace> tripPlaces = new ArrayList<>();
 
     public void incrementCurrentMember() {
-        this.current_member += 1;
+        this.currentCnt += 1;
+    }
+
+    public boolean isLimitMember() {
+        return this.currentCnt == this.maxCnt;
     }
 }
 

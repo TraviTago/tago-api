@@ -19,34 +19,24 @@ import org.springframework.stereotype.Service;
 public class TripMemberService {
 
     private final TripMemberCreateService tripMemberCreateService;
-    private final TripMemberCommandService tripMemberCommandService;
-    private final TripCommandService tripCommandService;
     private final TripQueryService tripQueryService;
 
     @Transactional
     public TripMemberJoinResponse joinTrip(Long tripId, Long memberId){
+        Trip trip = tripQueryService.findById(tripId);
+        canJoinTrip(trip);
+        trip.incrementCurrentMember();
 
-        //존재하는 여행인지 확인
-        Trip trip = tripQueryService.findByID(tripId);
-
-        //현재 인원수와 최대 인원수 비교하기
-        if(!canJoinTrip(trip)){
-            throw new MaxMemberLimitException();
-        }
-
-        //현재 인원수 증가
-        tripCommandService.incrementCurrentMember(trip);
         TripMember tripMember = tripMemberCreateService.create(tripId, memberId);
 
-        return new TripMemberJoinResponse(tripMember.getId(),tripMember.getTripId(),tripMember.getMemberId());
-
+        return TripMemberJoinResponse.from(tripMember);
     }
 
-    private boolean canJoinTrip(Trip trip){
-        return trip.getCurrent_member() < trip.getMax_member();
+    private void canJoinTrip(Trip trip){
+        if(trip.isLimitMember()){
+            throw new MaxMemberLimitException();
+        }
     }
-
-
 }
 
 

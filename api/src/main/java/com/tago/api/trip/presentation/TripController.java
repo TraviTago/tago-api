@@ -1,14 +1,13 @@
 package com.tago.api.trip.presentation;
 
 import com.tago.api.common.dto.ResponseDto;
+import com.tago.api.trip.application.TripPlaceService;
 import com.tago.api.trip.application.TripService;
 import com.tago.api.trip.dto.response.TripGetAllResponse;
+import com.tago.api.trip.dto.response.TripPlaceGetResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 public class TripController {
 
     private final TripService tripService;
+    private final TripPlaceService tripPlaceService;
 
     @GetMapping("/trips")
     public ResponseEntity<TripGetAllResponse> getAll(
@@ -26,6 +26,14 @@ public class TripController {
             @RequestParam("limit") int limit
     ) {
         TripGetAllResponse response = tripService.getAll(cursorId, cursorDate, limit);
+        return ResponseDto.ok(response);
+    }
+
+    @GetMapping("/trips/{tripId}")
+    public ResponseEntity<TripPlaceGetResponse> getOne(
+            @PathVariable Long tripId
+    ) {
+        TripPlaceGetResponse response = tripPlaceService.getTripAndPlaces(tripId);
         return ResponseDto.ok(response);
     }
 }

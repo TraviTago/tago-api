@@ -29,7 +29,8 @@ public class TripMemberService {
 
         TripMember tripMember = tripMemberCreateService.create(tripId, memberId);
 
-        return TripMemberJoinResponse.from(tripMember);
+
+        return new TripMemberJoinResponse(tripMember.getId());
     }
 
     private void canJoinTrip(Trip trip){

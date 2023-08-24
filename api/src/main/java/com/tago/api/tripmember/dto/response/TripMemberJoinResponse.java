@@ -9,15 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TripMemberJoinResponse {
     private Long id;
-    private Long tripId;
-    private Long memberId;
-
-    public static TripMemberJoinResponse from(TripMember tripMember) {
-        return new TripMemberJoinResponse(
-                tripMember.getId(),
-                tripMember.getTripId(),
-                tripMember.getMemberId()
-        );
-    }
 }
 

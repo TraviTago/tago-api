@@ -50,9 +50,7 @@ public class TripService {
         return new TripStatusResponse(
                 femaleCnt,
                 maleCnt,
-                new ArrayList<>((ageGroups)),
-//                trip.getDateTime().toString(),
-//                endTime.toString()
+                ageGroups,
                 formatToHourMinute(trip.getDateTime()),
                 formatToHourMinute(endTime)
         );
@@ -68,7 +66,7 @@ public class TripService {
                 .count();
     }
 
-    private Set<String > getAgeGroups(List<TripMember> tripMembers){
+    private Set<String> getAgeGroups(List<TripMember> tripMembers){
         return tripMembers.stream()
                 .map(TripMember::getMember)
                 .map(Member::getProfile)

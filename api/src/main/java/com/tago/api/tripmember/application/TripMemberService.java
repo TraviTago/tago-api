@@ -38,12 +38,12 @@ public class TripMemberService {
         tripCommandService.incrementCurrentMember(trip);
         TripMember tripMember = tripMemberCreateService.create(tripId, memberId);
 
-        return new TripMemberJoinResponse(tripMember.getId(),tripMember.getTripId(),tripMember.getMemberId());
+        return new TripMemberJoinResponse(tripMember.getId());
 
     }
 
     private boolean canJoinTrip(Trip trip){
-        return trip.getCurrent_member() < trip.getMax_member();
+        return trip.getCurrentCnt() < trip.getMaxCnt();
     }
 
 

@@ -1,5 +1,6 @@
 package com.tago.domain.trip.domain;
 
+import com.tago.domain.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,9 +17,13 @@ public class TripMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long tripId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 
-    private Long memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
 }
 

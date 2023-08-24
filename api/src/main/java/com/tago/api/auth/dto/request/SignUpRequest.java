@@ -20,7 +20,7 @@ import java.util.List;
 public class SignUpRequest {
     private int ageRange;
     private String gender;
-    private Mbti mbti;
+    private String mbti;
     private List<String> favorites;
     private List<String> tripTypes;
 
@@ -28,7 +28,7 @@ public class SignUpRequest {
         return MemberInfoDto.builder()
                 .ageRange(ageRange)
                 .gender(Gender.valueOf(gender))
-                .mbti(mbti)
+                .mbti(Mbti.valueOf(mbti))
                 .favorites(Favorite.from(favorites))
                 .tripTypes(TripType.from(tripTypes))
                 .build();

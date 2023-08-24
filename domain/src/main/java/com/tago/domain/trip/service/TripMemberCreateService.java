@@ -23,7 +23,7 @@ public class TripMemberCreateService {
 
     public TripMember create(Long trip_id,Long member_id){
 
-        Trip trip = tripQueryService.findByID(trip_id);
+        Trip trip = tripQueryService.findById(trip_id);
         Member member = memberQueryService.findById(member_id);
 
         TripMember tripMember = TripMember.builder()

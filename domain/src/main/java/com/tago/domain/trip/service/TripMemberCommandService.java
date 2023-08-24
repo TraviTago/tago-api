@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TripMemberCommandService {
     private final TripMemberRepository tripMemberRepository;
-    public TripMember save(TripMember tripMember) {return tripMemberRepository.save(tripMember); }
-
-
+    public TripMember save(TripMember tripMember) {
+        return tripMemberRepository.save(tripMember);
+    }
 }
 
 

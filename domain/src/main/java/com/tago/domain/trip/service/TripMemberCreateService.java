@@ -1,9 +1,5 @@
 package com.tago.domain.trip.service;
 
-import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.domain.vo.Authority;
-import com.tago.domain.member.domain.vo.OAuthProvider;
-
 import com.tago.domain.trip.domain.TripMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

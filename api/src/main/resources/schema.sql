@@ -73,3 +73,12 @@ create table trip_place (
     place_id bigint,
     primary key (id)
 );
+
+
+drop table if exists trip_member;
+create table trip_member (
+    id bigint auto_increment,
+    trip_id bigint,
+    member_id bigint,
+    primary key (id)
+);

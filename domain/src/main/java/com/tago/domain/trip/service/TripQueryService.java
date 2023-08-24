@@ -1,6 +1,7 @@
 package com.tago.domain.trip.service;
 
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.trip.dto.TripPreviewDto;
 import com.tago.domain.trip.mapper.TripDtoMapper;
 import com.tago.domain.trip.repository.TripRepository;
@@ -16,6 +17,11 @@ public class TripQueryService {
 
     private final TripRepository tripRepository;
 
+    public Trip findByID(Long tripId) {
+        return tripRepository.findById(tripId)
+                .orElseThrow(TripNotFoundException::new);
+    }
+  
     public List<TripPreviewDto> findAll(Long cursorId, LocalDateTime cursorDate, int limit) {
         List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit);
         return TripDtoMapper.toTripPreviews(trips);

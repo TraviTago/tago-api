@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TokenReissueService {
     private final JwtTokenGenerator jwtTokenGenerator;
     private final MemberQueryService memberQueryService;
+    
 
     @Transactional
     public TokenReissueResponse reissue(Long memberId) {

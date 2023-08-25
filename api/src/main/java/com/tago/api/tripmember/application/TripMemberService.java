@@ -26,18 +26,10 @@ public class TripMemberService {
         Trip trip = tripQueryService.findById(tripId);
         Member member = memberQueryService.findById(memberId);
 
-        canJoinTrip(trip);
-        trip.incrementCurrentMember();
-
+        trip.join();
         TripMember tripMember = tripMemberCreateService.create(trip, member);
 
         return new TripMemberJoinResponse(tripMember.getId());
-    }
-
-    private void canJoinTrip(Trip trip){
-        if(trip.isLimitMember()){
-            throw new MaxMemberLimitException();
-        }
     }
 }
 

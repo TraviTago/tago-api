@@ -2,6 +2,7 @@ package com.tago.domain.trip.domain;
 
 import com.tago.domain.common.converter.FavoriteEnumArrayConverter;
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.exception.MaxMemberLimitException;
 import com.tago.domain.trip.domain.vo.Condition;
 import com.tago.domain.member.domain.vo.Favorite;
 import jakarta.persistence.*;
@@ -53,12 +54,13 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private List<TripPlace> tripPlaces = new ArrayList<>();
 
-    public void incrementCurrentMember() {
+    public void join() {
+        if (isLimitMember()) throw new MaxMemberLimitException();
         this.currentCnt += 1;
     }
 
-    public boolean isLimitMember() {
-        return this.currentCnt == this.maxCnt;
+    private boolean isLimitMember() {
+        return this.currentCnt >= this.maxCnt;
     }
 }
 

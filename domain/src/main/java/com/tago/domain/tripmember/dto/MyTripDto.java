@@ -22,17 +22,4 @@ public class MyTripDto {
     private int maxMember;
     private int currentMember;
     private List<String> places;
-
-//    @QueryProjection
-//    public MyTripDto(Long tripId, LocalDateTime dateTime, String imageUrl, String name,
-//                     int totalTime, int maxMember, int currentMember, List<String> places) {
-//        this.tripId = tripId;
-//        this.dateTime = dateTime;
-//        this.imageUrl = imageUrl;
-//        this.name = name;
-//        this.totalTime = totalTime;
-//        this.maxMember = maxMember;
-//        this.currentMember = currentMember;
-//        this.places = places;
-//    }
 }

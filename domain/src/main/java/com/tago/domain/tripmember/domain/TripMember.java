@@ -1,6 +1,7 @@
-package com.tago.domain.trip.domain;
+package com.tago.domain.tripmember.domain;
 
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.trip.domain.Trip;
 import jakarta.persistence.*;
 import lombok.*;
 

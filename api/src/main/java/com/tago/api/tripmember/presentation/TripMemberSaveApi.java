@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-public class TripMemberApi {
+public class TripMemberSaveApi {
 
     @Autowired
     private TripMemberSaveService tripMemberService;

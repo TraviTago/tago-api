@@ -3,7 +3,6 @@ package com.tago.api.tripmember.application;
 
 import com.tago.api.tripmember.dto.response.TripMemberJoinResponse;
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.exception.MaxMemberLimitException;
 import com.tago.domain.member.service.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.tripmember.domain.TripMember;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TripMemberService {
+public class TripMemberSaveService {
 
     private final TripMemberCreateService tripMemberCreateService;
     private final TripQueryService tripQueryService;

@@ -20,11 +20,11 @@ insert into trip values(1, '테스트 여행', '2023-09-02T11:00:00', '해운대
 insert into trip values(2, '테스트 여행', '2023-09-02T11:00:00', '해운대', 4, 2, true, true, true, 'INSTAGRAM', 1);
 
 -- INSERT TRIP_PLACE
-insert into trip_place values(1, 1, 1, 2487927);
-insert into trip_place values(2, 3, 1, 2787112);
-insert into trip_place values(3, 2, 1, 2614721);
+insert into trip_place values(1, 1, 1, 1);
+insert into trip_place values(2, 3, 1, 2);
+insert into trip_place values(3, 2, 1, 2);
 
-insert into trip_place values(4, 1, 2, 2487927);
-insert into trip_place values(5, 3, 2, 2787112);
-insert into trip_place values(6, 2, 2, 2614721);
+insert into trip_place values(4, 1, 2, 1);
+insert into trip_place values(5, 3, 2, 3);
+insert into trip_place values(6, 2, 2, 2);
 

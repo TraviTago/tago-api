@@ -33,6 +33,9 @@ public class Trip {
     @Column(name = "meet_place")
     private String meetPlace;
 
+    @Column(name = "total_time")
+    private int totalTime;
+
     @Column(name = "max_cnt")
     private int maxCnt;
 
@@ -63,33 +66,3 @@ public class Trip {
         return this.currentCnt >= this.maxCnt;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

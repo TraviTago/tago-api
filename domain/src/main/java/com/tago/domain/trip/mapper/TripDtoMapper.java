@@ -22,7 +22,7 @@ public class TripDtoMapper {
                 .dateTime(trip.getDateTime())
                 .imageUrl(getMainPlaceImgUrl(tripPlaces))
                 .name(trip.getName())
-                .totalTime(8)
+                .totalTime(trip.getTotalTime())
                 .maxMember(trip.getMaxCnt())
                 .currentMember(trip.getCurrentCnt())
                 .places(getPlacesName(tripPlaces))

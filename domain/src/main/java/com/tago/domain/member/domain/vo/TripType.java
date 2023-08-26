@@ -32,4 +32,10 @@ public enum TripType {
                 .findFirst()
                 .orElseThrow(() -> new EnumNotFoundException(ErrorCode.TRIP_TYPE_NOT_FOUND));
     }
+
+    public static List<String> toString(List<TripType> tripTypes) {
+        return tripTypes.stream()
+                .map(TripType::getDescription)
+                .toList();
+    }
 }

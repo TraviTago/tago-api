@@ -2,6 +2,7 @@ package com.tago.domain.place.service;
 
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.exception.PlaceNotFoundException;
 import com.tago.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class PlaceQueryService {
 
     public Place findById(Long placeId) {
         return placeRepository.findById(placeId)
-                .orElseThrow(()-> new RuntimeException("Place not found"));
+                .orElseThrow(PlaceNotFoundException::new);
     }
 
 }

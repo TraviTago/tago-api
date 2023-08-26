@@ -20,6 +20,9 @@ public enum ErrorCode {
     TRIP_NOT_FOUND(400, "T001", "존재하지 않는 여행입니다."),
     MAX_MEMBER_LIMIT_REACHED(400, "T002", "이 여행은 이미 최대 멤버 수에 도달하였습니다."),
 
+    //Place
+    PLACE_NOT_FOUND(400,"P001","존재하지 않은 여행지입니다."),
+
 
     // ETC
     DEFAULT(500, "-1", "INTERNAL_SERVER_ERROR")

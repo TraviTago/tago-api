@@ -1,5 +1,6 @@
 package com.tago.domain.place.service;
 
+import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
 import com.tago.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,4 +17,10 @@ public class PlaceQueryService {
     public List<PlacePreviewDto> getAll(Long cursorId, int limit) {
         return placeRepository.findAll(cursorId, limit);
     }
+
+    public Place findById(Long placeId) {
+        return placeRepository.findById(placeId)
+                .orElseThrow(()-> new RuntimeException("Place not found"));
+    }
+
 }

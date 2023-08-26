@@ -3,13 +3,11 @@ package com.tago.api.place.presentation;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.place.application.PlaceService;
+import com.tago.api.place.dto.response.PlaceInfoResponse;
 import com.tago.domain.place.dto.PlacePreviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,5 +23,14 @@ public class PlaceController {
     ) {
         PageResponseDto<PlacePreviewDto> response = placeService.getAll(cursorId, limit);
         return ResponseDto.ok(response);
+    }
+
+    @GetMapping("place/{placeId}")
+    public ResponseEntity<PlaceInfoResponse> getPlaceInfo(
+            @PathVariable("placeId")Long placeId
+    ){
+        PlaceInfoResponse response = placeService.getPlaceInfo(placeId);
+        return ResponseEntity.ok(response);
+
     }
 }

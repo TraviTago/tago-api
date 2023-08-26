@@ -33,4 +33,10 @@ public enum Favorite {
                 .findFirst()
                 .orElseThrow(() -> new EnumNotFoundException(ErrorCode.FAVORITE_NOT_FOUND));
     }
+
+    public static List<String> toString(List<Favorite> favorites) {
+        return favorites.stream()
+                .map(Favorite::getDescription)
+                .toList();
+    }
 }

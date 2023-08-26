@@ -23,7 +23,7 @@ public class MemberInfoResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Profile {
-        private int ageRange;
+        private Integer ageRange;
         private String gender;
         private String mbti;
         private List<String> favorites;
@@ -31,20 +31,24 @@ public class MemberInfoResponse {
     }
 
     public static MemberInfoResponse from(Member member) {
-        Profile profile = new Profile(
-                member.getAgeRange(),
-                member.getGender().name(),
-                member.getMbti().name(),
-                Favorite.toString(member.getFavorites()),
-                TripType.toString(member.getTripTypes())
-        );
-
         return new MemberInfoResponse(
                 member.getEmail(),
                 member.getOauthProvider().name(),
                 member.getName(),
                 member.getImgUrl(),
-                profile
+                getProfile(member)
+        );
+    }
+
+    private static Profile getProfile(Member member) {
+        if (!member.isSignUp()) return null;
+
+        return new Profile(
+                member.getAgeRange(),
+                member.getGender().name(),
+                member.getMbti().name(),
+                Favorite.toString(member.getFavorites()),
+                TripType.toString(member.getTripTypes())
         );
     }
 }

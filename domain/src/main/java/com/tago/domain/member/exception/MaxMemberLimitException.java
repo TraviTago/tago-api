@@ -7,16 +7,3 @@ public class MaxMemberLimitException extends BaseBusinessException {
         super(ErrorCode.MAX_MEMBER_LIMIT_REACHED);
     }
 }
-
-
-//public class TripMemberApi {
-//
-//    private final TripMemberService tripMemberService;
-//
-//    @PostMapping("/{tripId}/join")
-//    public ResponseEntity<?> joinTrip(@PathVariable Long tripId, @LoginMember Long memberId) {
-//        TripMemberJoinResponse response = tripMemberService.joinTrip(tripId, memberId);
-//        return ResponseDto.ok(response);
-//    }
-//
-//}

@@ -1,7 +1,7 @@
-package com.tago.domain.trip.service;
+package com.tago.domain.tripmember.service;
 
-import com.tago.domain.trip.domain.TripMember;
-import com.tago.domain.trip.repository.TripMemberRepository;
+import com.tago.domain.tripmember.domain.TripMember;
+import com.tago.domain.tripmember.repository.TripMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

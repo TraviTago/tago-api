@@ -27,7 +27,7 @@ public class SignUpRequest {
     public MemberInfoDto toMemberInfoDto() {
         return MemberInfoDto.builder()
                 .ageRange(ageRange)
-                .gender(Gender.valueOf(gender))
+                .gender(Gender.from(gender))
                 .mbti(Mbti.valueOf(mbti))
                 .favorites(Favorite.from(favorites))
                 .tripTypes(TripType.from(tripTypes))

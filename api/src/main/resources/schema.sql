@@ -56,6 +56,7 @@ create table trip (
     name varchar(255),
     date_time timestamp,
     meet_place varchar(255),
+    total_time int,
     max_cnt int,
     current_cnt int,
     same_gender boolean,
@@ -74,7 +75,6 @@ create table trip_place (
     place_id bigint,
     primary key (id)
 );
-
 
 drop table if exists trip_member;
 create table trip_member (

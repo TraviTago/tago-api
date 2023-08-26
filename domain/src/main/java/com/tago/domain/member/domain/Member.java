@@ -42,8 +42,7 @@ public class Member {
     private Profile profile;
 
     public void updateInfo(int ageRange, Gender gender, Mbti mbti,
-                           List<Favorite> favorites, List<TripType> tripTypes
-    ) {
+                           List<Favorite> favorites, List<TripType> tripTypes) {
         this.profile = Profile.builder()
                 .ageRange(ageRange)
                 .gender(gender)
@@ -53,7 +52,27 @@ public class Member {
                 .build();
     }
 
-    public boolean isSignedUp() {
+    public boolean isSignUp() {
         return profile.isSignedUp();
+    }
+
+    public Integer getAgeRange() {
+        return profile.getAgeRange();
+    }
+
+    public Gender getGender() {
+        return profile.getGender();
+    }
+
+    public Mbti getMbti() {
+        return profile.getMbti();
+    }
+
+    public List<Favorite> getFavorites() {
+        return profile.getFavorites();
+    }
+
+    public List<TripType> getTripTypes() {
+        return profile.getTripTypes();
     }
 }

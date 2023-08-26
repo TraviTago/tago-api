@@ -1,23 +1,24 @@
-package com.tago.domain.trip.mapper;
+package com.tago.domain.tripmember.mapper;
 
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.domain.TripPlace;
 import com.tago.domain.trip.dto.TripPreviewDto;
+import com.tago.domain.tripmember.dto.MyTripDto;
 
 import java.util.List;
 
-public class TripDtoMapper {
+public class MyTripDtoMapper {
 
-    public static List<TripPreviewDto> toTripPreviews(List<Trip> trips) {
+    public static List<MyTripDto> toMyTripDto(List<Trip> trips) {
         return trips.stream()
-                .map(TripDtoMapper::getTripPreviewDto)
+                .map(MyTripDtoMapper::getMyTripDto)
                 .toList();
     }
 
-    private static TripPreviewDto getTripPreviewDto(Trip trip) {
+    private static MyTripDto getMyTripDto(Trip trip) {
         List<TripPlace> tripPlaces = trip.getTripPlaces();
 
-        return TripPreviewDto.builder()
+        return MyTripDto.builder()
                 .tripId(trip.getId())
                 .dateTime(trip.getDateTime())
                 .imageUrl(getMainPlaceImgUrl(tripPlaces))

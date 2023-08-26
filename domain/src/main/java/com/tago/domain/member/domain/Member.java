@@ -51,11 +51,12 @@ public class Member {
                 .tripTypes(tripTypes)
                 .build();
     }
-    public boolean isSignedUp() {
+
+    public boolean isSignUp() {
         return profile.isSignedUp();
     }
 
-    public int getAgeRange() {
+    public Integer getAgeRange() {
         return profile.getAgeRange();
     }
 

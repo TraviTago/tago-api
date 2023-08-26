@@ -4,7 +4,6 @@ import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.trip.dto.TripPreviewDto;
 import com.tago.domain.trip.mapper.TripDtoMapper;
-import com.tago.domain.tripmember.repository.TripMemberRepository;
 import com.tago.domain.trip.repository.TripRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,5 +26,4 @@ public class TripQueryService {
         List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit);
         return TripDtoMapper.toTripPreviews(trips);
     }
-
 }

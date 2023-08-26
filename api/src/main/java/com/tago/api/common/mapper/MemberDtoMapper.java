@@ -5,9 +5,9 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.member.domain.vo.TripType;
 
-public class MemberInfoDtoMapper {
+public class MemberDtoMapper {
 
-    public static MemberInfoResponse from(Member member) {
+    public static MemberInfoResponse toDto(Member member) {
         return new MemberInfoResponse(
                 member.getEmail(),
                 member.getOauthProvider().name(),

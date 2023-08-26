@@ -29,28 +29,6 @@ public class MemberInfoResponse {
         private List<String> favorites;
         private List<String> tripTypes;
     }
-
-    public static MemberInfoResponse from(Member member) {
-        return new MemberInfoResponse(
-                member.getEmail(),
-                member.getOauthProvider().name(),
-                member.getName(),
-                member.getImgUrl(),
-                getProfile(member)
-        );
-    }
-
-    private static Profile getProfile(Member member) {
-        if (!member.isSignUp()) return null;
-
-        return new Profile(
-                member.getAgeRange(),
-                member.getGender().name(),
-                member.getMbti().name(),
-                Favorite.toString(member.getFavorites()),
-                TripType.toString(member.getTripTypes())
-        );
-    }
 }
 
 

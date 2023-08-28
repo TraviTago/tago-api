@@ -1,6 +1,6 @@
 package com.tago.api.member.application;
 
-import com.tago.api.common.mapper.MemberInfoDtoMapper;
+import com.tago.api.common.mapper.MemberDtoMapper;
 import com.tago.api.member.dto.response.MemberInfoResponse;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.service.MemberQueryService;
@@ -17,6 +17,6 @@ public class MemberService {
     @Transactional(readOnly = true)
     public MemberInfoResponse getInfo(Long memberId) {
         Member member = memberQueryService.findById(memberId);
-        return MemberInfoDtoMapper.from(member);
+        return MemberDtoMapper.toDto(member);
     }
 }

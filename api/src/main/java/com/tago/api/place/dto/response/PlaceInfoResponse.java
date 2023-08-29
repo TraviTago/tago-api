@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Normalized;
 @NoArgsConstructor
 public class PlaceInfoResponse {
 
-    private int placeId;
+    private Long placeId;
     private String typeId;
     private String title;
     private String overview;

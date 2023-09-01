@@ -18,8 +18,8 @@ public class PlaceInfoResponse {
     private String title;
     private String overview;
     private String imageUrl;
-    private double mapx;
-    private double mapy;
+    private double mapX;
+    private double mapY;
     private String address;
     private String homepage;
     private String telephone;

@@ -83,3 +83,13 @@ create table trip_member (
     member_id bigint,
     primary key (id)
 );
+
+drop table if exists issue;
+create table issue(
+      id bigint auto_increment,
+      member_id bigint,
+      type varchar(255),
+      detail varchar(255),
+      primary key(id)
+);
+

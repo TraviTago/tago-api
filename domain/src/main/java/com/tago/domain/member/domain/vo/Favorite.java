@@ -20,7 +20,7 @@ public enum Favorite {
     private Favorite(String description) {
         this.description = description;
     }
-
+;
     public static List<Favorite> from(List<String> favorites) {
         return favorites.stream()
                 .map(Favorite::of)

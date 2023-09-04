@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PlacePreviewDto {
+    private Long id;
     private String imageUrl;
     private String title;
     private String address;
 
     @QueryProjection
-    public PlacePreviewDto(String imageUrl, String title, String address) {
+    public PlacePreviewDto(Long id,String imageUrl, String title, String address) {
+        this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
         this.address = address;

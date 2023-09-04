@@ -21,6 +21,7 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
     @Override
     public List<PlacePreviewDto> findAll(Long cursorId, int limit) {
         return queryFactory.select(new QPlacePreviewDto(
+                    place.id,
                     place.imgUrl,
                     place.title,
                     place.address
@@ -28,6 +29,23 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                 .where(cursorGt(cursorId))
                 .limit(limit)
                 .fetch();
+    }
+
+    @Override
+    public List<PlacePreviewDto> findByTitleKeyword (String keyword){
+        return queryFactory.select(new QPlacePreviewDto(
+                    place.id,
+                    place.imgUrl,
+                    place.title,
+                    place.address
+                )).from(place)
+                .where(searchTitle(keyword))
+                .fetch();
+
+    }
+
+    private BooleanExpression searchTitle(String keyword){
+        return place.title.contains(keyword);
     }
 
     private BooleanExpression cursorGt(Long cursorId) {

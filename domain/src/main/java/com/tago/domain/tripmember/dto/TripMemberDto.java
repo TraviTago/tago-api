@@ -29,7 +29,7 @@ public class TripMemberDto {
         this.name = name;
         this.mbti = mbti.name();
         this.ageRange = ageRange;
-        this.gender = gender.name();
+        this.gender = gender.getDescription();
         this.tripTypes = TripType.toSentence(tripTypes);
     }
 }

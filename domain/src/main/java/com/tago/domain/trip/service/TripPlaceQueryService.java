@@ -15,6 +15,6 @@ public class TripPlaceQueryService {
     private final TripPlaceRepository tripPlaceRepository;
 
     public List<TripPlaceDto> findAll(Trip trip) {
-        return tripPlaceRepository.findAllByTripFetchPlace(trip);
+        return tripPlaceRepository.findAllByTrip(trip);
     }
 }

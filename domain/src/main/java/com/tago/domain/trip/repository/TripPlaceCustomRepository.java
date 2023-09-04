@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface TripPlaceCustomRepository {
 
-    List<TripPlaceDto> findAllByTripFetchPlace(Trip trip);
+    List<TripPlaceDto> findAllByTrip(Trip trip);
 }

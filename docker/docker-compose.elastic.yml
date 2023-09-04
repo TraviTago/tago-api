@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  elasticsearch:
+    build:
+      context: .
+      args:
+        ELK_VERSION: 8.7.0
+    container_name: elasticsearch
+    environment:
+      - node.name=single-node
+      - cluster.name=tago
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.7.0
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+# docker-compose -f docker-compose.elastic.yml up -d

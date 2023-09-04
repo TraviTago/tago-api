@@ -14,6 +14,7 @@ import org.hibernate.validator.constraints.Normalized;
 public class PlaceInfoResponse {
 
     private Long id;
+    private Long contentId;
     private String typeId;
     private String title;
     private String overview;

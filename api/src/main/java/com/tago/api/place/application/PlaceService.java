@@ -24,7 +24,6 @@ public class PlaceService {
         return PageResponseDto.from(places);
     }
 
-
     public PlaceInfoResponse getPlaceInfo(Long placeId){
         Place place = placeQueryService.findById(placeId);
         return PlaceDtoMapper.mapToplaceInfoResponse(place);

@@ -65,4 +65,8 @@ public class Trip {
     private boolean isLimitMember() {
         return this.currentCnt >= this.maxCnt;
     }
+
+    public LocalDateTime getEndTime() {
+        return this.dateTime.plusMinutes(totalTime);
+    }
 }

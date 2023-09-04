@@ -30,5 +30,4 @@ insert into trip_place values(6, 2, 2, 2);
 
 -- INSERT TRIP_MEMBER
 insert into trip_member values(1, 1, 1);
-insert into trip_member values(2, 2, 1);
 

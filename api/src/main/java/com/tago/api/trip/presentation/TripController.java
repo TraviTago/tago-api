@@ -1,5 +1,6 @@
 package com.tago.api.trip.presentation;
 
+import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripPlaceService;
@@ -31,18 +32,20 @@ public class TripController {
         return ResponseDto.ok(response);
     }
 
-
-    @GetMapping("trips/{tripId}/status")
-    public ResponseEntity<TripStatusResponse> getTripStatus(@PathVariable Long tripId){
-        TripStatusResponse tripStatus = tripService.getTripStatus(tripId);
-        return ResponseDto.ok(tripStatus);
-    }
-      
     @GetMapping("/trips/{tripId}")
     public ResponseEntity<TripGetOneResponse> getOne(
+            @LoginMember Long memberId,
             @PathVariable Long tripId
     ) {
-        TripGetOneResponse response = tripPlaceService.getTripAndPlaces(tripId);
+        TripGetOneResponse response = tripPlaceService.getTripAndPlaces(memberId, tripId);
         return ResponseDto.ok(response);
+    }
+
+    @GetMapping("trips/{tripId}/status")
+    public ResponseEntity<TripStatusResponse> getTripStatus(
+            @PathVariable Long tripId
+    ){
+        TripStatusResponse tripStatus = tripService.getTripStatus(tripId);
+        return ResponseDto.ok(tripStatus);
     }
 }

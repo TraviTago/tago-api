@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class TripController {
+public class TripApi {
 
     private final TripService tripService;
     private final TripPlaceService tripPlaceService;

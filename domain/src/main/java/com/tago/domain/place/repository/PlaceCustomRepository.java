@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PlaceCustomRepository {
     List<PlacePreviewDto> findAll(Long cursorId, int limit);
+
+    List<PlacePreviewDto> findByTitleKeyword(String keyword);
 }

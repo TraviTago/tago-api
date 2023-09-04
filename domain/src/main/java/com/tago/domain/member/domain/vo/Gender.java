@@ -24,4 +24,8 @@ public enum Gender {
                 .findFirst()
                 .orElseThrow(() -> new EnumNotFoundException(ErrorCode.GENDER_NOT_FOUND));
     }
+
+    public boolean isEquals(String gender) {
+        return this.description.equals(gender);
+    }
 }

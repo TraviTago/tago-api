@@ -13,7 +13,7 @@ public class TripStatusResponse {
 
     private int femaleCnt;
     private int maleCnt;
-    private Set<String> ageGroup;
+    private Set<Integer> ageGroup;
     private String startTime;
     private String endTime;
 

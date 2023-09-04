@@ -14,5 +14,6 @@ public class TripGetOneResponse {
     private String tripName;
     private int currentCnt;
     private int maxCnt;
+    private Boolean isJoined;
     private List<TripPlaceDto> places;
 }

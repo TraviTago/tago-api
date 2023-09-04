@@ -19,7 +19,7 @@ public class PlaceApi {
 
     private final PlaceService placeService;
 
-    @GetMapping("places")
+    @GetMapping("/places")
     public ResponseEntity<PageResponseDto<PlacePreviewDto>> getAll(
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("limit") int limit
@@ -28,7 +28,7 @@ public class PlaceApi {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("places/search")
+    @GetMapping("/places/search")
     public ResponseEntity<PlaceSearchResponse> findByTitleKeyword(
             @RequestParam("keyword") String keyword
     ){
@@ -36,7 +36,7 @@ public class PlaceApi {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("place/{placeId}")
+    @GetMapping("/place/{placeId}")
     public ResponseEntity<PlaceInfoResponse> getPlaceInfo(
             @PathVariable("placeId")Long placeId
     ){

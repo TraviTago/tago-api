@@ -25,4 +25,8 @@ public class TripMemberQueryService {
     public List<TripMemberDto> findMembersByTrip(Trip trip) {
         return tripMemberRepository.findMembersByTrip(trip);
     }
+
+    public Boolean existsByTripIdAndMemberId(Long tripId, Long memberId) {
+        return tripMemberRepository.existsByTripIdAndMemberId(tripId, memberId);
+    }
 }

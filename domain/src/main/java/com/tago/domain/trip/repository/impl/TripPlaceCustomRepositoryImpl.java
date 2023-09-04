@@ -21,7 +21,7 @@ public class TripPlaceCustomRepositoryImpl implements TripPlaceCustomRepository 
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<TripPlaceDto> findAllByTripFetchPlace(Trip trip) {
+    public List<TripPlaceDto> findAllByTrip(Trip trip) {
         return queryFactory.select(new QTripPlaceDto(
                     place.id,
                     place.title,

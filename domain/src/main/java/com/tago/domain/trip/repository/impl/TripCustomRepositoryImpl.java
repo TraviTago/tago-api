@@ -37,26 +37,26 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
-//    @Override
-//    public List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit) {
-//        List<Long> ids = queryFactory.select(tripPlace.trip.id)
-//                .from(tripPlace)
-//                .where(
-//                        containPlaceTitle(keyword),
-//                        isNotDone(),
-//                        cursorGt(cursorId, cursorDate)
-//                )
-//                .distinct()
-//                .limit(limit)
-//                .fetch();
-//
-//        return queryFactory.selectFrom(trip)
-//                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
-//                .innerJoin(tripPlace.place, place).fetchJoin()
-//                .where(trip.id.in(ids))
-//                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
-//                .fetch();
-//    }
+    @Override
+    public List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit) {
+        List<Long> ids = queryFactory.select(tripPlace.trip.id)
+                .from(tripPlace)
+                .where(
+                        containPlaceTitle(keyword),
+                        isNotDone(),
+                        cursorGt(cursorId, cursorDate)
+                )
+                .distinct()
+                .limit(limit)
+                .fetch();
+
+        return queryFactory.selectFrom(trip)
+                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
+                .innerJoin(tripPlace.place, place).fetchJoin()
+                .where(trip.id.in(ids))
+                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
+                .fetch();
+    }
 
     private BooleanExpression cursorGt(Long cursorId, LocalDateTime cursorDate) {
         return cursorIdAndDateGt(cursorId, cursorDate).or(cursorDateGt(cursorDate));

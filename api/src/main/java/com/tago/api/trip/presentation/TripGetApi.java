@@ -3,8 +3,7 @@ package com.tago.api.trip.presentation;
 import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
-import com.tago.api.trip.application.TripPlaceService;
-import com.tago.api.trip.application.TripService;
+import com.tago.api.trip.application.TripGetService;
 import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.api.trip.dto.response.TripStatusResponse;
 import com.tago.domain.trip.dto.TripPreviewDto;
@@ -17,10 +16,9 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class TripController {
+public class TripGetApi {
 
-    private final TripService tripService;
-    private final TripPlaceService tripPlaceService;
+    private final TripGetService tripService;
 
     @GetMapping("/trips")
     public ResponseEntity<PageResponseDto<TripPreviewDto>> getAll(
@@ -37,15 +35,15 @@ public class TripController {
             @LoginMember Long memberId,
             @PathVariable Long tripId
     ) {
-        TripGetOneResponse response = tripPlaceService.getTripAndPlaces(memberId, tripId);
+        TripGetOneResponse response = tripService.getOne(memberId, tripId);
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("trips/{tripId}/status")
-    public ResponseEntity<TripStatusResponse> getTripStatus(
+    @GetMapping("/trips/{tripId}/status")
+    public ResponseEntity<TripStatusResponse> getOneStatus(
             @PathVariable Long tripId
-    ){
-        TripStatusResponse tripStatus = tripService.getTripStatus(tripId);
+    ) {
+        TripStatusResponse tripStatus = tripService.getOneStatus(tripId);
         return ResponseDto.ok(tripStatus);
     }
 }

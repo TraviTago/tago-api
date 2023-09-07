@@ -29,3 +29,9 @@ oauth:
     url:
       auth: https://kauth.kakao.com
       api: https://kapi.kakao.com
+
+slack:
+  bot-token: ${SLACK_BOT_TOKEN}
+  postMessageUrl : "https://slack.com/api/chat.postMessage"
+  channel:
+    monitor: "#불편신고"

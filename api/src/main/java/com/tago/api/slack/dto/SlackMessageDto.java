@@ -1,13 +1,13 @@
 package com.tago.api.slack.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+@Data
 @Getter
 @Builder
 public class SlackMessageDto {
-    String title;
-    String type;
-    String detail;
+    private String type;
+    private String detail;
 }

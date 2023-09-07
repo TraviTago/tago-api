@@ -18,19 +18,12 @@ public class IssueReportService {
 
     private final IssueCommandService issueCommandService;
     private final IssueCreateService issueCreateService;
-    private final SlackService slackService; // 이 부분 추가
+    private final SlackService slackService;
 
     @Transactional
     public Issue reportIssue(Long memberId, IssueDto issueDto){
         Issue issue = issueCreateService.createIssue(memberId, issueDto);
-
-        SlackMessageDto slackMessageDto = SlackMessageDto.builder()
-                .title("불편신고")
-                .type(issue.getType().toString())
-                .detail(issue.getDetail())
-                .build();
-
-        slackService.sendMessageToSlack(slackMessageDto);
+        slackService.sendMessageToSlack(issueDto);
 
         return issueCommandService.save(issue);
     }

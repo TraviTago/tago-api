@@ -1,74 +1,52 @@
 package com.tago.api.slack.application;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tago.api.slack.dto.SlackMessageDto;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.slack.api.Slack;
+import com.slack.api.methods.MethodsClient;
+import com.slack.api.methods.request.chat.ChatPostMessageRequest;
+import com.slack.api.model.block.composition.TextObject;
+import com.tago.domain.issue.dto.IssueDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+
+import java.util.List;
+import java.util.ArrayList;
+
+import static com.slack.api.model.block.Blocks.*;
+import static com.slack.api.model.block.composition.BlockCompositions.markdownText;
+import static com.slack.api.model.block.composition.BlockCompositions.plainText;
 
 @Service
+@RequiredArgsConstructor
 public class SlackService{
 
-    @Value("${SLACK_BOT_TOKEN}")
-    private String slackToken;
+    @Value(value = "${slack.bot-token}")
+    private String token;
 
-    private static final String SLACK_POST_MESSAGE_URL = "https://slack.com/api/chat.postMessage";
+    @Value(value="${slack.channel.monitor}")
+    private String channel;
 
-    public void sendMessageToSlack(String channel, String message) {
-        RestTemplate restTemplate = new RestTemplate();
+    public void sendMessageToSlack(IssueDto issueDto){
+        List<TextObject> textObjects = new ArrayList<>();
+        textObjects.add(markdownText("*문의 제목:*\n" + issueDto.getType()));
+        textObjects.add(markdownText("*문의 내용:*\n" + issueDto.getDetail()));
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(slackToken);
-        headers.add("Content-type", "application/json;charset=utf-8");
-
-//        String requestBody = String.format("{\"channel\":\"%s\",\"text\":\"%s\"}", channel, message);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String,Object> payload = new HashMap<>();
-        payload.put("channel",channel);
-        payload.put("text",message);
-
-        String requestBody;
+        MethodsClient methods = Slack.getInstance().methods(token);
+        ChatPostMessageRequest request = ChatPostMessageRequest.builder()
+                .channel(channel)
+                .blocks(asBlocks(
+                        //추후에 수정 예정
+                        //header(header -> header.text(plainText(issueDto.getType() + "님이 문의를 남겨주셨습니다!"))),
+                        divider(),
+                        section(section -> section.fields(textObjects)
+                        ))).build();
 
         try {
-            requestBody = objectMapper.writeValueAsString(payload);
+            methods.chatPostMessage(request);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create JSON payload", e);
-        }
-
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<String> response = restTemplate.exchange(
-                SLACK_POST_MESSAGE_URL,
-                HttpMethod.POST,
-                requestEntity,
-                String.class
-        );
-
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("Failed to send message to Slack: " + response.getBody());
-        }
-
-
-    }
-    public void sendMessageToSlack(SlackMessageDto slackMessageDto){
-        String jsonPayload = convertDtoToJson(slackMessageDto);
-        sendMessageToSlack(slackMessageDto.getTitle(), jsonPayload);
-    }
-
-    private String convertDtoToJson(SlackMessageDto slackMessageDto) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(slackMessageDto);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to convert DTO to JSON", e);
+            throw new RuntimeException("Failed to send message to Slack", e);
         }
     }
-
 }

@@ -25,7 +25,7 @@ public class MemberService {
         return MemberDtoMapper.toDto(member);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void editMemberInfo(Long memberId, EditMemberInfoRequest request) {
         MemberInfoDto dto = MemberInfoDto.builder()
                 .mbti(request.getMbti())

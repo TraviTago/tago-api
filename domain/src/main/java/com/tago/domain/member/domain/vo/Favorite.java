@@ -11,7 +11,7 @@ import java.util.List;
 public enum Favorite {
     INSTAGRAM("인스타그램"),
     YOUTUBE("유튜브"),
-    CAMARA("사진 촬영"),
+    CAMERA("사진 촬영"),
     HOT_PLACE("핫플")
     ;
 

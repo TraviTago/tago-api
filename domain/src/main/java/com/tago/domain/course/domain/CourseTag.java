@@ -1,30 +1,27 @@
 package com.tago.domain.course.domain;
 
-import com.tago.domain.place.domain.Place;
+import com.tago.domain.tag.domain.Tag;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Builder
 @Entity
-@EqualsAndHashCode
+@Table(name = "course_tag")
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "course_place")
-public class CoursePlace {
+public class CourseTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private int order;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
-    private Place place;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 }

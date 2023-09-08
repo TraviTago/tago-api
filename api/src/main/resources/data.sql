@@ -16,8 +16,8 @@ values(3, 2787112, 39, '밀양순대돼지국밥', '부산광역시 해운대구
        null, '051-731-7005', null, '24시간', null);
 
 -- INSERT TRIP
-insert into trip values(1, '테스트 여행', '2023-09-02T10:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
-insert into trip values(2, '테스트 여행', '2023-09-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
+insert into trip values(1, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
+insert into trip values(2, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
 
 -- INSERT TRIP_PLACE
 insert into trip_place values(1, 1, 1, 1);

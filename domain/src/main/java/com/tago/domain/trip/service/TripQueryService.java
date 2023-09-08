@@ -26,4 +26,11 @@ public class TripQueryService {
         List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit);
         return TripDtoMapper.toTripPreviews(trips);
     }
+
+    public List<TripPreviewDto> searchByPlaceTitleKeyword(
+            String keyword, Long cursorId, LocalDateTime cursorDate, int limit
+    ) {
+        List<Trip> trips = tripRepository.findByPlaceTitleKeywordContain(keyword, cursorId, cursorDate, limit);
+        return TripDtoMapper.toTripPreviews(trips);
+    }
 }

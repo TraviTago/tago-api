@@ -8,6 +8,7 @@ import com.tago.domain.member.domain.vo.Favorite;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.Builder.Default;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

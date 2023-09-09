@@ -45,8 +45,9 @@ create table course (
 drop table if exists course_place;
 create table course_place (
     id bigint auto_increment,
-    course_id bigint,
-    place_id bigint,
+    `order` int not null,
+    place_id bigint not null,
+    course_id bigint not null,
     primary key (id)
 );
 
@@ -62,7 +63,6 @@ create table trip (
     same_gender boolean,
     same_age boolean,
     is_pet boolean,
-    favorites varchar(255),
     member_id bigint,
     primary key (id)
 );
@@ -82,6 +82,29 @@ create table trip_member (
     trip_id bigint,
     member_id bigint,
     primary key (id)
+);
+
+drop table if exists tag;
+create table tag (
+    id bigint auto_increment,
+    type varchar(255) not null,
+    primary key (id)
+);
+
+drop table if exists course_tag;
+create table course_tag (
+    id bigint auto_increment,
+    course_id bigint not null,
+    tag_id bigint not null,
+    primary key (id)
+);
+
+drop table if exists trip_tag;
+create table trip_tag (
+   id bigint auto_increment,
+   trip_id bigint not null,
+   tag_id bigint not null,
+   primary key (id)
 );
 
 drop table if exists issue;

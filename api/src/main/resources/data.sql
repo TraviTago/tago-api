@@ -16,8 +16,8 @@ values(3, 2787112, 39, '밀양순대돼지국밥', '부산광역시 해운대구
        null, '051-731-7005', null, '24시간', null);
 
 -- INSERT TRIP
-insert into trip values(1, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
-insert into trip values(2, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 'INSTAGRAM', 1);
+insert into trip values(1, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
+insert into trip values(2, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
 
 -- INSERT TRIP_PLACE
 insert into trip_place values(1, 1, 1, 1);
@@ -30,4 +30,54 @@ insert into trip_place values(6, 2, 2, 2);
 
 -- INSERT TRIP_MEMBER
 insert into trip_member values(1, 1, 1);
+
+-- INSERT COURSE
+insert into course values(1);
+insert into course values(2);
+insert into course values(3);
+
+-- INSERT TAG
+insert into tag values(1, '사진촬영');
+insert into tag values(2, '맛집탐방');
+insert into tag values(3, '핫플');
+insert into tag values(4, '산책');
+insert into tag values(5, '미술/에술');
+insert into tag values(6, '독서');
+insert into tag values(7, '영화');
+insert into tag values(8, '레저/액티비티');
+insert into tag values(9, '동물');
+insert into tag values(10, '자연');
+insert into tag values(11, '역사');
+insert into tag values(12, '전통시장');
+insert into tag values(13, '바다');
+insert into tag values(14, '지역축제');
+insert into tag values(15, '카페');
+insert into tag values(16, '쇼핑');
+
+-- INSERT COURSE_TAG
+insert into course_tag values(1,1,13);
+insert into course_tag values(2,1,12);
+insert into course_tag values(3,1,2);
+insert into course_tag values(4,1,8);
+insert into course_tag values(5,1,15);
+insert into course_tag values(6,2,13);
+insert into course_tag values(7,2,1);
+insert into course_tag values(8,2,4);
+insert into course_tag values(9,2,7);
+insert into course_tag values(10,2,2);
+insert into course_tag values(11,3,13);
+insert into course_tag values(12,3,9);
+insert into course_tag values(13,3,4);
+insert into course_tag values(14,3,10);
+insert into course_tag values(15,3,15);
+insert into course_tag values(16,3,2);
+
+-- INSERT TRIP_TAG
+insert into trip_tag values(1, 1, 13);
+insert into trip_tag values(2, 1, 8);
+insert into trip_tag values(3, 1, 3); -- 바다, 레저/액티비티, 핫플
+
+insert into trip_tag values(4, 2, 1);
+insert into trip_tag values(5, 2, 2);
+insert into trip_tag values(6, 2, 15); -- 사진촬영, 맛집탐방, 카페
 

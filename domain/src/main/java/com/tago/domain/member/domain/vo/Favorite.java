@@ -9,10 +9,23 @@ import java.util.List;
 
 @Getter
 public enum Favorite {
-    INSTAGRAM("인스타그램"),
-    YOUTUBE("유튜브"),
-    CAMERA("사진 촬영"),
-    HOT_PLACE("핫플")
+    CAMERA("사진촬영"),
+    HOT_PLACE("핫플"),
+    FOOD("맛집탐방"),
+    STROLL("산책"),
+    ART("미술/예술"),
+    BOOK("독서"),
+    MOVIE("영화"),
+    ACTIVITY("레저/액티비티"),
+    ANIMAL("동물"),
+    NATURE("자연"),
+    HISTORY("역사"),
+    MARKET("전통시장"),
+    BEACH("바다"),
+    FESTIVAL("지역축제"),
+    CAFE("카페"),
+    SHOPPING("쇼핑"),
+
     ;
 
     private String description;

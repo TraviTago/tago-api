@@ -9,7 +9,6 @@ create table member (
     age_range int,
     gender varchar(255),
     mbti varchar(255),
-    favorites varchar(255),
     trip_types varchar(255),
     primary key (id),
     constraint uniqueAccount unique (email, oauth_provider)
@@ -105,6 +104,22 @@ create table trip_tag (
    trip_id bigint not null,
    tag_id bigint not null,
    primary key (id)
+);
+
+drop table if exists place_tag;
+create table place_tag (
+    id bigint auto_increment,
+    place_id bigint not null,
+    tag_id bigint not null,
+    primary key (id)
+);
+
+drop table if exists member_tag;
+create table member_tag (
+    id bigint auto_increment,
+    member_id bigint not null,
+    tag_id bigint not null,
+    primary key (id)
 );
 
 drop table if exists issue;

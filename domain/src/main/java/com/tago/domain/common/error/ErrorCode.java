@@ -14,17 +14,20 @@ public enum ErrorCode {
     PRINCIPAL_TYPE_NOT_MATCH(400, "AU006", "Authorization의 principal 객체가 Long 타입이 아닙니다."),
 
     // Member
-    MEMBER_NOT_FOUND(400, "M001", "존재하지 않는 멤버입니다."),
-    TRIP_TYPE_NOT_FOUND(400, "M002", "존재하지 않는 TRIPTYPE 입니다."),
-    FAVORITE_NOT_FOUND(400, "M003", "존재하지 않는 FAVORITE 입니다."),
-    GENDER_NOT_FOUND(400, "M004", "존재하지 않는 GENDER 입니다."),
+    MEMBER_NOT_FOUND(404, "M001", "존재하지 않는 멤버입니다."),
+    TRIP_TYPE_NOT_FOUND(404, "M002", "존재하지 않는 TRIPTYPE 입니다."),
+    FAVORITE_NOT_FOUND(404, "M003", "존재하지 않는 FAVORITE 입니다."),
+    GENDER_NOT_FOUND(404, "M004", "존재하지 않는 GENDER 입니다."),
 
     // Trip
-    TRIP_NOT_FOUND(400, "T001", "존재하지 않는 여행입니다."),
+    TRIP_NOT_FOUND(404, "T001", "존재하지 않는 여행입니다."),
     MAX_MEMBER_LIMIT_REACHED(400, "T002", "이 여행은 이미 최대 멤버 수에 도달하였습니다."),
 
     // Place
-    PLACE_NOT_FOUND(400,"P001","존재하지 않은 여행지입니다."),
+    PLACE_NOT_FOUND(404,"P001","존재하지 않은 여행지입니다."),
+
+    // Tag
+    TAG_NOT_FOUND(404, "TA001", "존재하지 않는 태그입니다."),
 
     // ETC
     DEFAULT(500, "-1", "INTERNAL_SERVER_ERROR")

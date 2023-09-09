@@ -2,6 +2,7 @@ package com.tago.domain.member.domain.vo;
 
 import com.tago.domain.common.converter.FavoriteEnumArrayConverter;
 import com.tago.domain.common.converter.TripTypeEnumArrayConverter;
+import com.tago.domain.member.domain.MemberTag;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,10 +27,6 @@ public class Profile {
 
     @Enumerated(EnumType.STRING)
     private Mbti mbti;
-
-    @Default
-    @Convert(converter = FavoriteEnumArrayConverter.class)
-    private List<Favorite> favorites = new ArrayList<>();
 
     @Default
     @Column(name = "trip_types")

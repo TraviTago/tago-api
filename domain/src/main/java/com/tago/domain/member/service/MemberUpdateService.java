@@ -1,9 +1,15 @@
 package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.MemberTag;
+import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.member.dto.MemberInfoDto;
+import com.tago.domain.tag.domain.Tag;
+import com.tago.domain.tag.service.TagQueryHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -11,16 +17,31 @@ import org.springframework.stereotype.Service;
 public class MemberUpdateService {
 
     private final MemberQueryService memberQueryService;
+    private final TagQueryHandler tagQueryHandler;
 
     public Member updateMemberInfo(Long memberId, MemberInfoDto dto) {
-        Member member = memberQueryService.findById(memberId);
+        Member member = memberQueryService.findByMemberId(memberId);
         member.updateInfo(
                 dto.getAgeRange(),
                 dto.getGender(),
                 dto.getMbti(),
-                dto.getFavorites(),
-                dto.getTripTypes()
+                dto.getTripTypes(),
+                getMemberTags(member, dto.getFavorites())
         );
         return member;
+    }
+
+    private List<MemberTag> getMemberTags(Member member, List<Favorite> favorites) {
+        return favorites.stream()
+                .map(favorite -> getMemberTag(member, favorite))
+                .toList();
+    }
+
+    private MemberTag getMemberTag(Member member, Favorite favorite) {
+        Tag tag = tagQueryHandler.findByType(favorite);
+        return MemberTag.builder()
+                .member(member)
+                .tag(tag)
+                .build();
     }
 }

@@ -24,7 +24,7 @@ public class MemberDtoMapper {
                 member.getAgeRange(),
                 member.getGender().name(),
                 member.getMbti().name(),
-                Favorite.toString(member.getFavorites()),
+                Favorite.toString(member.getMemberTags()),
                 TripType.toString(member.getTripTypes())
         );
     }

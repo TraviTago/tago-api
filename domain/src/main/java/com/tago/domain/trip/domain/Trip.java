@@ -46,10 +46,6 @@ public class Trip {
     @Embedded
     private Condition condition;
 
-    @Default
-    @Convert(converter = FavoriteEnumArrayConverter.class)
-    private List<Favorite> favorites = new ArrayList<>();
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -57,6 +53,9 @@ public class Trip {
     @Default
     @OneToMany(mappedBy = "trip")
     private List<TripPlace> tripPlaces = new ArrayList<>();
+
+    @OneToMany(mappedBy = "trip")
+    private List<TripTag> tripTags = new ArrayList<>();
 
     public void join() {
         if (isLimitMember()) throw new MaxMemberLimitException();

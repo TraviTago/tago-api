@@ -26,6 +26,7 @@ create table place (
     img_url varchar(255) NOT NULL,
     mapx double NOT NULL,
     mapy double NOT NULL,
+    visit double NOT NULL,
     overview longtext NOT NULL,
     homepage varchar(255),
     telephone varchar(255),

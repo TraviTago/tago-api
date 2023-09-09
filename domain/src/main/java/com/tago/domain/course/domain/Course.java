@@ -23,6 +23,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<CoursePlace> coursePlaces = new ArrayList<>();
 
+    @Default
     @OneToMany(mappedBy = "course")
     private List<CourseTag> courseTags = new ArrayList<>();
 }

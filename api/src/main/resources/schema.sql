@@ -107,6 +107,14 @@ create table trip_tag (
    primary key (id)
 );
 
+drop table if exists place_tag;
+create table place_tag (
+    id bigint auto_increment,
+    place_id bigint not null,
+    tag_id bigint not null,
+    primary key (id)
+);
+
 drop table if exists issue;
 create table issue(
       id bigint auto_increment,

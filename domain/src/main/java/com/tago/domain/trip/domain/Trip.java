@@ -54,6 +54,7 @@ public class Trip {
     @OneToMany(mappedBy = "trip")
     private List<TripPlace> tripPlaces = new ArrayList<>();
 
+    @Default
     @OneToMany(mappedBy = "trip")
     private List<TripTag> tripTags = new ArrayList<>();
 

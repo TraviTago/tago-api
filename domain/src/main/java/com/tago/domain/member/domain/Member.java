@@ -2,6 +2,7 @@ package com.tago.domain.member.domain;
 
 
 import com.tago.domain.member.domain.vo.*;
+import com.tago.domain.member.domain.vo.MemberTags;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,13 +42,25 @@ public class Member {
     @Embedded
     private Profile profile;
 
+    @Embedded
+    private MemberTags memberTags;
+
     public void updateInfo(int ageRange, Gender gender, Mbti mbti,
-                           List<Favorite> favorites, List<TripType> tripTypes) {
+                           List<TripType> tripTypes, List<MemberTag> tags) {
+        updateMemberTags(tags);
+        updateProfile(ageRange, gender, mbti, tripTypes);
+    }
+
+    private void updateMemberTags(List<MemberTag> tags) {
+        this.memberTags.getMemberTags().clear();
+        this.memberTags.getMemberTags().addAll(tags);
+    }
+
+    private void updateProfile(int ageRange, Gender gender, Mbti mbti, List<TripType> tripTypes) {
         this.profile = Profile.builder()
                 .ageRange(ageRange)
                 .gender(gender)
                 .mbti(mbti)
-                .favorites(favorites)
                 .tripTypes(tripTypes)
                 .build();
     }
@@ -68,8 +81,10 @@ public class Member {
         return profile.getMbti();
     }
 
-    public List<Favorite> getFavorites() {
-        return profile.getFavorites();
+    public List<Favorite> getMemberTags() {
+        return memberTags.getMemberTags().stream()
+                .map(memberTag -> memberTag.getTag().getType())
+                .toList();
     }
 
     public List<TripType> getTripTypes() {

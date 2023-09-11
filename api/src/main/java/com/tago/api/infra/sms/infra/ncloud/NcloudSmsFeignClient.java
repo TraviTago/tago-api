@@ -1,7 +1,7 @@
-package com.gloddy.server.authSms.infra.ncloud;
+package com.tago.api.infra.sms.infra.ncloud;
 
-import com.gloddy.server.authSms.infra.ncloud.dto.NcloudSmsRequest;
-import com.gloddy.server.authSms.infra.ncloud.dto.NcloudSmsResponse;
+import com.tago.api.infra.sms.infra.ncloud.dto.NcloudSmsRequest;
+import com.tago.api.infra.sms.infra.ncloud.dto.NcloudSmsResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,7 +1,7 @@
-package com.gloddy.server.authSms.infra.ncloud;
+package com.tago.api.infra.sms.infra.ncloud;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Mac;

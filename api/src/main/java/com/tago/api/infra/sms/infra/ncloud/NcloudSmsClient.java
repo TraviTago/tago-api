@@ -1,14 +1,14 @@
-package com.gloddy.server.authSms.infra.ncloud;
+package com.tago.api.infra.sms.infra.ncloud;
 
-import com.gloddy.server.authSms.domain.SmsClient;
-import com.gloddy.server.authSms.utils.VerificationCodeUtil;
-import com.gloddy.server.authSms.domain.dto.SmsRequest;
-import com.gloddy.server.authSms.infra.ncloud.dto.NcloudSmsRequest;
-import com.gloddy.server.authSms.infra.ncloud.dto.NcloudSmsRequest.Message;
+import com.tago.api.infra.sms.domain.SmsClient;
+import com.tago.api.infra.sms.domain.dto.SmsRequest;
+import com.tago.api.infra.sms.infra.ncloud.dto.NcloudSmsRequest;
+import com.tago.api.infra.sms.util.VerificationCodeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import com.tago.api.infra.sms.infra.ncloud.dto.NcloudSmsRequest.Message;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.gloddy.server.authSms.infra.ncloud;
+package com.tago.api.infra.sms.infra.ncloud;
 
 
 import lombok.Getter;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Getter
 @Component
 public class NcloudProperties {
-    @Value("${cloud.ncloud.credentials.access-key}")
+    @Value("${ncloud.credentials.access-key}")
     private String accessKey;
 
-    @Value("${cloud.ncloud.credentials.secret-key}")
+    @Value("${ncloud.credentials.secret-key}")
     private String secretKey;
 
     @Value("${ncloud.sms.service-id}")

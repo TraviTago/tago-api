@@ -1,7 +1,7 @@
-package com.gloddy.server.authSms.infra.ncloud;
+package com.tago.api.infra.sms.infra.ncloud;
 
-import com.gloddy.server.core.error.handler.errorCode.ErrorCode;
-import com.gloddy.server.core.error.handler.exception.SmsBusinessException;
+import com.tago.api.common.exception.SmsBusinessException;
+import com.tago.domain.common.error.ErrorCode;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;

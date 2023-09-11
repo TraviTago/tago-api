@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberInfoResponse {
+public class MemberGetResponse {
     private String number;
     private String name;
     private String imgUrl;

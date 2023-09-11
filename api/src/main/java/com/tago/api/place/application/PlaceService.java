@@ -40,7 +40,7 @@ public class PlaceService {
 
     @Transactional(readOnly = true)
     public PlaceRecommendResponse recommend(Long memberId){
-        List<PlacePreviewDto> places = placeQueryService.findRecommendedPlaces(memberId);
+        List<PlacePreviewDto> places = placeQueryService.findByPlaceTag(memberId);
         return new PlaceRecommendResponse(places);
     }
 }

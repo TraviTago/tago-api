@@ -1,5 +1,6 @@
 package com.tago.api.place.presentation;
 
+import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.place.application.PlaceService;
@@ -43,6 +44,12 @@ public class PlaceApi {
     ){
         PlaceInfoResponse response = placeService.getPlaceInfo(placeId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/places/recommend")
+    public ResponseEntity<List<PlacePreviewDto>> findRecommendedPlaces(@LoginMember Long memberId) {
+        List<PlacePreviewDto> Places = placeService.findRecommendedPlaces(memberId);
+        return ResponseEntity.ok(Places);
     }
 
 

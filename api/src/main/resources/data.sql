@@ -1,4 +1,8 @@
 -- INSERT PLACE
+insert into Member
+values(1,'email','이하늘하이','http://tong.visitkorea.or.kr/cms/resource/23/2488023_image2_1.JPG','USER','KAKAO',10,'FEMALE','INFP','SLOW_LAZY,IMPORTANT_FOOD,LATEST_TREND');
+
+
 insert into place
 values(1, 2487927, 12, '맥도상태공원', '부산광역시 강서구 공항로 500', 20170329201904, 20230327113816, 'http://tong.visitkorea.or.kr/cms/resource/23/2488023_image2_1.JPG', 128.9549259546, 35.1523490931,2,
        '맥도생태공원은 낙동강하구둑부터 공항램프까지 하천내 자연적으로 형성된 둔치지역이며, 낙동강하구 천연기년물 179호(철새도래지)로 지정된 지역이다. 이곳은 과거부터 벼농사 등의 농경지로 이용되어 아직까지 겨울철새의 먹이터 겸 쉼터로 관리되도록 하였다.<br>겨울철새에 대한 배려 이외에도 생태공원의 특징을 살려 갈대밭, 연꽃단지, 수생식물원 등을 조성하여 시민들의 볼거리를 만들었고, 그밖에 각종 체육시설과 휴게시설이 구비되어 있다.',
@@ -15,6 +19,10 @@ values(3, 2787112, 39, '밀양순대돼지국밥', '부산광역시 해운대구
        '24시간 연중무휴로 운영되는 밀양순대돼지국밥은 14년여를 오로지 돼지국밥만 연구해 온 맛집이다. 순수 국내산 돼지뼈 사골을 48시간 이상 고아 낸 진하고 뽀얀 국물에 고기와 파를 넣어 뚝배기에 나오는데, 국물 맛이 깔끔하고 담백하다. 미리 나온 부추와 소면을 넣고 새우젓과 양념장을 풀어 넣어 밥과 함께 먹으면 배 속이 든든해진다. 국밥 안에 들어 있는 쫀득하게 씹히는 고기는 잡내 없이 깨끗한 맛이라 처음 돼지국밥을 접하는 사람도 거부감 없이 즐길 수 있다. 돼지국밥 외에도 순대국밥, 섞어국밥, 내장국밥, 모둠국밥 등 입맛에 따라 선택하여 주문할 수 있으며, 감자탕, 뼈해장국도 진한 맛이 일품이다.',
        null, '051-731-7005', null, '24시간', null);
 
+insert into place
+values(4, 2787112, 39, '밀양순대돼지국밥2', '부산광역시 해운대구 구남로 28', 20211207183505, 20221111120418, 'http://tong.visitkorea.or.kr/cms/resource/91/2798191_image2_1.JPG', 129.1603494961, 35.1615435216,0,
+       '24시간 연중무휴로 운영되는 밀양순대돼지국밥은 14년여를 오로지 돼지국밥만 연구해 온 맛집이다. 순수 국내산 돼지뼈 사골을 48시간 이상 고아 낸 진하고 뽀얀 국물에 고기와 파를 넣어 뚝배기에 나오는데, 국물 맛이 깔끔하고 담백하다. 미리 나온 부추와 소면을 넣고 새우젓과 양념장을 풀어 넣어 밥과 함께 먹으면 배 속이 든든해진다. 국밥 안에 들어 있는 쫀득하게 씹히는 고기는 잡내 없이 깨끗한 맛이라 처음 돼지국밥을 접하는 사람도 거부감 없이 즐길 수 있다. 돼지국밥 외에도 순대국밥, 섞어국밥, 내장국밥, 모둠국밥 등 입맛에 따라 선택하여 주문할 수 있으며, 감자탕, 뼈해장국도 진한 맛이 일품이다.',
+       null, '051-731-7005', null, '24시간', null);
 
 -- INSERT TRIP
 insert into trip values(1, '테스트 여행', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
@@ -81,4 +89,21 @@ insert into trip_tag values(3, 1, 3); -- 바다, 레저/액티비티, 핫플
 insert into trip_tag values(4, 2, 1);
 insert into trip_tag values(5, 2, 2);
 insert into trip_tag values(6, 2, 15); -- 사진촬영, 맛집탐방, 카페
+
+insert into member_tag values (1,2,1);
+insert into member_tag values (2,2,3);
+insert into member_tag values (3,2,9);
+
+insert into place_tag values(1,1,2);
+insert into place_tag values(2,1,4);
+insert into place_tag values(3,1,6);
+insert into place_tag values(4,2,1);
+insert into place_tag values(5,2,2);
+insert into place_tag values(6,2,3);
+insert into place_tag values(7,3,1);
+insert into place_tag values(8,3,3);
+insert into place_tag values(9,3,9);
+insert into place_tag values(10,4,7);
+insert into place_tag values(11,4,8);
+insert into place_tag values(12,4,9);
 

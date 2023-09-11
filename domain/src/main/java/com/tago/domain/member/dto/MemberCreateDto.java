@@ -15,7 +15,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberInfoDto {
+public class MemberCreateDto {
+    private String number;
+    private String name;
+    private String imgUrl;
     private int ageRange;
     private Gender gender;
     private Mbti mbti;

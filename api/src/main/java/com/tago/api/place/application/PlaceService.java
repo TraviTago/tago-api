@@ -37,4 +37,9 @@ public class PlaceService {
         return PlaceDtoMapper.mapToplaceInfoResponse(place);
     }
 
+    public List<PlacePreviewDto> findRecommendedPlaces(Long memberId){
+        return placeQueryService.findRecommendedPlaces(memberId);
+    }
+
+
 }

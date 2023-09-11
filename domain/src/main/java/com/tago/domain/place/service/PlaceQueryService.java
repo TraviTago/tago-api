@@ -26,4 +26,8 @@ public class PlaceQueryService {
                 .orElseThrow(PlaceNotFoundException::new);
     }
 
+    public List<PlacePreviewDto> findRecommendedPlaces(Long memberId){
+        return placeRepository.findRecommendedPlaces(memberId);
+    }
+
 }

@@ -52,9 +52,6 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 
     }
 
-
-
-
     public List<PlacePreviewDto> findRecommendedPlaces(Long memberId){
 
         List<Long> memberTags = queryFactory

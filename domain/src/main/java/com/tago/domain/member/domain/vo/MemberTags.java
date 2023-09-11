@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class MemberTags {
 
-    @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberTag> memberTags = new ArrayList<>();
+
+    public void addMemberTags(List<MemberTag> memberTags) {
+        this.memberTags.addAll(memberTags);
+    }
 }

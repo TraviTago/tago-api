@@ -13,37 +13,28 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "uniqueAccount", columnNames = {"email", "oauth_provider"})
-})
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String email;
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
 
     @Column(nullable = false)
     private String name;
-
-    @Column(name = "img_url", nullable = false)
-    private String imgUrl;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @Column(name = "oauth_provider", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private OAuthProvider oauthProvider;
-
     @Embedded
     private Profile profile;
 
+    @Builder.Default
     @Embedded
-    private MemberTags memberTags;
+    private MemberTags memberTags = new MemberTags();
 
     public void updateInfo(int ageRange, Gender gender, Mbti mbti,
                            List<TripType> tripTypes, List<MemberTag> tags) {
@@ -81,13 +72,21 @@ public class Member {
         return profile.getMbti();
     }
 
-    public List<Favorite> getMemberTags() {
-        return memberTags.getMemberTags().stream()
-                .map(memberTag -> memberTag.getTag().getType())
-                .toList();
+    public String getImgUrl() {
+        return profile.getImgUrl();
     }
 
     public List<TripType> getTripTypes() {
         return profile.getTripTypes();
+    }
+
+    public void addMemberTags(List<MemberTag> memberTags) {
+        this.memberTags.addMemberTags(memberTags);
+    }
+
+    public List<Favorite> getMemberTags() {
+        return memberTags.getMemberTags().stream()
+                .map(memberTag -> memberTag.getTag().getType())
+                .toList();
     }
 }

@@ -1,7 +1,6 @@
 package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.domain.vo.OAuthProvider;
 import com.tago.domain.member.exception.MemberNotFoundException;
 import com.tago.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +23,13 @@ public class MemberQueryService {
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email)
+    public Member findByPhone(String phoneNumber) {
+        return memberRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Optional<Member> findOptionalByEmailAndOauthProvider(String email, OAuthProvider oAuthProvider) {
-        return memberRepository.findByEmailAndOauthProvider(email, oAuthProvider);
+    public Optional<Member> findOptionalByPhoneNumber(String phoneNumber) {
+        return memberRepository.findByPhoneNumber(phoneNumber);
     }
 
     public boolean existsById(Long memberId) {

@@ -27,6 +27,7 @@ public class MemberCreateService {
                 .ageRange(dto.getAgeRange())
                 .gender(dto.getGender())
                 .mbti(dto.getMbti())
+                .tripTypes(dto.getTripTypes())
                 .build();
 
         Member member = Member.builder()

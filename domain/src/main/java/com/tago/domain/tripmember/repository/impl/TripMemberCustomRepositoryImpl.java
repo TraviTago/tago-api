@@ -41,7 +41,7 @@ public class TripMemberCustomRepositoryImpl implements TripMemberCustomRepositor
     public List<TripMemberDto> findMembersByTrip(Trip trip) {
         return queryFactory.select(new QTripMemberDto(
                     member.id,
-                    member.imgUrl,
+                    member.profile.imgUrl,
                     member.name,
                     member.profile.mbti,
                     member.profile.ageRange,

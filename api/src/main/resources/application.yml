@@ -19,6 +19,10 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
 
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
 
 jwt:
   secretKey: ${JWT_SECRET_KEY}
@@ -35,3 +39,12 @@ slack:
   postMessageUrl : "https://slack.com/api/chat.postMessage"
   channel:
     monitor: "#불편신고"
+
+ncloud:
+  credentials:
+    access-key: ${NCLOUD_ACCESS_KEY}
+    secret-key: ${NCLOUD_SECRET_KEY}
+  sms:
+    base-url: ${NCLOUD_SMS_BASE_URL}
+    service-id: ${NCLOUD_SMS_SERVICE_ID}
+    calling-number: ${NCLOUD_SMS_CALLING_NUMBER}

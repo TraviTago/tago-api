@@ -3,7 +3,7 @@ package com.tago.domain.member.service;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.MemberTag;
 import com.tago.domain.member.domain.vo.Favorite;
-import com.tago.domain.member.dto.MemberInfoDto;
+import com.tago.domain.member.dto.MemberCreateDto;
 import com.tago.domain.tag.domain.Tag;
 import com.tago.domain.tag.service.TagQueryHandler;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class MemberUpdateService {
     private final MemberQueryService memberQueryService;
     private final TagQueryHandler tagQueryHandler;
 
-    public Member updateMemberInfo(Long memberId, MemberInfoDto dto) {
+    public Member updateMemberInfo(Long memberId, MemberCreateDto dto) {
         Member member = memberQueryService.findByMemberId(memberId);
         member.updateInfo(
                 dto.getAgeRange(),

@@ -1,4 +1,4 @@
-package com.gloddy.server.authSms.utils;
+package com.tago.api.infra.sms.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;

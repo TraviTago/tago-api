@@ -1,4 +1,4 @@
-package com.tago.api.slack.dto;
+package com.tago.api.infra.slack.dto;
 
 import lombok.Builder;
 import lombok.Data;

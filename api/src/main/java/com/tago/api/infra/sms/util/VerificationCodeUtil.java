@@ -1,8 +1,8 @@
-package com.gloddy.server.authSms.utils;
+package com.tago.api.infra.sms.util;
 
-import com.gloddy.server.core.error.handler.errorCode.ErrorCode;
-import com.gloddy.server.core.error.handler.exception.VerificationCodeBusinessException;
-import com.gloddy.server.core.utils.RedisUtil;
+import com.tago.api.common.exception.VerificationCodeBusinessException;
+import com.tago.api.common.util.RedisUtil;
+import com.tago.domain.common.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.tago.api.member.application;
 
 import com.tago.api.common.mapper.MemberDtoMapper;
-import com.tago.api.member.dto.response.MemberInfoResponse;
+import com.tago.api.member.dto.response.MemberGetResponse;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class MemberService {
     private final MemberQueryService memberQueryService;
 
     @Transactional(readOnly = true)
-    public MemberInfoResponse getInfo(Long memberId) {
+    public MemberGetResponse get(Long memberId) {
         Member member = memberQueryService.findById(memberId);
         return MemberDtoMapper.toDto(member);
     }

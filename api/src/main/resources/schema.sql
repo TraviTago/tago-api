@@ -1,17 +1,15 @@
 drop table if exists member;
 create table member (
     id bigint auto_increment,
-    email varchar(255) not null,
+    phone_number varchar(255) not null unique,
     `name` varchar(255) not null,
     img_url varchar(255) not null,
     authority varchar(255) not null,
-    oauth_provider varchar(255) not null,
     age_range int,
     gender varchar(255),
     mbti varchar(255),
     trip_types varchar(255),
-    primary key (id),
-    constraint uniqueAccount unique (email, oauth_provider)
+    primary key (id)
 );
 
 drop table if exists place;

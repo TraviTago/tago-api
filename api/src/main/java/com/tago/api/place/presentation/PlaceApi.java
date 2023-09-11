@@ -5,6 +5,7 @@ import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.place.application.PlaceService;
 import com.tago.api.place.dto.response.PlaceInfoResponse;
+import com.tago.api.place.dto.response.PlaceRecommendResponse;
 import com.tago.api.place.dto.response.PlaceSearchResponse;
 import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.place.dto.PlacePreviewDto;
@@ -30,28 +31,27 @@ public class PlaceApi {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("/places/search")
-    public ResponseEntity<PlaceSearchResponse> findByTitleKeyword(
-            @RequestParam("keyword") String keyword
+    @GetMapping("/place/{placeId}")
+    public ResponseEntity<PlaceInfoResponse> getOne(
+            @PathVariable("placeId")Long placeId
     ){
-        PlaceSearchResponse response = placeService.findByTitleKeyword(keyword);
+        PlaceInfoResponse response = placeService.getOne(placeId);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/place/{placeId}")
-    public ResponseEntity<PlaceInfoResponse> getPlaceInfo(
-            @PathVariable("placeId")Long placeId
+    @GetMapping("/places/search")
+    public ResponseEntity<PlaceSearchResponse> search(
+            @RequestParam("keyword") String keyword
     ){
-        PlaceInfoResponse response = placeService.getPlaceInfo(placeId);
+        PlaceSearchResponse response = placeService.search(keyword);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/places/recommend")
-    public ResponseEntity<List<PlacePreviewDto>> findRecommendedPlaces(@LoginMember Long memberId) {
-        List<PlacePreviewDto> Places = placeService.findRecommendedPlaces(memberId);
+    public ResponseEntity<PlaceRecommendResponse> recommend(
+            @LoginMember Long memberId
+    ) {
+        PlaceRecommendResponse Places = placeService.recommend(memberId);
         return ResponseEntity.ok(Places);
     }
-
-
-
 }

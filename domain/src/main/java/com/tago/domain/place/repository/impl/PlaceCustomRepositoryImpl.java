@@ -71,7 +71,7 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                 .innerJoin(placeTag).on(place.id.eq(placeTag.place.id).and(placeTag.tag.id.in(memberTags)))
                 .groupBy(place.id)
                 .orderBy(placeTag.tag.id.count().desc())
-                .limit(3)
+                .limit(5)
                 .fetch();
     }
 

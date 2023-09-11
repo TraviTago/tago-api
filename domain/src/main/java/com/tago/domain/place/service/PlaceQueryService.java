@@ -19,15 +19,17 @@ public class PlaceQueryService {
         return placeRepository.findAll(cursorId, limit);
     }
 
-    public List<PlacePreviewDto> findByTitleKeyword(String title){return placeRepository.findByTitleKeyword(title);}
+    public List<PlacePreviewDto> findByTitleKeyword(String title) {
+        return placeRepository.findByTitleKeyword(title);
+    }
 
     public Place findById(Long placeId) {
         return placeRepository.findById(placeId)
                 .orElseThrow(PlaceNotFoundException::new);
     }
 
-    public List<PlacePreviewDto> findRecommendedPlaces(Long memberId){
-        return placeRepository.findRecommendedPlaces(memberId);
+    public List<PlacePreviewDto> findByPlaceTag(Long memberId){
+        return placeRepository.findByPlaceTag(memberId);
     }
 
 }

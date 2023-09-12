@@ -1,8 +1,4 @@
 -- INSERT PLACE
-insert into Member
-values(1,'email','이하늘하이','http://tong.visitkorea.or.kr/cms/resource/23/2488023_image2_1.JPG','USER','KAKAO',10,'FEMALE','INFP','SLOW_LAZY,IMPORTANT_FOOD,LATEST_TREND');
-
-
 insert into place
 values(1, 2487927, 12, '맥도상태공원', '부산광역시 강서구 공항로 500', 20170329201904, 20230327113816, 'http://tong.visitkorea.or.kr/cms/resource/23/2488023_image2_1.JPG', 128.9549259546, 35.1523490931,2,
        '맥도생태공원은 낙동강하구둑부터 공항램프까지 하천내 자연적으로 형성된 둔치지역이며, 낙동강하구 천연기년물 179호(철새도래지)로 지정된 지역이다. 이곳은 과거부터 벼농사 등의 농경지로 이용되어 아직까지 겨울철새의 먹이터 겸 쉼터로 관리되도록 하였다.<br>겨울철새에 대한 배려 이외에도 생태공원의 특징을 살려 갈대밭, 연꽃단지, 수생식물원 등을 조성하여 시민들의 볼거리를 만들었고, 그밖에 각종 체육시설과 휴게시설이 구비되어 있다.',

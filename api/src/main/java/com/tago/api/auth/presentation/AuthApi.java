@@ -1,7 +1,6 @@
 package com.tago.api.auth.presentation;
 
-import com.tago.api.auth.application.LoginService;
-import com.tago.api.auth.application.SignUpService;
+import com.tago.api.auth.application.AuthService;
 import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.application.TokenReissueService;
 import com.tago.api.auth.dto.request.SignUpRequest;
@@ -10,6 +9,7 @@ import com.tago.api.auth.dto.response.SignUpResponse;
 import com.tago.api.auth.dto.response.TokenReissueResponse;
 import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.ResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +18,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 public class AuthApi {
-    private final LoginService loginService;
+    private final AuthService authService;
     private final TokenReissueService tokenReissueService;
-    private final SignUpService signUpService;
 
     @PostMapping("/auth/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
-        return ResponseDto.ok(loginService.login(request));
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request){
+        return ResponseDto.ok(authService.login(request));
     }
 
-    @PatchMapping("/auth/sign-up")
-    public ResponseEntity<SignUpResponse> signUp(
-            @LoginMember Long memberId,
-            @RequestBody SignUpRequest request
-    ) {
-        SignUpResponse response = signUpService.signUp(memberId, request);
+    @PostMapping("/auth/sign-up")
+    public ResponseEntity<SignUpResponse> signUp(@RequestBody @Valid SignUpRequest request) {
+        SignUpResponse response = authService.signUp(request);
         return ResponseDto.ok(response);
     }
 

@@ -9,6 +9,6 @@ public interface PlaceCustomRepository {
 
     List<PlacePreviewDto> findByTitleKeyword(String keyword);
 
-    List<PlacePreviewDto> findRecommendedPlaces(Long memberId);
+    List<PlacePreviewDto> findByPlaceTag(Long memberId);
 
 }

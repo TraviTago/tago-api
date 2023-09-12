@@ -1,6 +1,16 @@
 bootJar { enabled = true }
 jar { enabled = false }
 
+ext {
+    set('springCloudVersion', "2022.0.3")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 dependencies {
     implementation project(':domain')
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -15,12 +25,17 @@ dependencies {
     // swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
 
-    //slack
-
+    // slack
     implementation("com.slack.api:bolt:1.31.0")
     implementation("com.slack.api:bolt-servlet:1.31.0")
     implementation("com.slack.api:bolt-jetty:1.31.0")
     implementation("org.slf4j:slf4j-simple:1.7.36")
+
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // feignClient
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

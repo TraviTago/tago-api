@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class TokenReissueService {
+
     private final JwtTokenGenerator jwtTokenGenerator;
     private final MemberQueryService memberQueryService;
-    
 
     @Transactional
     public TokenReissueResponse reissue(Long memberId) {

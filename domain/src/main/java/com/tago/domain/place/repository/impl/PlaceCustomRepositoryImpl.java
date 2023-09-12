@@ -1,25 +1,21 @@
 package com.tago.domain.place.repository.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.place.dto.PlacePreviewDto;
 import com.tago.domain.place.dto.QPlacePreviewDto;
 import com.tago.domain.place.repository.PlaceCustomRepository;
+import com.tago.domain.tag.domain.QTag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import nonapi.io.github.classgraph.json.JSONUtils;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.place.domain.QPlaceTag.placeTag;
+import static com.tago.domain.tag.domain.QTag.tag;
 
-@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
@@ -52,25 +48,25 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 
     }
 
-    public List<PlacePreviewDto> findRecommendedPlaces(Long memberId){
-
+    public List<PlacePreviewDto> findByPlaceTag(Long memberId){
         List<Long> memberTags = queryFactory
                 .select(memberTag.tag.id)
                 .from(memberTag)
                 .where(memberTag.member.id.eq(memberId))
                 .fetch();
 
-        if (memberTags.isEmpty()) {
-            log.warn("No tags found for member with ID: {}", memberId);
-            return Collections.emptyList();
-        }
-
         return queryFactory
-                .select(new QPlacePreviewDto(place.id,place.imgUrl,place.title,place.address))
-                .from(place)
-                .innerJoin(placeTag).on(place.id.eq(placeTag.place.id).and(placeTag.tag.id.in(memberTags)))
+                .select(new QPlacePreviewDto(
+                        place.id,
+                        place.imgUrl,
+                        place.title,
+                        place.address
+                )).from(placeTag)
+                .innerJoin(placeTag.place, place)
+                .innerJoin(placeTag.tag, tag)
+                .where(tag.id.in(memberTags))
                 .groupBy(place.id)
-                .orderBy(placeTag.tag.id.count().desc())
+                .orderBy(tag.id.count().desc())
                 .limit(5)
                 .fetch();
     }

@@ -1,8 +1,6 @@
 package com.tago.domain.member.domain.vo;
 
-import com.tago.domain.common.converter.FavoriteEnumArrayConverter;
 import com.tago.domain.common.converter.TripTypeEnumArrayConverter;
-import com.tago.domain.member.domain.MemberTag;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +16,9 @@ import static lombok.Builder.*;
 @EqualsAndHashCode
 @Embeddable
 public class Profile {
+
+    @Column(name = "img_url", nullable = false)
+    private String imgUrl;
 
     @Column(name = "age_range")
     private Integer ageRange;

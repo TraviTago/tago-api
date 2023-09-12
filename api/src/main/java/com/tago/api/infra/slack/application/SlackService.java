@@ -1,4 +1,4 @@
-package com.tago.api.slack.application;
+package com.tago.api.infra.slack.application;
 
 
 import com.slack.api.Slack;

@@ -9,10 +9,8 @@ import com.tago.domain.place.dto.QPopularPlaceDto;
 import com.tago.domain.place.repository.PlaceCustomRepository;
 import com.tago.domain.tag.domain.QTag;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
-=======
+
 import lombok.extern.slf4j.Slf4j;
->>>>>>> 36f715c (feat:관광데이터 기반으로 여행지 추천)
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

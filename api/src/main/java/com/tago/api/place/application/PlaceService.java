@@ -39,17 +39,14 @@ public class PlaceService {
         return new PlaceSearchResponse(places);
     }
 
-<<<<<<< HEAD
     @Transactional(readOnly = true)
     public PlaceRecommendResponse recommend(Long memberId){
         List<PlacePreviewDto> places = placeQueryService.findByPlaceTag(memberId);
         return new PlaceRecommendResponse(places);
     }
-=======
+
     public List<PopularPlaceDto> findPopularPlaces(){
         return placeQueryService.findPopularPlaces();
     }
 
-
->>>>>>> 36f715c (feat:관광데이터 기반으로 여행지 추천)
 }

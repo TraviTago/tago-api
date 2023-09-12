@@ -1,18 +1,26 @@
 package com.tago.domain.trip.repository.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.dto.TripPreviewDto;
+import com.tago.domain.trip.dto.TripRecommendDto;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import com.tago.domain.trip.dto.QTripRecommendDto;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.trip.domain.QTrip.trip;
 import static com.tago.domain.trip.domain.QTripPlace.tripPlace;
+import static com.tago.domain.trip.domain.QTripTag.tripTag;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 @Repository
@@ -57,6 +65,40 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
                 .fetch();
     }
+
+    public Trip findByTripTag(Long memberId){
+
+        List<Long> memberTags = queryFactory
+                .select(memberTag.tag.id)
+                .from(memberTag)
+                .where(memberTag.member.id.eq(memberId))
+                .fetch();
+
+        List<Long> tripIds = queryFactory
+                .select(tripTag.trip.id)
+                .from(tripTag)
+                .where(tripTag.tag.id.in(memberTags))
+                .groupBy(tripTag.trip.id)
+                .orderBy(tripTag.tag.id.count().desc())
+                .limit(1)
+                .fetch();
+
+
+        Trip bestMatchingTrip = queryFactory
+                .selectFrom(trip)
+                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
+                .innerJoin(tripPlace.place, place).fetchJoin()
+                .where(trip.id.eq(tripIds.get(0)))
+                .orderBy(tripPlace.order.asc())
+                .fetchOne();
+
+        return bestMatchingTrip;
+
+
+    }
+
+
+
 
     private BooleanExpression cursorGt(Long cursorId, LocalDateTime cursorDate) {
         return cursorIdAndDateGt(cursorId, cursorDate).or(cursorDateGt(cursorDate));

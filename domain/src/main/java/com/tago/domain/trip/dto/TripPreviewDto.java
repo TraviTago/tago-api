@@ -1,5 +1,6 @@
 package com.tago.domain.trip.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,4 +18,5 @@ public class TripPreviewDto {
     private int maxMember;
     private int currentMember;
     private List<String> places;
+
 }

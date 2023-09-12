@@ -33,7 +33,7 @@ public class PlaceQueryService {
         return placeRepository.findByPlaceTag(memberId);
     }
 
-    public List<PopularPlaceDto> findPopularPlaces(){
+    public List<PlacePreviewDto> findPopularPlaces(){
         return placeRepository.findPopularPlaces();
     }
 

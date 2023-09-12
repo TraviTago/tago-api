@@ -45,7 +45,7 @@ public class PlaceService {
         return new PlaceRecommendResponse(places);
     }
 
-    public List<PopularPlaceDto> findPopularPlaces(){
+    public List<PlacePreviewDto> findPopularPlaces(){
         return placeQueryService.findPopularPlaces();
     }
 

@@ -56,7 +56,7 @@ public class PlaceApi {
         return ResponseEntity.ok(Places);
     }
     @GetMapping("/places/popular")
-    public List<PopularPlaceDto> findPopularPlaces(){
+    public List<PlacePreviewDto> findPopularPlaces(){
         return placeService.findPopularPlaces();
     }
 }

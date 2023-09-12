@@ -32,7 +32,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                     place.id,
                     place.imgUrl,
                     place.title,
-                    place.address
+                    place.address,
+                    place.overview
                 )).from(place)
                 .where(cursorGt(cursorId))
                 .limit(limit)
@@ -45,7 +46,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                     place.id,
                     place.imgUrl,
                     place.title,
-                    place.address
+                    place.address,
+                    place.overview
                 )).from(place)
                 .where(searchTitle(keyword))
                 .fetch();
@@ -64,7 +66,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                         place.id,
                         place.imgUrl,
                         place.title,
-                        place.address
+                        place.address,
+                        place.overview
                 )).from(placeTag)
                 .innerJoin(placeTag.place, place)
                 .innerJoin(placeTag.tag, tag)
@@ -75,10 +78,9 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                 .fetch();
     }
 
-    public List<PopularPlaceDto> findPopularPlaces(){
-
+    public List<PlacePreviewDto> findPopularPlaces(){
         return queryFactory
-                .select(new QPopularPlaceDto(place.id,place.imgUrl,place.title,place.address,place.visit))
+                .select(new QPlacePreviewDto(place.id,place.imgUrl,place.title,place.address,place.overview))
                 .from(place)
                 .orderBy(place.visit.desc())
                 .limit(10)

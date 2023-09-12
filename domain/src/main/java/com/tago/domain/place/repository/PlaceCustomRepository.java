@@ -11,4 +11,7 @@ public interface PlaceCustomRepository {
 
     List<PlacePreviewDto> findByPlaceTag(Long memberId);
 
+    List<PlacePreviewDto> findPopularPlaces();
+
+
 }

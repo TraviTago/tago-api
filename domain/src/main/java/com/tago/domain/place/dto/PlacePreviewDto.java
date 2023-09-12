@@ -11,12 +11,14 @@ public class PlacePreviewDto {
     private String imageUrl;
     private String title;
     private String address;
+    private String overview;
 
     @QueryProjection
-    public PlacePreviewDto(Long id,String imageUrl, String title, String address) {
+    public PlacePreviewDto(Long id,String imageUrl, String title, String address, String overview)  {
         this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
         this.address = address;
+        this.overview= overview;
     }
 }

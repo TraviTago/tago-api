@@ -3,10 +3,14 @@ package com.tago.domain.place.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.dto.PopularPlaceDto;
 import com.tago.domain.place.dto.QPlacePreviewDto;
+import com.tago.domain.place.dto.QPopularPlaceDto;
 import com.tago.domain.place.repository.PlaceCustomRepository;
 import com.tago.domain.tag.domain.QTag;
 import lombok.RequiredArgsConstructor;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +32,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                     place.id,
                     place.imgUrl,
                     place.title,
-                    place.address
+                    place.address,
+                    place.overview
                 )).from(place)
                 .where(cursorGt(cursorId))
                 .limit(limit)
@@ -41,7 +46,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                     place.id,
                     place.imgUrl,
                     place.title,
-                    place.address
+                    place.address,
+                    place.overview
                 )).from(place)
                 .where(searchTitle(keyword))
                 .fetch();
@@ -60,7 +66,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                         place.id,
                         place.imgUrl,
                         place.title,
-                        place.address
+                        place.address,
+                        place.overview
                 )).from(placeTag)
                 .innerJoin(placeTag.place, place)
                 .innerJoin(placeTag.tag, tag)
@@ -68,6 +75,15 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                 .groupBy(place.id)
                 .orderBy(tag.id.count().desc())
                 .limit(5)
+                .fetch();
+    }
+
+    public List<PlacePreviewDto> findPopularPlaces(){
+        return queryFactory
+                .select(new QPlacePreviewDto(place.id,place.imgUrl,place.title,place.address,place.overview))
+                .from(place)
+                .orderBy(place.visit.desc())
+                .limit(10)
                 .fetch();
     }
 

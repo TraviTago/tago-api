@@ -3,10 +3,16 @@ package com.tago.domain.place.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.dto.PopularPlaceDto;
 import com.tago.domain.place.dto.QPlacePreviewDto;
+import com.tago.domain.place.dto.QPopularPlaceDto;
 import com.tago.domain.place.repository.PlaceCustomRepository;
 import com.tago.domain.tag.domain.QTag;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
+=======
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> 36f715c (feat:관광데이터 기반으로 여행지 추천)
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -68,6 +74,16 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                 .groupBy(place.id)
                 .orderBy(tag.id.count().desc())
                 .limit(5)
+                .fetch();
+    }
+
+    public List<PopularPlaceDto> findPopularPlaces(){
+
+        return queryFactory
+                .select(new QPopularPlaceDto(place.id,place.imgUrl,place.title,place.address,place.visit))
+                .from(place)
+                .orderBy(place.visit.desc())
+                .limit(10)
                 .fetch();
     }
 

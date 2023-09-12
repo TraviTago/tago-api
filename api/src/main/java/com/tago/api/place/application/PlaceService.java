@@ -7,6 +7,7 @@ import com.tago.api.place.dto.response.PlaceRecommendResponse;
 import com.tago.api.place.dto.response.PlaceSearchResponse;
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.dto.PopularPlaceDto;
 import com.tago.domain.place.service.PlaceQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,9 +39,17 @@ public class PlaceService {
         return new PlaceSearchResponse(places);
     }
 
+<<<<<<< HEAD
     @Transactional(readOnly = true)
     public PlaceRecommendResponse recommend(Long memberId){
         List<PlacePreviewDto> places = placeQueryService.findByPlaceTag(memberId);
         return new PlaceRecommendResponse(places);
     }
+=======
+    public List<PopularPlaceDto> findPopularPlaces(){
+        return placeQueryService.findPopularPlaces();
+    }
+
+
+>>>>>>> 36f715c (feat:관광데이터 기반으로 여행지 추천)
 }

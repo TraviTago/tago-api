@@ -46,6 +46,9 @@ public class Place {
     @Column(name = "mapy", nullable = false)
     private double mapY;
 
+    @Column(name = "visit", nullable = false)
+    private double visit;
+
     @Column(columnDefinition = "TEXT")
     private String overview;
 

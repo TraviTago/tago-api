@@ -2,6 +2,7 @@ package com.tago.domain.place.service;
 
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.dto.PopularPlaceDto;
 import com.tago.domain.place.exception.PlaceNotFoundException;
 import com.tago.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,11 @@ public class PlaceQueryService {
     public List<PlacePreviewDto> findByPlaceTag(Long memberId){
         return placeRepository.findByPlaceTag(memberId);
     }
+
+    public List<PopularPlaceDto> findPopularPlaces(){
+        return placeRepository.findPopularPlaces();
+    }
+
+
 
 }

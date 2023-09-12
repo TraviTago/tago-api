@@ -9,6 +9,7 @@ import com.tago.api.place.dto.response.PlaceRecommendResponse;
 import com.tago.api.place.dto.response.PlaceSearchResponse;
 import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.place.dto.PlacePreviewDto;
+import com.tago.domain.place.dto.PopularPlaceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,9 @@ public class PlaceApi {
     ) {
         PlaceRecommendResponse Places = placeService.recommend(memberId);
         return ResponseEntity.ok(Places);
+    }
+    @GetMapping("/places/popular")
+    public List<PopularPlaceDto> findPopularPlaces(){
+        return placeService.findPopularPlaces();
     }
 }

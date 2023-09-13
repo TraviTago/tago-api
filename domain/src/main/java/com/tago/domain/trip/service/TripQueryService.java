@@ -33,4 +33,8 @@ public class TripQueryService {
         List<Trip> trips = tripRepository.findByPlaceTitleKeywordContain(keyword, cursorId, cursorDate, limit);
         return TripDtoMapper.toTripPreviews(trips);
     }
+
+    public Trip findByTripTag (Long memberId){
+        return tripRepository.findByTripTag(memberId);
+    }
 }

@@ -84,6 +84,14 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
 
 
+//        return queryFactory
+//                .selectFrom(trip)
+//                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
+//                .innerJoin(tripPlace.place, place).fetchJoin()
+//                .where(trip.id.eq(tripIds.get(0)))
+//                .orderBy(tripPlace.order.asc())
+//                .fetchOne();
+
         Trip bestMatchingTrip = queryFactory
                 .selectFrom(trip)
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()

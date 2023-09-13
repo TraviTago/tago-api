@@ -53,7 +53,13 @@ public class TripGetService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public Trip findByTripTag(Long memberId){
+        return tripQueryService.findByTripTag(memberId);
+    }
+
     private Boolean isJoined(Long tripId, Long memberId) {
         return tripMemberQueryService.existsByTripIdAndMemberId(tripId, memberId);
     }
+
 }

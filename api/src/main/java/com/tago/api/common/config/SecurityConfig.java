@@ -33,6 +33,7 @@ public class SecurityConfig {
         return web -> web.ignoring()
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/login")
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/sign-up")
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth/sms/**")
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/*/**");
     }
 

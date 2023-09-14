@@ -27,4 +27,16 @@ public class CoursePlace {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
+
+    public Long getPlaceId() {
+        return this.place.getId();
+    }
+
+    public String getPlaceTitle() {
+        return this.place.getTitle();
+    }
+
+    public String getPlaceImgUrl() {
+        return this.place.getImgUrl();
+    }
 }

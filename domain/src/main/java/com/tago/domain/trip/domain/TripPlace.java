@@ -27,7 +27,7 @@ public class TripPlace {
     @JoinColumn(name = "place_id")
     private Place place;
 
-    public String getPlaceName() {
+    public String getPlaceTitle() {
         return this.getPlace().getTitle();
     }
 }

@@ -1,9 +1,9 @@
 package com.tago.domain.course.repository.impl;
 
-import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.course.domain.Course;
+import com.tago.domain.course.exception.CourseNotFoundException;
 import com.tago.domain.course.repository.CourseCustomRepository;
 import com.tago.domain.member.domain.vo.Favorite;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         return queryFactory.selectFrom(course)
                 .innerJoin(course.coursePlaces, coursePlace).fetchJoin()
                 .innerJoin(coursePlace.place, place).fetchJoin()
-                .where(course.id.eq(id))
+                .where(courseEq(id))
                 .orderBy(coursePlace.order.asc())
                 .fetchOne();
     }
@@ -53,8 +53,11 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         return place.id.eq(placeId);
     }
 
-    private BooleanExpression placeIdExists(Long placeId) {
-        return place.id.eq(placeId).count().gt(0);
+    private BooleanExpression courseEq(Long courseId) {
+        if (courseId == null) {
+            throw new CourseNotFoundException();
+        }
+        return course.id.eq(courseId);
     }
 
     private BooleanExpression courseIdIn(List<Long> courseIds) {

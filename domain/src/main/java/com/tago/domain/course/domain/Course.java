@@ -3,6 +3,7 @@ package com.tago.domain.course.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.Builder.Default;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Course {
     private Long id;
 
     @Default
+    @BatchSize(size = 10)
     @OneToMany(mappedBy = "course")
     private List<CoursePlace> coursePlaces = new ArrayList<>();
 

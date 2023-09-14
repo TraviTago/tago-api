@@ -11,7 +11,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ErrorResponse {
     private LocalDateTime timestamp;
+    private String path;
     private int status;
     private String message;
     private String reason;
+
+    public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode, String message, ) {
+
+    }
 }

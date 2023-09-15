@@ -13,6 +13,6 @@ public interface TripCustomRepository {
     List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit);
     List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit);
 
-    Trip findByTripTag(Long memberId);
+    TripRecommendDto findByTripTag(Long memberId);
 }
 

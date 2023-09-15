@@ -7,6 +7,8 @@ import com.tago.api.trip.dto.response.TripStatusResponse;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.dto.TripPreviewDto;
+import com.tago.domain.trip.dto.TripRecommendDto;
+import com.tago.domain.trip.mapper.TripDtoMapper;
 import com.tago.domain.trip.service.TripPlaceQueryService;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.trip.service.TripQueryService;
@@ -54,7 +56,7 @@ public class TripGetService {
     }
 
     @Transactional(readOnly = true)
-    public Trip findByTripTag(Long memberId){
+    public TripRecommendDto findByTripTag(Long memberId){
         return tripQueryService.findByTripTag(memberId);
     }
 

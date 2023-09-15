@@ -1,6 +1,7 @@
 package com.tago.domain.trip.service;
 
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.dto.TripRecommendDto;
 import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.trip.dto.TripPreviewDto;
 import com.tago.domain.trip.mapper.TripDtoMapper;
@@ -34,7 +35,9 @@ public class TripQueryService {
         return TripDtoMapper.toTripPreviews(trips);
     }
 
-    public Trip findByTripTag (Long memberId){
+    public TripRecommendDto findByTripTag(Long memberId) {
         return tripRepository.findByTripTag(memberId);
     }
+
+
 }

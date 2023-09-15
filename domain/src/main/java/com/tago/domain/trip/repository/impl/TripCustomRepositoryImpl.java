@@ -10,7 +10,10 @@ import com.tago.domain.trip.dto.TripRecommendDto;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import com.tago.domain.trip.mapper.TripDtoMapper;
 import com.tago.domain.trip.dto.QTripRecommendDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.time.LocalDateTime;
@@ -28,6 +31,7 @@ import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private final JPAQueryFactory queryFactory;
+    private static final Logger logger = LoggerFactory.getLogger(TripCustomRepositoryImpl.class);
 
     @Override
     public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit) {
@@ -66,13 +70,22 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
-    public Trip findByTripTag(Long memberId){
+    public TripRecommendDto findByTripTag(Long memberId){
+
+        logger.info("Searching for trip tags for member with ID: {}", memberId);
 
         List<Long> memberTags = queryFactory
                 .select(memberTag.tag.id)
                 .from(memberTag)
                 .where(memberTag.member.id.eq(memberId))
                 .fetch();
+
+        logger.info("Found member tags: {}", memberTags);
+
+        if (memberTags.isEmpty()) {
+            logger.warn("No tags found for member with ID: {}", memberId);
+            return null;  // or throw an exception
+        }
 
         List<Long> tripIds = queryFactory
                 .select(tripTag.trip.id)
@@ -83,14 +96,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .limit(1)
                 .fetch();
 
+        logger.info("Found trip IDs based on member tags: {}", tripIds);
 
-//        return queryFactory
-//                .selectFrom(trip)
-//                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
-//                .innerJoin(tripPlace.place, place).fetchJoin()
-//                .where(trip.id.eq(tripIds.get(0)))
-//                .orderBy(tripPlace.order.asc())
-//                .fetchOne();
+        if (tripIds.isEmpty()) {
+            logger.warn("No trips found for the given member tags: {}", memberTags);
+            return null;  // or throw an exception
+        }
+
 
         Trip bestMatchingTrip = queryFactory
                 .selectFrom(trip)
@@ -100,11 +112,15 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .orderBy(tripPlace.order.asc())
                 .fetchOne();
 
-        return bestMatchingTrip;
+        if (bestMatchingTrip == null) {
+            logger.warn("No best matching trip found for trip ID: {}", tripIds.get(0));
+        } else {
+            logger.info("Found best matching trip with ID: {}", bestMatchingTrip.getId());  // 가정: Trip 클래스에 getId 메서드가 있다.
 
+     }
 
+        return TripDtoMapper.toTripRecommendDto(bestMatchingTrip);
     }
-
 
 
 

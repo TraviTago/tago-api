@@ -8,6 +8,7 @@ import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.api.trip.dto.response.TripStatusResponse;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPreviewDto;
+import com.tago.domain.trip.dto.TripRecommendDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,11 +49,9 @@ public class TripGetApi {
         return ResponseDto.ok(tripStatus);
     }
 
-    @GetMapping("trips/recommend")
-    public ResponseEntity<Trip> getByTripTag(
-            @LoginMember Long memberId
-    ){
-        Trip trip = tripService.findByTripTag(memberId);
-        return ResponseEntity.ok(trip);
+    @GetMapping("/trips/recommend")
+    public ResponseEntity<TripRecommendDto> getByTripTag(@LoginMember Long memberId) {
+        TripRecommendDto tripRecommendDto = tripService.findByTripTag(memberId);
+        return ResponseEntity.ok(tripRecommendDto);
     }
 }

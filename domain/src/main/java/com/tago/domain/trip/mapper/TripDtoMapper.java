@@ -3,6 +3,7 @@ package com.tago.domain.trip.mapper;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.domain.TripPlace;
 import com.tago.domain.trip.dto.TripPreviewDto;
+import com.tago.domain.trip.dto.TripRecommendDto;
 
 import java.util.List;
 
@@ -38,4 +39,21 @@ public class TripDtoMapper {
                 .map(TripPlace::getPlaceName)
                 .toList();
     }
+
+    public static TripRecommendDto toTripRecommendDto(Trip trip) {
+        List<TripPlace> tripPlaces = trip.getTripPlaces();
+
+        return TripRecommendDto.builder()
+                .tripId(trip.getId())
+                .dateTime(trip.getDateTime())
+                .imageUrl(getMainPlaceImgUrl(tripPlaces))
+                .name(trip.getName())
+                .totalTime(trip.getTotalTime())
+                .maxMember(trip.getMaxCnt())
+                .currentMember(trip.getCurrentCnt())
+                .places(getPlacesName(tripPlaces))
+                .build();
+    }
+
+
 }

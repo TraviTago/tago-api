@@ -72,8 +72,6 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     public TripRecommendDto findByTripTag(Long memberId){
 
-        logger.info("Searching for trip tags for member with ID: {}", memberId);
-
         List<Long> memberTags = queryFactory
                 .select(memberTag.tag.id)
                 .from(memberTag)
@@ -84,7 +82,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
         if (memberTags.isEmpty()) {
             logger.warn("No tags found for member with ID: {}", memberId);
-            return null;  // or throw an exception
+            return null;
         }
 
         List<Long> tripIds = queryFactory
@@ -100,9 +98,8 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
         if (tripIds.isEmpty()) {
             logger.warn("No trips found for the given member tags: {}", memberTags);
-            return null;  // or throw an exception
+            return null;
         }
-
 
         Trip bestMatchingTrip = queryFactory
                 .selectFrom(trip)
@@ -111,13 +108,6 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .where(trip.id.eq(tripIds.get(0)))
                 .orderBy(tripPlace.order.asc())
                 .fetchOne();
-
-        if (bestMatchingTrip == null) {
-            logger.warn("No best matching trip found for trip ID: {}", tripIds.get(0));
-        } else {
-            logger.info("Found best matching trip with ID: {}", bestMatchingTrip.getId());  // 가정: Trip 클래스에 getId 메서드가 있다.
-
-     }
 
         return TripDtoMapper.toTripRecommendDto(bestMatchingTrip);
     }

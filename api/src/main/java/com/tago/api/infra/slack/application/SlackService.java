@@ -43,7 +43,6 @@ public class SlackService{
         textObjects.add(markdownText("*문의자 전화번호:*\n" + member.getNumber()));
         textObjects.add(markdownText("*문의 제목:*\n"+ issueDescription));
         textObjects.add(markdownText("*문의 내용:*\n" + issueDto.getDetail()));
-
         MethodsClient methods = Slack.getInstance().methods(token);
         ChatPostMessageRequest request = ChatPostMessageRequest.builder()
                 .channel(channel)

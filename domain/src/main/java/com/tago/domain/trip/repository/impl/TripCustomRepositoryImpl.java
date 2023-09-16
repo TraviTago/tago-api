@@ -11,7 +11,6 @@ import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import com.tago.domain.trip.mapper.TripDtoMapper;
-import com.tago.domain.trip.dto.QTripRecommendDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +69,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
-    public TripRecommendDto findByTripTag(Long memberId){
+    public Trip findByTripTag(Long memberId){
 
         List<Long> memberTags = queryFactory
                 .select(memberTag.tag.id)
@@ -109,7 +108,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .orderBy(tripPlace.order.asc())
                 .fetchOne();
 
-        return TripDtoMapper.toTripRecommendDto(bestMatchingTrip);
+        return bestMatchingTrip;
     }
 
 

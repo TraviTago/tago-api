@@ -36,8 +36,8 @@ public class TripQueryService {
     }
 
     public TripRecommendDto findByTripTag(Long memberId) {
-        return tripRepository.findByTripTag(memberId);
+        Trip trip = tripRepository.findByTripTag(memberId);
+        return TripDtoMapper.toTripRecommendDto(trip);
     }
-
 
 }

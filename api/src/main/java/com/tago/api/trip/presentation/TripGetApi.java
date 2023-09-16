@@ -51,7 +51,7 @@ public class TripGetApi {
 
     @GetMapping("/trips/recommend")
     public ResponseEntity<TripRecommendDto> getByTripTag(@LoginMember Long memberId) {
-        TripRecommendDto tripRecommendDto = tripService.findByTripTag(memberId);
-        return ResponseEntity.ok(tripRecommendDto);
+        TripRecommendDto trip = tripService.findByTripTag(memberId);
+        return ResponseEntity.ok(trip);
     }
 }

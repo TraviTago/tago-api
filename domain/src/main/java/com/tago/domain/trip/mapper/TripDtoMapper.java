@@ -55,5 +55,4 @@ public class TripDtoMapper {
                 .build();
     }
 
-
 }

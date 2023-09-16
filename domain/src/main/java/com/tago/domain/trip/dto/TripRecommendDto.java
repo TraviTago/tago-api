@@ -1,7 +1,11 @@
 package com.tago.domain.trip.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TripPreviewDto {
+public class TripRecommendDto {
     private Long tripId;
     private LocalDateTime dateTime;
     private String imageUrl;

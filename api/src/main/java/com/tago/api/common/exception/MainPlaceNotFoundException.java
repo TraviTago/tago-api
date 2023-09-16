@@ -5,6 +5,6 @@ import com.tago.domain.common.error.ErrorCode;
 
 public class MainPlaceNotFoundException extends BaseBusinessException {
     public MainPlaceNotFoundException() {
-        super(ErrorCode.MAIN_PLACE_NOT_FOUND);
+        super(ErrorCode.COURSE_WITH_MAIN_PLACE_NOT_FOUND);
     }
 }

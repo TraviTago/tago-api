@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Builder
 @Entity
 @Table(name = "member_tag")
 @EqualsAndHashCode(callSuper = false)
@@ -24,4 +23,9 @@ public class MemberTag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tag tag;
+
+    public MemberTag(Member member, Tag tag) {
+        this.member = member;
+        this.tag = tag;
+    }
 }

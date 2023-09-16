@@ -4,6 +4,7 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.MemberTag;
 import com.tago.domain.member.domain.vo.Authority;
 import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.member.domain.vo.MemberTags;
 import com.tago.domain.member.domain.vo.Profile;
 import com.tago.domain.member.dto.MemberCreateDto;
 import com.tago.domain.tag.domain.Tag;
@@ -19,7 +20,7 @@ public class MemberCreateService {
 
     public final MemberQueryService memberQueryService;
     public final MemberCommandService memberCommandService;
-    private final TagQueryHandler tagQueryHandler;
+    private final MemberTagCreateService memberTagCreateService;
 
     public Member create(MemberCreateDto dto) {
         Profile profile = Profile.builder()
@@ -37,22 +38,8 @@ public class MemberCreateService {
                 .profile(profile)
                 .build();
 
-        member.addMemberTags(getMemberTags(member, dto.getFavorites()));
+        member.addMemberTags(memberTagCreateService.createMemberTags(member, dto.getFavorites()));
 
         return memberCommandService.save(member);
-    }
-
-    private List<MemberTag> getMemberTags(Member member, List<Favorite> favorites) {
-        return favorites.stream()
-                .map(favorite -> getMemberTag(member, favorite))
-                .toList();
-    }
-
-    private MemberTag getMemberTag(Member member, Favorite favorite) {
-        Tag tag = tagQueryHandler.findByType(favorite);
-        return MemberTag.builder()
-                .member(member)
-                .tag(tag)
-                .build();
     }
 }

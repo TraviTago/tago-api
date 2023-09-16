@@ -131,11 +131,6 @@ insert into trip_tag values(4, 2, 1);
 insert into trip_tag values(5, 2, 2);
 insert into trip_tag values(6, 2, 15); -- 사진촬영, 맛집탐방, 카페
 
--- INSERT MEMBER_TAG
-insert into member_tag values (1,2,1);
-insert into member_tag values (2,2,3);
-insert into member_tag values (3,2,9);
-
 -- INSERT PLACE_TAG
 insert into place_tag values(1,1,2);
 insert into place_tag values(2,1,4);

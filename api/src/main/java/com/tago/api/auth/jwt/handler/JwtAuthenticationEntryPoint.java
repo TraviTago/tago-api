@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tago.domain.common.error.BaseBusinessException;
 import com.tago.domain.common.error.ErrorCode;
-import com.tago.domain.common.error.ErrorResponse;
+import com.tago.api.common.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +29,18 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         try {
             response.setContentType("application/json;charset=UTF-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write(createWriter(authException));
+            response.getWriter().write(createWriter(authException, request));
         } catch (IOException e) {
             throw new BaseBusinessException(ErrorCode.DEFAULT, e);
         }
     }
 
-    private String createWriter(AuthenticationException e) throws JsonProcessingException {
+    private String createWriter(AuthenticationException e, HttpServletRequest request) throws JsonProcessingException {
         ErrorResponse response = new ErrorResponse(
                 LocalDateTime.now(),
+                request.getRequestURI(),
                 HttpStatus.UNAUTHORIZED.value(),
+                ErrorCode.DEFAULT.getCode(),
                 HttpStatus.UNAUTHORIZED.toString(),
                 e.getMessage()
         );

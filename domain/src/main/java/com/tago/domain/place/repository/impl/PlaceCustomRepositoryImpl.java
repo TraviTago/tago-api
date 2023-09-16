@@ -3,14 +3,10 @@ package com.tago.domain.place.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.place.dto.PlacePreviewDto;
-import com.tago.domain.place.dto.PopularPlaceDto;
 import com.tago.domain.place.dto.QPlacePreviewDto;
-import com.tago.domain.place.dto.QPopularPlaceDto;
 import com.tago.domain.place.repository.PlaceCustomRepository;
-import com.tago.domain.tag.domain.QTag;
 import lombok.RequiredArgsConstructor;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

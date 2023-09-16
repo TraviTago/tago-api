@@ -8,14 +8,15 @@ import com.tago.domain.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TagQueryHandler {
 
     private final TagRepository tagRepository;
 
-    public Tag findByType(Favorite favorite) {
-        return tagRepository.findByType(favorite)
-                .orElseThrow(TagNotFoundException::new);
+    public List<Tag> findAllByType(List<Favorite> types) {
+        return tagRepository.findAllByType(types);
     }
 }

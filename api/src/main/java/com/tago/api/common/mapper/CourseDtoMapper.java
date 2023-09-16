@@ -2,8 +2,10 @@ package com.tago.api.common.mapper;
 
 import com.tago.api.common.exception.MainPlaceNotFoundException;
 import com.tago.api.course.dto.response.CourseRecommendResponse;
+import com.tago.api.course.dto.response.CourseRecommendResponse.PlacePreview;
 import com.tago.domain.course.domain.Course;
 import com.tago.domain.course.domain.CoursePlace;
+import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.exception.PlaceNotFoundException;
 
 import java.util.List;
@@ -16,10 +18,9 @@ public class CourseDtoMapper {
         List<CoursePlace> coursePlaces = course.getCoursePlaces();
 
         return new CourseRecommendResponse(
-                course.getId(),
                 getMainPlaceImgUrl(coursePlaces, placeId),
                 TOTAL_TIME,
-                getPlacesTitle(coursePlaces)
+                getPlaces(coursePlaces)
         );
     }
 
@@ -31,9 +32,19 @@ public class CourseDtoMapper {
                 .orElseThrow(MainPlaceNotFoundException::new);
     }
 
-    private static List<String> getPlacesTitle(List<CoursePlace> coursePlaces) {
+    private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
         return coursePlaces.stream()
-                .map(CoursePlace::getPlaceTitle)
+                .map(coursePlace -> getPlacePreview(coursePlace.getPlace()))
                 .toList();
+    }
+
+    private static PlacePreview getPlacePreview(Place place) {
+        return new PlacePreview(
+                place.getId(),
+                place.getImgUrl(),
+                place.getTitle(),
+                place.getAddress(),
+                place.getOverview()
+        );
     }
 }

@@ -83,6 +83,21 @@ insert into course values(1);
 insert into course values(2);
 insert into course values(3);
 
+-- INSERT COURSE_PLACE
+insert into course_place values(1, 1, 1, 1);
+insert into course_place values(2, 3, 1, 3);
+insert into course_place values(3, 2, 1, 2);
+insert into course_place values(4, 4, 1, 4); -- 맥도생태공원, 몰운대, 밀양순대돼지국밥, 밀양순대돼지국밥2
+
+insert into course_place values(5, 1, 2, 1);
+insert into course_place values(6, 3, 2, 3);
+insert into course_place values(7, 2, 2, 2);
+insert into course_place values(8, 4, 2, 4); -- 맥도생태공원, 몰운대, 밀양순대돼지국밥, 밀양순대돼지국밥2
+
+insert into course_place values(9, 1, 3, 1);
+insert into course_place values(10, 3, 3, 3);
+insert into course_place values(11, 2, 3, 2); -- 맥도생태공원, 몰운대, 밀양순대돼지국밥
+
 -- INSERT TAG
 insert into tag values(1, 'CAMERA'); -- 사진촬영
 insert into tag values(2, 'FOOD'); -- 맛집탐방
@@ -106,18 +121,18 @@ insert into course_tag values(1,1,13);
 insert into course_tag values(2,1,12);
 insert into course_tag values(3,1,2);
 insert into course_tag values(4,1,8);
-insert into course_tag values(5,1,15);
+insert into course_tag values(5,1,15); -- 바다, 전통시장, 맛집탐방, 레저/액티비티, 카페
 insert into course_tag values(6,2,13);
 insert into course_tag values(7,2,1);
 insert into course_tag values(8,2,4);
 insert into course_tag values(9,2,7);
-insert into course_tag values(10,2,2);
+insert into course_tag values(10,2,2); -- 바다, 사진촬영, 산책, 영화, 맛집탐방
 insert into course_tag values(11,3,13);
 insert into course_tag values(12,3,9);
 insert into course_tag values(13,3,4);
 insert into course_tag values(14,3,10);
 insert into course_tag values(15,3,15);
-insert into course_tag values(16,3,2);
+insert into course_tag values(16,3,2); -- 바다, 동물, 산책, 자연, 카페, 맛집탐방
 
 -- INSERT TRIP_TAG
 insert into trip_tag values(1, 1, 13);
@@ -136,12 +151,13 @@ insert into trip_tag values(10, 4, 1);
 insert into trip_tag values(11, 4, 2);
 insert into trip_tag values(12, 4, 3); -- 사진촬영, 맛집탐방, 카페
 
-
-
+-- INSERT MEMBER_TAG
 insert into member_tag values (4,2,1);
 insert into member_tag values (5,2,3);
 insert into member_tag values (6,2,9);
 
+
+-- INSERT PLACE_TAG
 insert into place_tag values(1,1,2);
 insert into place_tag values(2,1,4);
 insert into place_tag values(3,1,6);

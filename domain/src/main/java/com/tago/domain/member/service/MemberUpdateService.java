@@ -4,6 +4,7 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.MemberTag;
 import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.member.dto.MemberCreateDto;
+import com.tago.domain.member.dto.MemberUpdateDto;
 import com.tago.domain.tag.domain.Tag;
 import com.tago.domain.tag.service.TagQueryHandler;
 import lombok.RequiredArgsConstructor;
@@ -17,31 +18,15 @@ import java.util.List;
 public class MemberUpdateService {
 
     private final MemberQueryService memberQueryService;
-    private final TagQueryHandler tagQueryHandler;
+    private final MemberTagCreateService memberTagCreateService;
 
-    public Member updateMemberInfo(Long memberId, MemberCreateDto dto) {
+    public void updateMemberInfo(Long memberId, MemberUpdateDto dto) {
         Member member = memberQueryService.findByMemberId(memberId);
         member.updateInfo(
-                dto.getAgeRange(),
-                dto.getGender(),
                 dto.getMbti(),
+                dto.getImgUrl(),
                 dto.getTripTypes(),
-                getMemberTags(member, dto.getFavorites())
+                memberTagCreateService.createMemberTags(member, dto.getFavorites())
         );
-        return member;
-    }
-
-    private List<MemberTag> getMemberTags(Member member, List<Favorite> favorites) {
-        return favorites.stream()
-                .map(favorite -> getMemberTag(member, favorite))
-                .toList();
-    }
-
-    private MemberTag getMemberTag(Member member, Favorite favorite) {
-        Tag tag = tagQueryHandler.findByType(favorite);
-        return MemberTag.builder()
-                .member(member)
-                .tag(tag)
-                .build();
     }
 }

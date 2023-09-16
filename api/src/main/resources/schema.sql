@@ -44,8 +44,8 @@ drop table if exists course_place;
 create table course_place (
     id bigint auto_increment,
     `order` int not null,
-    place_id bigint not null,
     course_id bigint not null,
+    place_id bigint not null,
     primary key (id)
 );
 

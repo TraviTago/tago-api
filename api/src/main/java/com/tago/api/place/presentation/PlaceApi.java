@@ -7,7 +7,6 @@ import com.tago.api.place.application.PlaceService;
 import com.tago.api.place.dto.response.PlaceInfoResponse;
 import com.tago.api.place.dto.response.PlaceRecommendResponse;
 import com.tago.api.place.dto.response.PlaceSearchResponse;
-import com.tago.domain.member.domain.vo.Favorite;
 import com.tago.domain.place.dto.PlacePreviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

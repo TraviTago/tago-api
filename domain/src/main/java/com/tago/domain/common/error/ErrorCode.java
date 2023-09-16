@@ -33,6 +33,10 @@ public enum ErrorCode {
     // PLACE
     PLACE_NOT_FOUND(404,"P001","존재하지 않은 여행지입니다."),
 
+    // COURSE
+    COURSE_WITH_MAIN_PLACE_NOT_FOUND(404, "C001", "꼭 가고싶은 여행지가 포함된 코스가 존재하지 않습니다."),
+    COURSE_NOT_MATCHING(404, "C002", "조건에 맞는 코스가 존재하지 않습니다."),
+
     // TAG
     TAG_NOT_FOUND(404, "TA001", "존재하지 않는 태그입니다."),
 

@@ -36,10 +36,9 @@ public class Member {
     @Embedded
     private MemberTags memberTags = new MemberTags();
 
-    public void updateInfo(int ageRange, Gender gender, Mbti mbti,
-                           List<TripType> tripTypes, List<MemberTag> tags) {
+    public void updateInfo(Mbti mbti, String imgUrl, List<TripType> tripTypes, List<MemberTag> tags) {
         updateMemberTags(tags);
-        updateProfile(ageRange, gender, mbti, tripTypes);
+        updateProfile(mbti, imgUrl, tripTypes);
     }
 
     private void updateMemberTags(List<MemberTag> tags) {
@@ -47,10 +46,11 @@ public class Member {
         this.memberTags.getMemberTags().addAll(tags);
     }
 
-    private void updateProfile(int ageRange, Gender gender, Mbti mbti, List<TripType> tripTypes) {
+    private void updateProfile(Mbti mbti, String imgUrl, List<TripType> tripTypes) {
         this.profile = Profile.builder()
-                .ageRange(ageRange)
-                .gender(gender)
+                .ageRange(this.getAgeRange())
+                .gender(this.getGender())
+                .imgUrl(imgUrl)
                 .mbti(mbti)
                 .tripTypes(tripTypes)
                 .build();

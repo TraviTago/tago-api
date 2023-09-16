@@ -26,7 +26,7 @@ public class TripDtoMapper {
                 .totalTime(trip.getTotalTime())
                 .maxMember(trip.getMaxCnt())
                 .currentMember(trip.getCurrentCnt())
-                .places(getPlacesName(tripPlaces))
+                .places(getPlacesTitle(tripPlaces))
                 .build();
     }
 
@@ -34,9 +34,9 @@ public class TripDtoMapper {
         return tripPlaces.get(0).getPlace().getImgUrl();
     }
 
-    private static List<String> getPlacesName(List<TripPlace> tripPlaces) {
+    private static List<String> getPlacesTitle(List<TripPlace> tripPlaces) {
         return tripPlaces.stream()
-                .map(TripPlace::getPlaceName)
+                .map(TripPlace::getPlaceTitle)
                 .toList();
     }
 

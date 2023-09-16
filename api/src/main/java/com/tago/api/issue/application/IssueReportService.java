@@ -21,7 +21,7 @@ public class IssueReportService {
     @Transactional
     public Issue reportIssue(Long memberId, IssueDto issueDto){
         Issue issue = issueCreateService.createIssue(memberId, issueDto);
-        slackService.sendMessageToSlack(issueDto);
+        slackService.sendMessageToSlack(memberId, issueDto);
 
         return issueCommandService.save(issue);
     }

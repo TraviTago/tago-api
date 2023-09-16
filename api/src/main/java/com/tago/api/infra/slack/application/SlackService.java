@@ -7,6 +7,7 @@ import com.slack.api.methods.request.chat.ChatPostMessageRequest;
 import com.slack.api.model.block.composition.TextObject;
 import com.tago.api.member.application.MemberService;
 import com.tago.api.member.dto.response.MemberGetResponse;
+import com.tago.domain.issue.domain.vo.IssueType;
 import com.tago.domain.issue.dto.IssueDto;
 import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +37,11 @@ public class SlackService{
     public void sendMessageToSlack(Long memberId,IssueDto issueDto){
 
         MemberGetResponse member = memberService.get(memberId);
+        String issueDescription = IssueType.getDescriptionByType(issueDto.getType());
 
         List<TextObject> textObjects = new ArrayList<>();
         textObjects.add(markdownText("*문의자 전화번호:*\n" + member.getNumber()));
-        textObjects.add(markdownText("*문의 제목:*\n"+ issueDto.getType()));
+        textObjects.add(markdownText("*문의 제목:*\n"+ issueDescription));
         textObjects.add(markdownText("*문의 내용:*\n" + issueDto.getDetail()));
 
         MethodsClient methods = Slack.getInstance().methods(token);

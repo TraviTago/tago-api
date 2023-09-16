@@ -15,6 +15,14 @@ public enum IssueType {
 
     private IssueType(String description) {this.description = description; }
 
+    public static String getDescriptionByType(String type) {
+        for (IssueType issueType : IssueType.values()) {
+            if (issueType.name().equals(type)) {
+                return issueType.description;
+            }
+        }
+        return "알 수 없는 타입";
+    }
     public String getDescription() {
         return description;
     }

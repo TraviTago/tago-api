@@ -9,5 +9,5 @@ public interface TripMemberRepository extends JpaRepository<TripMember,Long>, Tr
 
     Boolean existsByTripIdAndMemberId(Long tripId, Long memberId);
 
-    Optional<TripMember> findByTripIdAndMemberId(Long tripId, Long memberId);
+    TripMember findByTripIdAndMemberId(Long tripId, Long memberId);
 }

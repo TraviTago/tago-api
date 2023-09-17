@@ -7,6 +7,7 @@ import com.tago.domain.tripmember.dto.MyTripDto;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.tripmember.mapper.MyTripDtoMapper;
 import com.tago.domain.tripmember.repository.TripMemberRepository;
+import com.tago.domain.tripmember.exception.TripMemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,12 @@ public class TripMemberQueryService {
         return tripMemberRepository.existsByTripIdAndMemberId(tripId, memberId);
     }
 
-    public Optional<TripMember> findByTripIdAndMemberId(Long tripId, Long memberId) {
-        return tripMemberRepository.findByTripIdAndMemberId(tripId, memberId);
+    public TripMember findByTripIdAndMemberId(Long tripId, Long memberId) {
+        TripMember tripMember = tripMemberRepository.findByTripIdAndMemberId(tripId, memberId);
+        if (tripMember == null) {
+            throw new TripMemberNotFoundException();
+        }
+        return tripMember;
     }
 
 }

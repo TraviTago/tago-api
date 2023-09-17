@@ -18,9 +18,7 @@ public class TripMemberDeleteService {
 
     @Transactional
     public void deleteTripMember(Long tripId,Long memberId){
-        TripMember tripmember = tripMemberQueryService.findByTripIdAndMemberId(tripId,memberId)
-                .orElseThrow(() -> new IllegalArgumentException("TripMember not found with given tripId and memberId"));
-
+        TripMember tripmember = tripMemberQueryService.findByTripIdAndMemberId(tripId,memberId);
         tripMemberCommandService.delete(tripmember);
     }
 }

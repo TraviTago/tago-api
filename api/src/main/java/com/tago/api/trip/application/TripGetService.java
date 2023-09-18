@@ -29,8 +29,8 @@ public class TripGetService {
     private final TripMemberQueryService tripMemberQueryService;
 
     @Transactional(readOnly = true)
-    public PageResponseDto<TripPreviewDto> getAll(Long cursorId, LocalDateTime cursorDate, int limit) {
-        List<TripPreviewDto> trips = tripQueryService.findAll(cursorId, cursorDate, limit);
+    public PageResponseDto<TripPreviewDto> getAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+        List<TripPreviewDto> trips = tripQueryService.findAll(cursorId, cursorDate, limit, sameGender, isPet);
         return PageResponseDto.from(trips);
     }
 

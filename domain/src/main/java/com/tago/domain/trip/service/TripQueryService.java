@@ -23,8 +23,8 @@ public class TripQueryService {
                 .orElseThrow(TripNotFoundException::new);
     }
   
-    public List<TripPreviewDto> findAll(Long cursorId, LocalDateTime cursorDate, int limit) {
-        List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit);
+    public List<TripPreviewDto> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+        List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit, sameGender, isPet);
         return TripDtoMapper.toTripPreviews(trips);
     }
 

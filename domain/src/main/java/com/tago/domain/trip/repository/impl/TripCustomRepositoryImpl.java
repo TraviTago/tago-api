@@ -1,5 +1,6 @@
 package com.tago.domain.trip.repository.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -33,7 +34,21 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     private static final Logger logger = LoggerFactory.getLogger(TripCustomRepositoryImpl.class);
 
     @Override
-    public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit) {
+    public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+
+//        BooleanBuilder builder = new BooleanBuilder();
+//
+//        builder.and(isNotDone());
+//        builder.and(cursorGt(cursorId,cursorDate));
+//
+//        if(sameGender != null){
+//            builder.and(trip.condition.sameGender.eq(sameGender));
+//        }
+//
+//        if(isPet != null){
+//            builder.and(trip.condition.isPet.eq(isPet));
+//        }
+
         List<Long> ids = queryFactory.select(trip.id)
                 .from(trip)
                 .where(isNotDone(), cursorGt(cursorId, cursorDate))

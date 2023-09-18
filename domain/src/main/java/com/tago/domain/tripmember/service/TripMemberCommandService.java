@@ -12,6 +12,10 @@ public class TripMemberCommandService {
     public TripMember save(TripMember tripMember) {
         return tripMemberRepository.save(tripMember);
     }
+
+    public void delete(TripMember tripMember){
+        tripMemberRepository.delete(tripMember);
+    }
 }
 
 

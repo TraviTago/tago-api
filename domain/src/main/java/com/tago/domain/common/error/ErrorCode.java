@@ -25,6 +25,7 @@ public enum ErrorCode {
     TRIP_TYPE_NOT_FOUND(404, "M002", "존재하지 않는 TRIPTYPE 입니다."),
     FAVORITE_NOT_FOUND(404, "M003", "존재하지 않는 FAVORITE 입니다."),
     GENDER_NOT_FOUND(404, "M004", "존재하지 않는 GENDER 입니다."),
+    TRIPMEMBER_NOT_FOUND(404,"M005","존재하지 않는 TRIPMEMBER 입니다."),
 
     // TRIP
     TRIP_NOT_FOUND(404, "T001", "존재하지 않는 여행입니다."),

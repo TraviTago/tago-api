@@ -51,7 +51,7 @@ public class TripDtoMapper {
                 .totalTime(trip.getTotalTime())
                 .maxMember(trip.getMaxCnt())
                 .currentMember(trip.getCurrentCnt())
-                .places(getPlacesName(tripPlaces))
+                .places(getPlacesTitle(tripPlaces))
                 .build();
     }
 

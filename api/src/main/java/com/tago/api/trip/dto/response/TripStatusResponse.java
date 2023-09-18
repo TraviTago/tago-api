@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TripStatusResponse {
 
+    private String meatPlace;
     private int femaleCnt;
     private int maleCnt;
     private Set<Integer> ageGroup;

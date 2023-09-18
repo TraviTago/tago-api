@@ -51,9 +51,9 @@ values(10, 2787112, 39, '테스트6', '부산광역시 해운대구 구남로 28
        null, '051-731-7005', null, '24시간', null);
 
 -- INSERT TRIP
-insert into trip values(1, '테스트 여행1', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1); --성별,나이대,애완동물
-insert into trip values(2, '테스트 여행2', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
-insert into trip values(3, '테스트 여행3', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
+insert into trip values(1, '테스트 여행1', '2023-10-02T11:00:00', '해운대', 480, 4, 2, false, true, false, 1); --성별,나이대,애완동물
+insert into trip values(2, '테스트 여행2', '2023-10-02T11:00:00', '해운대', 480, 4, 2, false, true, true, 1);
+insert into trip values(3, '테스트 여행3', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, false, 1);
 insert into trip values(4, '테스트 여행4', '2023-10-02T11:00:00', '해운대', 480, 4, 2, true, true, true, 1);
 
 -- INSERT TRIP_PLACE

@@ -36,22 +36,12 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     @Override
     public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
 
-//        BooleanBuilder builder = new BooleanBuilder();
-//
-//        builder.and(isNotDone());
-//        builder.and(cursorGt(cursorId,cursorDate));
-//
-//        if(sameGender != null){
-//            builder.and(trip.condition.sameGender.eq(sameGender));
-//        }
-//
-//        if(isPet != null){
-//            builder.and(trip.condition.isPet.eq(isPet));
-//        }
-
         List<Long> ids = queryFactory.select(trip.id)
                 .from(trip)
-                .where(isNotDone(), cursorGt(cursorId, cursorDate))
+                .where(isNotDone(),
+                        cursorGt(cursorId, cursorDate),
+                        isSameGender(sameGender),
+                        okayPet(isPet))
                 .limit(limit)
                 .fetch();
 
@@ -146,5 +136,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression containPlaceTitle(String keyword) {
         return isNotEmpty(keyword) ? place.title.containsIgnoreCase(keyword) : null;
+    }
+
+    private BooleanExpression isSameGender(Boolean sameGender){
+        return sameGender ? trip.condition.sameGender.eq(true) : null ;
+    }
+
+    private BooleanExpression okayPet(Boolean isPet){
+        return isPet ? trip.condition.isPet.eq(true) : null;
     }
 }

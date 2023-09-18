@@ -28,8 +28,8 @@ public class TripGetApi {
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("cursorDate") LocalDateTime cursorDate,
             @RequestParam("limit") int limit,
-            @RequestParam(value="sameGender", required = false)Boolean sameGender,
-            @RequestParam(value = "isPet", required = false) Boolean isPet
+            @RequestParam(value="sameGender", defaultValue = "false")Boolean sameGender,
+            @RequestParam(value = "isPet", defaultValue = "false") Boolean isPet
             ) {
     PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit, sameGender, isPet);
         return ResponseDto.ok(response);

@@ -14,6 +14,7 @@ public class TripStatusDtoMapper {
 
     public static TripStatusResponse toDto(Trip trip, List<TripMemberDto> tripMembers) {
         return new TripStatusResponse(
+                trip.getMeetPlace(),
                 countGender(tripMembers, Gender.FEMALE),
                 countGender(tripMembers, Gender.MALE),
                 getAgeGroups(tripMembers),

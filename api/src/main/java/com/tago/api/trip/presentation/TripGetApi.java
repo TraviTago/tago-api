@@ -1,5 +1,6 @@
 package com.tago.api.trip.presentation;
 
+import ch.qos.logback.core.joran.event.BodyEvent;
 import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
@@ -26,9 +27,11 @@ public class TripGetApi {
     public ResponseEntity<PageResponseDto<TripPreviewDto>> getAll(
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("cursorDate") LocalDateTime cursorDate,
-            @RequestParam("limit") int limit
-    ) {
-        PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit);
+            @RequestParam("limit") int limit,
+            @RequestParam(value="sameGender", defaultValue = "false")Boolean sameGender,
+            @RequestParam(value = "isPet", defaultValue = "false") Boolean isPet
+            ) {
+    PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit, sameGender, isPet);
         return ResponseDto.ok(response);
     }
 

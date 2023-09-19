@@ -1,17 +1,11 @@
 package com.tago.domain.trip.repository.impl;
 
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.JPAExpressions;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.trip.domain.Trip;
-import com.tago.domain.trip.dto.TripPreviewDto;
-import com.tago.domain.trip.dto.TripRecommendDto;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import com.tago.domain.trip.mapper.TripDtoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,13 +29,14 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     @Override
     public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
-
         List<Long> ids = queryFactory.select(trip.id)
                 .from(trip)
-                .where(isNotDone(),
+                .where(
+                        isNotDone(),
                         cursorGt(cursorId, cursorDate),
                         isSameGender(sameGender),
-                        okayPet(isPet))
+                        isPet(isPet)
+                )
                 .limit(limit)
                 .fetch();
 
@@ -75,48 +70,28 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     }
 
     public Trip findByTripTag(Long memberId){
-
-        List<Long> memberTags = queryFactory
+        List<Long> tagIds = queryFactory
                 .select(memberTag.tag.id)
                 .from(memberTag)
                 .where(memberTag.member.id.eq(memberId))
                 .fetch();
 
-        logger.info("Found member tags: {}", memberTags);
-
-        if (memberTags.isEmpty()) {
-            logger.warn("No tags found for member with ID: {}", memberId);
-            return null;
-        }
-
-        List<Long> tripIds = queryFactory
+        Long tripId = queryFactory
                 .select(tripTag.trip.id)
                 .from(tripTag)
-                .where(tripTag.tag.id.in(memberTags))
+                .where(tagIdIn(tagIds))
                 .groupBy(tripTag.trip.id)
                 .orderBy(tripTag.tag.id.count().desc())
-                .limit(1)
-                .fetch();
+                .fetchFirst();
 
-        logger.info("Found trip IDs based on member tags: {}", tripIds);
-
-        if (tripIds.isEmpty()) {
-            logger.warn("No trips found for the given member tags: {}", memberTags);
-            return null;
-        }
-
-        Trip bestMatchingTrip = queryFactory
+        return queryFactory
                 .selectFrom(trip)
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
                 .innerJoin(tripPlace.place, place).fetchJoin()
-                .where(trip.id.eq(tripIds.get(0)))
+                .where(tripIdEq(tripId))
                 .orderBy(tripPlace.order.asc())
                 .fetchOne();
-
-        return bestMatchingTrip;
     }
-
-
 
     private BooleanExpression cursorGt(Long cursorId, LocalDateTime cursorDate) {
         return cursorIdAndDateGt(cursorId, cursorDate).or(cursorDateGt(cursorDate));
@@ -138,11 +113,19 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         return isNotEmpty(keyword) ? place.title.containsIgnoreCase(keyword) : null;
     }
 
+    private BooleanExpression tripIdEq(Long id) {
+        return trip.id.eq(id);
+    }
+
+    private BooleanExpression tagIdIn(List<Long> ids) {
+        return tripTag.tag.id.in(ids);
+    }
+
     private BooleanExpression isSameGender(Boolean sameGender){
         return sameGender ? trip.condition.sameGender.eq(true) : null ;
     }
 
-    private BooleanExpression okayPet(Boolean isPet){
+    private BooleanExpression isPet(Boolean isPet) {
         return isPet ? trip.condition.isPet.eq(true) : null;
     }
 }

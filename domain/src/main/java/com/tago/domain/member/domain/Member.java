@@ -2,10 +2,10 @@ package com.tago.domain.member.domain;
 
 
 import com.tago.domain.member.domain.vo.*;
-import com.tago.domain.member.domain.vo.MemberTags;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,8 +33,8 @@ public class Member {
     private Profile profile;
 
     @Builder.Default
-    @Embedded
-    private MemberTags memberTags = new MemberTags();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberTag> memberTags = new ArrayList<>();
 
     public void updateInfo(Mbti mbti, String imgUrl, List<TripType> tripTypes, List<MemberTag> tags) {
         updateMemberTags(tags);
@@ -42,8 +42,8 @@ public class Member {
     }
 
     private void updateMemberTags(List<MemberTag> tags) {
-        this.memberTags.getMemberTags().clear();
-        this.memberTags.getMemberTags().addAll(tags);
+        this.memberTags.clear();
+        this.memberTags.addAll(tags);
     }
 
     private void updateProfile(Mbti mbti, String imgUrl, List<TripType> tripTypes) {
@@ -81,11 +81,11 @@ public class Member {
     }
 
     public void addMemberTags(List<MemberTag> memberTags) {
-        this.memberTags.addMemberTags(memberTags);
+        this.memberTags.addAll(memberTags);
     }
 
     public List<Favorite> getMemberTags() {
-        return memberTags.getMemberTags().stream()
+        return memberTags.stream()
                 .map(memberTag -> memberTag.getTag().getType())
                 .toList();
     }

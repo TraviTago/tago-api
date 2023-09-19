@@ -8,11 +8,10 @@ import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.dto.TripPreviewDto;
 import com.tago.domain.trip.dto.TripRecommendDto;
-import com.tago.domain.trip.mapper.TripDtoMapper;
-import com.tago.domain.trip.service.TripPlaceQueryService;
+import com.tago.domain.trip.handler.TripPlaceQueryService;
 import com.tago.domain.tripmember.dto.TripMemberDto;
-import com.tago.domain.trip.service.TripQueryService;
-import com.tago.domain.tripmember.service.TripMemberQueryService;
+import com.tago.domain.trip.handler.TripQueryService;
+import com.tago.domain.tripmember.handler.TripMemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +28,9 @@ public class TripGetService {
     private final TripMemberQueryService tripMemberQueryService;
 
     @Transactional(readOnly = true)
-    public PageResponseDto<TripPreviewDto> getAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+    public PageResponseDto<TripPreviewDto> getAll(
+            Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet
+    ) {
         List<TripPreviewDto> trips = tripQueryService.findAll(cursorId, cursorDate, limit, sameGender, isPet);
         return PageResponseDto.from(trips);
     }
@@ -63,5 +64,4 @@ public class TripGetService {
     private Boolean isJoined(Long tripId, Long memberId) {
         return tripMemberQueryService.existsByTripIdAndMemberId(tripId, memberId);
     }
-
 }

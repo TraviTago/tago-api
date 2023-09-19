@@ -20,6 +20,13 @@ public class TripCreateDto {
     private Boolean sameAge;
     private Boolean isPet;
     private String meetPlace;
-    private List<Favorite> tags;
-    private List<Long> places;
+    private List<Favorite> types;
+    private List<Place> places;
+
+    @Getter
+    @AllArgsConstructor
+    public static class Place {
+        private Long placeId;
+        private int order;
+    }
 }

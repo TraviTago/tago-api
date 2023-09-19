@@ -9,7 +9,6 @@ import com.tago.api.member.application.MemberService;
 import com.tago.api.member.dto.response.MemberGetResponse;
 import com.tago.domain.issue.domain.vo.IssueType;
 import com.tago.domain.issue.dto.IssueDto;
-import com.tago.domain.member.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

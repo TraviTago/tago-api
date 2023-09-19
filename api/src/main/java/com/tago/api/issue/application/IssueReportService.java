@@ -4,7 +4,7 @@ package com.tago.api.issue.application;
 import com.tago.api.infra.slack.application.SlackService;
 import com.tago.domain.issue.domain.Issue;
 import com.tago.domain.issue.dto.IssueDto;
-import com.tago.domain.issue.service.IssueCommandService;
+import com.tago.domain.issue.handler.IssueCommandService;
 import com.tago.domain.issue.service.IssueCreateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

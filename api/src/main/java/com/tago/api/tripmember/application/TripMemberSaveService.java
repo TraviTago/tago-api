@@ -3,11 +3,11 @@ package com.tago.api.tripmember.application;
 
 import com.tago.api.tripmember.dto.response.TripMemberJoinResponse;
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.service.MemberQueryService;
+import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.tripmember.domain.TripMember;
 import com.tago.domain.tripmember.service.TripMemberCreateService;
-import com.tago.domain.trip.service.TripQueryService;
+import com.tago.domain.trip.handler.TripQueryService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

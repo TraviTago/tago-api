@@ -1,4 +1,4 @@
-package com.tago.domain.course.service;
+package com.tago.domain.course.handler;
 
 import com.tago.domain.course.domain.Course;
 import com.tago.domain.course.repository.CourseRepository;

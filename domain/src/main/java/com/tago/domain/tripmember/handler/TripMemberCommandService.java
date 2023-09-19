@@ -1,4 +1,4 @@
-package com.tago.domain.tripmember.service;
+package com.tago.domain.tripmember.handler;
 
 import com.tago.domain.tripmember.domain.TripMember;
 import com.tago.domain.tripmember.repository.TripMemberRepository;

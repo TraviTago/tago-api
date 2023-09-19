@@ -6,5 +6,5 @@ import com.tago.domain.tag.domain.Tag;
 import java.util.List;
 
 public interface TagCustomRepository {
-    List<Tag> findAllByType(List<Favorite> types);
+    List<Tag> findByTypes(List<Favorite> types);
 }

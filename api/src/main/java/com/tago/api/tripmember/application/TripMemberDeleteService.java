@@ -1,13 +1,11 @@
 package com.tago.api.tripmember.application;
 
 import com.tago.domain.tripmember.domain.TripMember;
-import com.tago.domain.tripmember.service.TripMemberCommandService;
-import com.tago.domain.tripmember.service.TripMemberQueryService;
+import com.tago.domain.tripmember.handler.TripMemberCommandService;
+import com.tago.domain.tripmember.handler.TripMemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

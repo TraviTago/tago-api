@@ -2,7 +2,7 @@ package com.tago.api.trip.application;
 
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.domain.trip.dto.TripPreviewDto;
-import com.tago.domain.trip.service.TripQueryService;
+import com.tago.domain.trip.handler.TripQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

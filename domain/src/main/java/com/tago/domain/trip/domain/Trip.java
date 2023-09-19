@@ -51,11 +51,11 @@ public class Trip {
     private Member member;
 
     @Default
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<TripPlace> tripPlaces = new ArrayList<>();
 
     @Default
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<TripTag> tripTags = new ArrayList<>();
 
     public void join() {
@@ -69,5 +69,13 @@ public class Trip {
 
     public LocalDateTime getEndTime() {
         return this.dateTime.plusMinutes(totalTime);
+    }
+
+    public void addTripPlaces(List<TripPlace> places) {
+        tripPlaces.addAll(places);
+    }
+
+    public void addTripTags(List<TripTag> tags) {
+        tripTags.addAll(tags);
     }
 }

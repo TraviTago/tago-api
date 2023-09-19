@@ -1,4 +1,4 @@
-package com.tago.domain.place.service;
+package com.tago.domain.place.handler;
 
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
@@ -35,7 +35,4 @@ public class PlaceQueryService {
     public List<PlacePreviewDto> findPopularPlaces(){
         return placeRepository.findPopularPlaces();
     }
-
-
-
 }

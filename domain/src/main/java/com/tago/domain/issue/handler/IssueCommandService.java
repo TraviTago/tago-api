@@ -1,4 +1,4 @@
-package com.tago.domain.issue.service;
+package com.tago.domain.issue.handler;
 
 import com.tago.domain.issue.domain.Issue;
 import com.tago.domain.issue.repository.IssueRepository;

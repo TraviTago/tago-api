@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Builder
 @Entity
 @Table(name = "trip_tag")
 @EqualsAndHashCode(callSuper = false)
@@ -24,4 +23,9 @@ public class TripTag {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tag tag;
+
+    public TripTag(Trip trip, Tag tag) {
+        this.trip = trip;
+        this.tag = tag;
+    }
 }

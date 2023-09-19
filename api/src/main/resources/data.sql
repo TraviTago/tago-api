@@ -73,8 +73,6 @@ insert into trip_place values(10, 3, 4, 8);
 insert into trip_place values(11, 1, 4, 4);
 insert into trip_place values(12, 2, 4, 1);
 
-
-
 -- INSERT TRIP_MEMBER
 insert into trip_member values(1, 1, 1);
 

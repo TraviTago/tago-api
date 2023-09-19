@@ -1,9 +1,6 @@
 package com.tago.domain.trip.repository;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.tago.domain.trip.domain.Trip;
-import com.tago.domain.trip.dto.TripPreviewDto;
-import com.tago.domain.trip.dto.TripRecommendDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

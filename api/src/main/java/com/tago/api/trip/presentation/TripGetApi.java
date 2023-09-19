@@ -1,13 +1,11 @@
 package com.tago.api.trip.presentation;
 
-import ch.qos.logback.core.joran.event.BodyEvent;
 import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripGetService;
 import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.api.trip.dto.response.TripStatusResponse;
-import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPreviewDto;
 import com.tago.domain.trip.dto.TripRecommendDto;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +26,10 @@ public class TripGetApi {
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("cursorDate") LocalDateTime cursorDate,
             @RequestParam("limit") int limit,
-            @RequestParam(value="sameGender", defaultValue = "false")Boolean sameGender,
+            @RequestParam(value = "sameGender", defaultValue = "false") Boolean sameGender,
             @RequestParam(value = "isPet", defaultValue = "false") Boolean isPet
-            ) {
-    PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit, sameGender, isPet);
+    ) {
+        PageResponseDto<TripPreviewDto> response = tripService.getAll(cursorId, cursorDate, limit, sameGender, isPet);
         return ResponseDto.ok(response);
     }
 

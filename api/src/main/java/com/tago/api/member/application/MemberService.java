@@ -4,7 +4,7 @@ import com.tago.api.common.mapper.MemberDtoMapper;
 import com.tago.api.member.dto.request.MemberUpdateRequest;
 import com.tago.api.member.dto.response.MemberGetResponse;
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.service.MemberQueryService;
+import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.member.service.MemberUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -4,7 +4,7 @@ import com.tago.api.common.mapper.CourseDtoMapper;
 import com.tago.api.course.dto.request.CourseRecommendRequest;
 import com.tago.api.course.dto.response.CourseRecommendResponse;
 import com.tago.domain.course.domain.Course;
-import com.tago.domain.course.service.CourseQueryService;
+import com.tago.domain.course.handler.CourseQueryService;
 import com.tago.domain.member.domain.vo.Favorite;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

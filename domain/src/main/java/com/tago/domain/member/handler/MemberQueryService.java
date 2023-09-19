@@ -1,4 +1,4 @@
-package com.tago.domain.member.service;
+package com.tago.domain.member.handler;
 
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.exception.MemberNotFoundException;

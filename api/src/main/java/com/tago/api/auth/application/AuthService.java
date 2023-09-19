@@ -8,7 +8,7 @@ import com.tago.api.auth.jwt.JwtTokenPublisher;
 import com.tago.api.common.exception.AlreadyExistsAccountException;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.service.MemberCreateService;
-import com.tago.domain.member.service.MemberQueryService;
+import com.tago.domain.member.handler.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

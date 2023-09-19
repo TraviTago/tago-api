@@ -2,7 +2,7 @@ package com.tago.api.auth.jwt;
 
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Authority;
-import com.tago.domain.member.service.MemberQueryService;
+import com.tago.domain.member.handler.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

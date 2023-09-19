@@ -7,7 +7,7 @@ import com.tago.api.place.dto.response.PlaceRecommendResponse;
 import com.tago.api.place.dto.response.PlaceSearchResponse;
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
-import com.tago.domain.place.service.PlaceQueryService;
+import com.tago.domain.place.handler.PlaceQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

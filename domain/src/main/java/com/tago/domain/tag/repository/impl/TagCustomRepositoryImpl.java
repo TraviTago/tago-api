@@ -19,7 +19,7 @@ public class TagCustomRepositoryImpl implements TagCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Tag> findAllByType(List<Favorite> types) {
+    public List<Tag> findByTypes(List<Favorite> types) {
         return queryFactory.selectFrom(tag)
                 .where(typeIn(types))
                 .fetch();

@@ -1,4 +1,4 @@
-package com.tago.domain.trip.service;
+package com.tago.domain.trip.handler;
 
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripRecommendDto;

@@ -76,8 +76,13 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 
     public List<PlacePreviewDto> findPopularPlaces(){
         return queryFactory
-                .select(new QPlacePreviewDto(place.id,place.imgUrl,place.title,place.address,place.overview))
-                .from(place)
+                .select(new QPlacePreviewDto(
+                        place.id,
+                        place.imgUrl,
+                        place.title,
+                        place.address,
+                        place.overview
+                )).from(place)
                 .orderBy(place.visit.desc())
                 .limit(10)
                 .fetch();

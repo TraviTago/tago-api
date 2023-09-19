@@ -5,6 +5,7 @@ import com.tago.domain.trip.dto.TripCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TripCreateRequest {
+public class TripSaveRequest {
     private String name;
     private LocalDateTime dateTime;
     private int currentCnt;
@@ -21,8 +22,16 @@ public class TripCreateRequest {
     private Boolean sameAge;
     private Boolean isPet;
     private String meetPlace;
-    private List<String> tags;
-    private List<Long> places;
+    private List<String> types;
+    private List<Place> places;
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Place {
+        private Long placeId;
+        private int order;
+    }
 
     public TripCreateDto toTripCreateDto() {
         return TripCreateDto.builder()
@@ -34,8 +43,14 @@ public class TripCreateRequest {
                 .sameAge(sameAge)
                 .isPet(isPet)
                 .meetPlace(meetPlace)
-                .tags(Favorite.from(tags))
-                .places(places)
+                .types(Favorite.from(types))
+                .places(toPlaceDto())
                 .build();
+    }
+
+    private List<TripCreateDto.Place> toPlaceDto() {
+        return places.stream()
+                .map(place -> new TripCreateDto.Place(place.placeId, place.order))
+                .toList();
     }
 }

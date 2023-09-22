@@ -26,7 +26,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     @Override
     public Optional<Member> findByMemberId(Long memberId) {
         return Optional.ofNullable(queryFactory.selectFrom(member)
-                .leftJoin(member.memberTags.memberTags, memberTag).fetchJoin()
+                .leftJoin(member.memberTags, memberTag).fetchJoin()
                 .leftJoin(memberTag.tag, tag).fetchJoin()
                 .where(memberIdEq(memberId))
                 .fetchOne());

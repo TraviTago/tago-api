@@ -32,10 +32,10 @@ public class Place {
     private Long typeId;
 
     @Column(name = "created_time", nullable = false)
-    private LocalDateTime createdTime;
+    private String createdTime;
 
     @Column(name = "modified_time", nullable = false)
-    private LocalDateTime modifiedTime;
+    private String modifiedTime;
 
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
@@ -49,7 +49,7 @@ public class Place {
     @Column(name = "visit", nullable = false)
     private double visit;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 1000)
     private String overview;
 
     @Embedded

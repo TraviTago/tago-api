@@ -25,6 +25,10 @@ public class CourseDtoMapper {
     }
 
     private static String getMainPlaceImgUrl(List<CoursePlace> coursePlaces, Long placeId) {
+        if (placeId < 0) {
+            return coursePlaces.get(0).getPlaceImgUrl();
+        }
+
         return coursePlaces.stream()
                 .filter(coursePlace -> coursePlace.getPlaceId().equals(placeId))
                 .map(CoursePlace::getPlaceImgUrl)
@@ -44,7 +48,9 @@ public class CourseDtoMapper {
                 place.getImgUrl(),
                 place.getTitle(),
                 place.getAddress(),
-                place.getOverview()
+                place.getOverview(),
+                place.getMapX(),
+                place.getMapY()
         );
     }
 }

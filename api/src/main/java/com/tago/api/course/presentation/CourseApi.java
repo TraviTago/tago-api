@@ -2,7 +2,6 @@ package com.tago.api.course.presentation;
 
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.course.application.CourseService;
-import com.tago.api.course.dto.request.CourseRecommendRequest;
 import com.tago.api.course.dto.response.CourseRecommendResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

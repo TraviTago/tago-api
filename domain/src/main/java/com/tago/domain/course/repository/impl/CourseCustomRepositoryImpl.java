@@ -50,7 +50,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
     }
 
     private BooleanExpression placeIdEq(Long placeId) {
-        return place.id.eq(placeId);
+        return placeId > 0 ? place.id.eq(placeId) : null;
     }
 
     private BooleanExpression courseEq(Long courseId) {

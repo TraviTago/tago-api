@@ -8,6 +8,7 @@ import com.tago.api.place.dto.response.PlaceSearchResponse;
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.dto.PlacePreviewDto;
 import com.tago.domain.place.handler.PlaceQueryService;
+import com.tago.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ import java.util.List;
 public class PlaceService {
 
     private final PlaceQueryService placeQueryService;
+    //private final CsvService csvService;
+    private final PlaceRepository placeRepository;
 
     @Transactional(readOnly = true)
     public PageResponseDto<PlacePreviewDto> getAll(Long cursorId, int limit) {
@@ -43,6 +46,12 @@ public class PlaceService {
         List<PlacePreviewDto> places = placeQueryService.findByPlaceTag(memberId);
         return new PlaceRecommendResponse(places);
     }
+
+//    @Transactional
+//    public void savePlaceFromCsv(String csvFilePath) throws Exception {
+//        List<Place> places = csvService.readCsv(csvFilePath);
+//        placeRepository.saveAll(places);
+//    }
 
     public List<PlacePreviewDto> findPopularPlaces(){
         return placeQueryService.findPopularPlaces();

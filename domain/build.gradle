@@ -16,9 +16,6 @@ dependencies {
     // Apache Commons CSV
     implementation 'org.apache.commons:commons-csv:1.8'
 
-    implementation 'mysql:mysql-connector-java:8.0.23' // 적절한 버전을 사용하세요
-
-
     // database
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'

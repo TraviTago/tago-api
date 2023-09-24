@@ -21,8 +21,7 @@ public class CSVToMySQL {
 
         try (
                 Connection connection = DriverManager.getConnection(jdbcUrl, user, password);
-                Reader in = new FileReader("/Users/yell/Downloads/place_v2.csv");
-                //Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
+                Reader in = new FileReader("/Users/yell/Documents/place_info.csv");
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
         ) {
             Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);

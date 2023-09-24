@@ -25,7 +25,6 @@ create table place (
     mapx double NOT NULL,
     mapy double NOT NULL,
     visit double NOT NULL,
-    recommend_tag varchar(255),
     overview longtext NOT NULL,
     homepage varchar(1000),
     telephone varchar(255),

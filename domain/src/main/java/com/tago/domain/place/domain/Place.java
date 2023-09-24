@@ -49,7 +49,11 @@ public class Place {
     @Column(name = "visit", nullable = false)
     private double visit;
 
+<<<<<<< HEAD
     @Column(length = 1000)
+=======
+    @Column(columnDefinition = "TEXT")
+>>>>>>> 6b647c0 (feat: inserter분리)
     private String overview;
 
     @Embedded

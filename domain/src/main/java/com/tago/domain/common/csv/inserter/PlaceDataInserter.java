@@ -1,29 +1,26 @@
-package com.tago.domain.common.entity;
+package com.tago.domain.common.csv.inserter;
 
+
+import com.tago.domain.common.csv.util.DatabaseUtil;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import java.awt.*;
 import java.io.FileReader;
 import java.io.Reader;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-public class CSVToMySQL {
 
-    public static void main(String[] args) throws ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+public class PlaceDataInserter {
+    public static void insertPlaceData() {
         String jdbcUrl = "jdbc:mysql://tago.cjn3xrjw75zo.ap-northeast-2.rds.amazonaws.com:3306/tago?serverTimezone=Asia/Seoul";
-        String user = System.getenv("DATABASE_USERNAME");
-        String password = System.getenv("DATABASE_PASSWORD");
-
         String insertQuery = "INSERT INTO place (id, content_id, type_id, title, address, created_time, modified_time, img_url, mapx, mapy, visit, overview, homepage, telephone, rest_date, open_time, parking) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
-                Connection connection = DriverManager.getConnection(jdbcUrl, user, password);
+                Connection connection = DatabaseUtil.getConnection();
                 Reader in = new FileReader("/Users/yell/Documents/place_info.csv");
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
         ) {
+
             Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
             Long id = 0L;
 
@@ -49,12 +46,11 @@ public class CSVToMySQL {
 
                 preparedStatement.addBatch();
             }
-
-            preparedStatement.executeBatch();
-            System.out.println("Data processing finished.");
-
+            // ... 기존의 로직 ...
+            System.out.println("Place data processing finished.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

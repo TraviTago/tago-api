@@ -49,9 +49,6 @@ public class Place {
     @Column(name = "visit", nullable = false)
     private double visit;
 
-    @Column(name="recommend_tag", nullable = false)
-    private String recommendTag;
-
     @Column(columnDefinition = "TEXT")
     private String overview;
 

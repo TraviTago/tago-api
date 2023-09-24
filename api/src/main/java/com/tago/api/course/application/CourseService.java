@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -17,11 +19,8 @@ public class CourseService {
     private final CourseQueryService courseQueryService;
 
     @Transactional(readOnly = true)
-    public CourseRecommendResponse recommend(CourseRecommendRequest request) {
-        Course course = courseQueryService.findByPlaceIdAndCourseTag(
-                request.getPlaceId(),
-                Favorite.from(request.getTripTags())
-        );
-        return CourseDtoMapper.toDto(course, request.getPlaceId());
+    public CourseRecommendResponse recommend(Long placeId, List<String> tags) {
+        Course course = courseQueryService.findByPlaceIdAndCourseTag(placeId, Favorite.from(tags));
+        return CourseDtoMapper.toDto(course, placeId);
     }
 }

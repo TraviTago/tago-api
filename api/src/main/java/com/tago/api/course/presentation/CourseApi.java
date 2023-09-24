@@ -6,10 +6,9 @@ import com.tago.api.course.dto.request.CourseRecommendRequest;
 import com.tago.api.course.dto.response.CourseRecommendResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,9 +19,10 @@ public class CourseApi {
 
     @GetMapping("/courses/recommend")
     public ResponseEntity<CourseRecommendResponse> recommend(
-            @RequestBody CourseRecommendRequest request
+            @RequestParam(value = "placeId", defaultValue = "-1") Long placeId,
+            @RequestParam("tags") List<String> tags
     ) {
-        CourseRecommendResponse response = courseService.recommend(request);
+        CourseRecommendResponse response = courseService.recommend(placeId, tags);
         return ResponseDto.ok(response);
     }
 }

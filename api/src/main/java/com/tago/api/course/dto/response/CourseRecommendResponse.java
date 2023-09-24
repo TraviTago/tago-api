@@ -24,5 +24,7 @@ public class CourseRecommendResponse {
         private String title;
         private String address;
         private String overview;
+        private double mapx;
+        private double mapy;
     }
 }

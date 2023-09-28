@@ -19,7 +19,8 @@ public class TripStatusDtoMapper {
                 countGender(tripMembers, Gender.MALE),
                 getAgeGroups(tripMembers),
                 TimeUtil.formatToHourMinute(trip.getDateTime()),
-                TimeUtil.formatToHourMinute(trip.getEndTime())
+                TimeUtil.formatToHourMinute(trip.getEndTime()),
+                trip.getCondition().isPet()
         );
     }
 

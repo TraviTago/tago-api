@@ -17,5 +17,6 @@ public class TripStatusResponse {
     private Set<Integer> ageGroup;
     private String startTime;
     private String endTime;
+    private boolean isPet;
 
 }

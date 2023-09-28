@@ -1,11 +1,8 @@
 name: cd-dev
 
 on:
-<<<<<<< HEAD
-=======
   push:
     branches: develop
->>>>>>> b7c769d (fix: zip 파일 경로 수정)
   pull_request:
     branches: [ develop ]
     types: [ closed ]

@@ -75,12 +75,12 @@ jobs:
           ECR_REPOSITORY: tago-dev
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./docker .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Upload to S3
         run: |
-          zip -r ./$GITHUB_SHA.zip ./scripts appspec.yml ./docker/docker-compose.yml .env
+          zip -r ./$GITHUB_SHA.zip ./scripts appspec.yml docker-compose.yml .env
           aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA s3://${{ secrets.S3_BUCKET_NAME }}
 
       - name: Deploy to EC2 with CodeDeploy

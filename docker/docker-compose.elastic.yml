@@ -4,6 +4,7 @@ services:
   elasticsearch:
     build:
       context: .
+      dockerfile: Dockerfile-elastic
       args:
         ELK_VERSION: 8.7.0
     container_name: elasticsearch

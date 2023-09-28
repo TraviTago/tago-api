@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:latest
+    command: redis-server
+    container_name: tago-redis
+    ports:
+      - "6379:6379"
+  spring:
+    image: 121284569119.dkr.ecr.ap-northeast-2.amazonaws.com/tago-dev:latest
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"
+    container_name: tago-spring
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      NCLOUD_ACCESS_KEY: ${NCLOUD_ACCESS_KEY}
+      NCLOUD_SECRET_KEY: ${NCLOUD_SECRET_KEY}
+      NCLOUD_SMS_BASE_URL: ${NCLOUD_SMS_BASE_URL}
+      NCLOUD_SMS_CALLING_NUMBER: ${NCLOUD_SMS_CALLING_NUMBER}
+      NCLOUD_SMS_SERVICE_ID: ${NCLOUD_SMS_SERVICE_ID}
+

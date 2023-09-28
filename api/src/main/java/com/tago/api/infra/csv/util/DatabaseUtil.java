@@ -1,11 +1,11 @@
-package com.tago.domain.common.csv.util;
+package com.tago.api.infra.csv.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseUtil {
-    private static final String JDBC_URL = "jdbc:mysql://tago.cjn3xrjw75zo.ap-northeast-2.rds.amazonaws.com:3306/tago?serverTimezone=Asia/Seoul";
+    private static final String JDBC_URL = System.getenv("DATABASE_URL");
     private static final String USER = System.getenv("DATABASE_USERNAME");
     private static final String PASSWORD = System.getenv("DATABASE_PASSWORD");
 

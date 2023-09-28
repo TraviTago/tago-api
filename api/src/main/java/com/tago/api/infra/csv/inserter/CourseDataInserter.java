@@ -1,6 +1,6 @@
-package com.tago.domain.common.csv.inserter;
+package com.tago.api.infra.csv.inserter;
 
-import com.tago.domain.common.csv.util.DatabaseUtil;
+import com.tago.api.infra.csv.util.DatabaseUtil;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -15,9 +15,9 @@ public class CourseDataInserter {
         String insertQuery = "INSERT INTO course (id) VALUES (?)";
 
         try(
-            Connection connection = DatabaseUtil.getConnection();
-            Reader in = new FileReader("/Users/yell/Documents/course_info.csv");
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+                Connection connection = DatabaseUtil.getConnection();
+                Reader in = new FileReader("/Users/yell/Documents/course_info.csv");
+                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
 
         ){
             Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);

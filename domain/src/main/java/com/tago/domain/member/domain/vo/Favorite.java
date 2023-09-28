@@ -33,14 +33,14 @@ public enum Favorite {
     private Favorite(String description) {
         this.description = description;
     }
-;
+
     public static List<Favorite> from(List<String> favorites) {
         return favorites.stream()
                 .map(Favorite::of)
                 .toList();
     }
 
-    private static Favorite of(String favorite) {
+    public static Favorite of(String favorite) {
         return Arrays.stream(Favorite.values())
                 .filter(value -> value.description.equals(favorite))
                 .findFirst()

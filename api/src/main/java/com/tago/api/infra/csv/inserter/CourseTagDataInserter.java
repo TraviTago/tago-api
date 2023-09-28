@@ -1,7 +1,7 @@
-package com.tago.domain.common.csv.inserter;
+package com.tago.api.infra.csv.inserter;
 
-
-import com.tago.domain.common.csv.util.DatabaseUtil;
+import com.tago.api.infra.csv.util.DatabaseUtil;
+import com.tago.domain.member.domain.vo.Favorite;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -10,37 +10,37 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class CoursePlaceDataInserter {
+public class CourseTagDataInserter {
 
-    public static void insertCoursePlaceData() {
-        String insertQuery = "INSERT INTO course_place (course_id, place_id, `order`) VALUES (?, ?, ?)";
+    public static void insertCourseTagData() {
+
+        String insertQuery = "INSERT INTO course_tag (course_id, tag_id) VALUES (?, ?)";
 
         try (
                 Connection connection = DatabaseUtil.getConnection();
-                Reader in = new FileReader("/Users/yell/Documents/course_info.csv");
+                Reader in = new FileReader("/Users/yell/Documents/course_info9.csv");
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
         ) {
             Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
 
             for (CSVRecord record : records) {
                 long courseId = Long.parseLong(record.get("Id"));
-                String[] placeIds = record.get("course_place").split(",");
+                String[] tags = record.get("course_tag").split(",");
 
-                int order = 1;
-                for (String placeIdStr : placeIds) {
-                    long placeId = Long.parseLong(placeIdStr.trim());
+                for (String tag : tags) {
+
+                    int tagId = Favorite.of(tag.trim()).ordinal();
 
                     preparedStatement.setLong(1, courseId);
-                    preparedStatement.setLong(2, placeId);
-                    preparedStatement.setInt(3, order++);
+                    preparedStatement.setInt(2, tagId);
                     preparedStatement.addBatch();
                 }
             }
 
             preparedStatement.executeBatch();
-            System.out.println("Data inserted into course_place.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+

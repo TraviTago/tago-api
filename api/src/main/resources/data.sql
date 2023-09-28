@@ -82,11 +82,11 @@ insert into course values(2);
 insert into course values(3);
 
 -- INSERT COURSE_PLACE
--- insert into course_place values(1, 1, 1, 1);
--- insert into course_place values(2, 3, 1, 3);
--- insert into course_place values(3, 2, 1, 2);
--- insert into course_place values(4, 4, 1, 4); -- 맥도생태공원, 몰운대, 밀양순대돼지국밥, 밀양순대돼지국밥2
---
+insert into course_place values(1, 1, 1, 1);
+insert into course_place values(2, 3, 1, 3);
+insert into course_place values(3, 2, 1, 2);
+insert into course_place values(4, 4, 1, 4);
+
 -- insert into course_place values(5, 1, 2, 1);
 -- insert into course_place values(6, 3, 2, 3);
 -- insert into course_place values(7, 2, 2, 2);
@@ -98,8 +98,8 @@ insert into course values(3);
 
 -- INSERT TAG
 insert into tag values(1, 'CAMERA'); -- 사진촬영
-insert into tag values(2, 'FOOD'); -- 맛집탐방
-insert into tag values(3, 'HOT_PLACE'); -- 핫플
+insert into tag values(2, 'HOT_PLACE'); -- 핫플
+insert into tag values(3, 'FOOD'); -- 맛집탐방
 insert into tag values(4, 'STROLL'); -- 산책
 insert into tag values(5, 'ART'); -- 미술/예술
 insert into tag values(6, 'BOOK'); -- 독서

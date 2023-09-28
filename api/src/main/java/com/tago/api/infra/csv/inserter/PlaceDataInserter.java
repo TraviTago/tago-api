@@ -1,7 +1,7 @@
-package com.tago.domain.common.csv.inserter;
+package com.tago.api.infra.csv.inserter;
 
 
-import com.tago.domain.common.csv.util.DatabaseUtil;
+import com.tago.api.infra.csv.util.DatabaseUtil;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -11,8 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class PlaceDataInserter {
-    public static void insertPlaceData() {
-        String jdbcUrl = "jdbc:mysql://tago.cjn3xrjw75zo.ap-northeast-2.rds.amazonaws.com:3306/tago?serverTimezone=Asia/Seoul";
+    public static void insertPlaceData(){
+
         String insertQuery = "INSERT INTO place (id, content_id, type_id, title, address, created_time, modified_time, img_url, mapx, mapy, visit, overview, homepage, telephone, rest_date, open_time, parking) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
@@ -46,7 +46,6 @@ public class PlaceDataInserter {
 
                 preparedStatement.addBatch();
             }
-            // ... 기존의 로직 ...
             System.out.println("Place data processing finished.");
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: tago-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: tago
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 1234
+      TZ: 'Asia/Seoul'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/schema.sql:/docker-entrypoint-initdb.d/data/schema.sql
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+  redis:
+    image: redis:latest
+    command: redis-server
+    container_name: tago-redis
+    ports:
+      - "6379:6379"

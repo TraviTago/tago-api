@@ -25,6 +25,10 @@ public class TripMember {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public Boolean isTripMember(Member member) {
+        return this.member.equals(member);
+    }
 }
 
 

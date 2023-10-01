@@ -1,5 +1,6 @@
 package com.tago.domain.trip.handler;
 
+import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.trip.repository.TripRepository;
@@ -34,4 +35,7 @@ public class TripQueryService {
         return tripRepository.findByTripTag(memberId);
     }
 
+    public List<Trip> findAllByMember(Member member) {
+        return tripRepository.findAllByMember(member);
+    }
 }

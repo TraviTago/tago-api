@@ -2,6 +2,8 @@ package com.tago.domain.trip.repository.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.QMember;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import com.tago.domain.tripmember.domain.QTripMember;
@@ -96,6 +98,18 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetchOne();
     }
 
+    public List<Trip> findAllByMember(Member member) {
+        return queryFactory.select(trip)
+                .from(tripMember)
+                .innerJoin(tripMember.trip, trip)
+                .innerJoin(tripMember.member, QMember.member)
+                .leftJoin(trip.tripPlaces, tripPlace).fetchJoin()
+                .leftJoin(tripPlace.place, place).fetchJoin()
+                .where(memberEq(member))
+                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
+                .fetch();
+    }
+
     private BooleanExpression cursorGt(Long cursorId, LocalDateTime cursorDate) {
         return cursorIdAndDateGt(cursorId, cursorDate).or(cursorDateGt(cursorDate));
     }
@@ -130,5 +144,9 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression isPet(Boolean isPet) {
         return isPet ? trip.condition.isPet.eq(true) : null;
+    }
+
+    private BooleanExpression memberEq(Member member) {
+        return QMember.member.eq(member);
     }
 }

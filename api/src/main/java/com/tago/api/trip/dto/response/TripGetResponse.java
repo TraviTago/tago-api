@@ -8,7 +8,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TripGetAllResponse {
+public class TripGetResponse {
     private Long tripId;
     private LocalDateTime dateTime;
     private String imageUrl;

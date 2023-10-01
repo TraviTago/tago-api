@@ -26,18 +26,6 @@ public class TripMemberCustomRepositoryImpl implements TripMemberCustomRepositor
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Trip> findTripsByMember(Member member) {
-        return queryFactory.select(trip)
-                .from(tripMember)
-                .innerJoin(tripMember.trip, trip)
-                .innerJoin(tripMember.member, QMember.member)
-                .leftJoin(trip.tripPlaces, tripPlace).fetchJoin()
-                .leftJoin(tripPlace.place, place).fetchJoin()
-                .where(memberEq(member))
-                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
-                .fetch();
-    }
-
     public List<TripMemberDto> findMembersByTrip(Trip trip) {
         return queryFactory.select(new QTripMemberDto(
                     member.id,
@@ -52,10 +40,6 @@ public class TripMemberCustomRepositoryImpl implements TripMemberCustomRepositor
                 .innerJoin(tripMember.member, member)
                 .where(tripEq(trip))
                 .fetch();
-    }
-
-    private BooleanExpression memberEq(Member member) {
-        return tripMember.member.eq(member);
     }
 
     private BooleanExpression tripEq(Trip trip) {

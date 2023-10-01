@@ -1,24 +1,24 @@
-package com.tago.domain.trip.mapper;
+package com.tago.api.common.mapper;
 
+import com.tago.api.trip.dto.response.TripGetResponse;
+import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.domain.TripPlace;
-import com.tago.domain.trip.dto.TripPreviewDto;
-import com.tago.domain.trip.dto.TripRecommendDto;
 
 import java.util.List;
 
 public class TripDtoMapper {
 
-    public static List<TripPreviewDto> toTripPreviews(List<Trip> trips) {
+    public static List<TripGetResponse> toDto(List<Trip> trips, Member member) {
         return trips.stream()
-                .map(TripDtoMapper::getTripPreviewDto)
+                .map(trip -> getTripResponseDto(trip, member))
                 .toList();
     }
 
-    private static TripPreviewDto getTripPreviewDto(Trip trip) {
+    public static TripGetResponse getTripResponseDto(Trip trip, Member member) {
         List<TripPlace> tripPlaces = trip.getTripPlaces();
 
-        return TripPreviewDto.builder()
+        return TripGetResponse.builder()
                 .tripId(trip.getId())
                 .dateTime(trip.getDateTime())
                 .imageUrl(getMainPlaceImgUrl(tripPlaces))
@@ -26,6 +26,7 @@ public class TripDtoMapper {
                 .totalTime(trip.getTotalTime())
                 .maxMember(trip.getMaxCnt())
                 .currentMember(trip.getCurrentCnt())
+                .isJoined(trip.isJoined(member))
                 .places(getPlacesTitle(tripPlaces))
                 .build();
     }
@@ -39,20 +40,4 @@ public class TripDtoMapper {
                 .map(TripPlace::getPlaceTitle)
                 .toList();
     }
-
-    public static TripRecommendDto toTripRecommendDto(Trip trip) {
-        List<TripPlace> tripPlaces = trip.getTripPlaces();
-
-        return TripRecommendDto.builder()
-                .tripId(trip.getId())
-                .dateTime(trip.getDateTime())
-                .imageUrl(getMainPlaceImgUrl(tripPlaces))
-                .name(trip.getName())
-                .totalTime(trip.getTotalTime())
-                .maxMember(trip.getMaxCnt())
-                .currentMember(trip.getCurrentCnt())
-                .places(getPlacesTitle(tripPlaces))
-                .build();
-    }
-
 }

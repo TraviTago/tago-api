@@ -1,6 +1,5 @@
-package com.tago.domain.trip.dto;
+package com.tago.api.trip.dto.response;
 
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TripPreviewDto {
+public class TripGetResponse {
     private Long tripId;
     private LocalDateTime dateTime;
     private String imageUrl;
@@ -17,6 +16,6 @@ public class TripPreviewDto {
     private int totalTime;
     private int maxMember;
     private int currentMember;
+    private Boolean isJoined;
     private List<String> places;
-
 }

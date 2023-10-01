@@ -1,5 +1,6 @@
 package com.tago.domain.trip.repository;
 
+import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
 
 import java.time.LocalDateTime;
@@ -11,5 +12,7 @@ public interface TripCustomRepository {
     List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit);
 
     Trip findByTripTag(Long memberId);
+
+    List<Trip> findAllByMember(Member member);
 }
 

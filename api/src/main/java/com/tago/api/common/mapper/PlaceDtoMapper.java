@@ -8,7 +8,6 @@ public class PlaceDtoMapper {
     public static PlaceInfoResponse mapToplaceInfoResponse(Place place) {
         return PlaceInfoResponse.builder()
                 .id(place.getId())
-                .contentId(place.getContentId())
                 .typeId(String.valueOf(place.getTypeId()))
                 .title(place.getTitle())
                 .overview(place.getOverview())

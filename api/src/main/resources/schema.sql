@@ -15,7 +15,6 @@ create table member (
 drop table if exists place;
 create table place (
     id bigint,
-    content_id bigint NOT NULL,
     type_id bigint NOT NULL,
     title varchar(255) NOT NULL,
     address varchar(255) NOT NULL,

@@ -5,8 +5,6 @@ import com.tago.domain.place.domain.vo.Info;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Builder
 @Entity
@@ -16,11 +14,7 @@ import java.time.LocalDateTime;
 public class Place {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private Long contentId;
 
     @Column(nullable = false)
     private String title;

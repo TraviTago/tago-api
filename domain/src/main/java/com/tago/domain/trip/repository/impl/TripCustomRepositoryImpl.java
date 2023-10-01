@@ -4,6 +4,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
+import com.tago.domain.tripmember.domain.QTripMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.trip.domain.QTrip.trip;
 import static com.tago.domain.trip.domain.QTripPlace.tripPlace;
 import static com.tago.domain.trip.domain.QTripTag.tripTag;
+import static com.tago.domain.tripmember.domain.QTripMember.tripMember;
 import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 
 @Repository
@@ -25,7 +27,6 @@ import static org.apache.logging.log4j.util.Strings.isNotEmpty;
 public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private final JPAQueryFactory queryFactory;
-    private static final Logger logger = LoggerFactory.getLogger(TripCustomRepositoryImpl.class);
 
     @Override
     public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
@@ -41,8 +42,10 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
 
         return queryFactory.selectFrom(trip)
+                .distinct()
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
                 .innerJoin(tripPlace.place, place).fetchJoin()
+                .innerJoin(trip.tripMembers, tripMember)
                 .where(trip.id.in(ids))
                 .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
                 .fetch();

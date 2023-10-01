@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TripMemberGetMemberResponse {
+public class TripMemberGetResponse {
     private List<TripMemberDto> members;
 }

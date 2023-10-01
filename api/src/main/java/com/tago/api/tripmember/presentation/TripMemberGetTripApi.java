@@ -1,10 +1,8 @@
 package com.tago.api.tripmember.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.tripmember.application.TripMemberGetService;
-import com.tago.api.tripmember.dto.response.TripMemberGetMemberResponse;
-import com.tago.api.tripmember.dto.response.TripMemberGetTripResponse;
+import com.tago.api.tripmember.dto.response.TripMemberGetResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,19 +17,11 @@ public class TripMemberGetTripApi {
 
     private final TripMemberGetService tripMemberGetTripService;
 
-    @GetMapping("/trips/me")
-    public ResponseEntity<TripMemberGetTripResponse> getTripsByMember(
-            @LoginMember Long memberId
-    ) {
-        TripMemberGetTripResponse response = tripMemberGetTripService.getTripsByMember(memberId);
-        return ResponseDto.ok(response);
-    }
-
     @GetMapping("/trips/{tripId}/members")
-    public ResponseEntity<TripMemberGetMemberResponse> getMembersByTrip(
+    public ResponseEntity<TripMemberGetResponse> getMembersByTrip(
             @PathVariable Long tripId
     ) {
-        TripMemberGetMemberResponse response = tripMemberGetTripService.getMembersByTrip(tripId);
+        TripMemberGetResponse response = tripMemberGetTripService.getMembersByTrip(tripId);
         return ResponseDto.ok(response);
     }
 }

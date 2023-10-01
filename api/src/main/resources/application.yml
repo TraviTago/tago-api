@@ -24,6 +24,10 @@ spring:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
 
+server:
+  tomcat:
+    connection-timeout: 300s
+
 jwt:
   secretKey: ${JWT_SECRET_KEY}
 

@@ -30,6 +30,7 @@ public enum ErrorCode {
     // TRIP
     TRIP_NOT_FOUND(404, "T001", "존재하지 않는 여행입니다."),
     MAX_MEMBER_LIMIT_REACHED(400, "T002", "이 여행은 이미 최대 멤버 수에 도달하였습니다."),
+    ALREADY_JOINED_TRIP(400, "T003", "이미 참여한 여행입니다."),
 
     // PLACE
     PLACE_NOT_FOUND(404,"P001","존재하지 않은 여행지입니다."),

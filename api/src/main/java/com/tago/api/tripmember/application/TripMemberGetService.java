@@ -20,7 +20,7 @@ public class TripMemberGetService {
 
     @Transactional(readOnly = true)
     public TripMemberGetResponse getMembersByTrip(Long tripId) {
-        Trip trip = tripQueryService.findById(tripId);
+        Trip trip = tripQueryService.findByIdFetchTripMember(tripId);
         List<TripMemberDto> members = tripMemberQueryService.findMembersByTrip(trip);
         return new TripMemberGetResponse(members);
     }

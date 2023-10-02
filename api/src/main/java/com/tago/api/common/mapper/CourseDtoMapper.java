@@ -8,7 +8,9 @@ import com.tago.domain.course.domain.CoursePlace;
 import com.tago.domain.place.domain.Place;
 import com.tago.domain.place.exception.PlaceNotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CourseDtoMapper {
 
@@ -36,11 +38,32 @@ public class CourseDtoMapper {
                 .orElseThrow(MainPlaceNotFoundException::new);
     }
 
-    private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
-        return coursePlaces.stream()
-                .map(coursePlace -> getPlacePreview(coursePlace.getPlace()))
-                .toList();
-    }
+//    private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
+//        return coursePlaces.stream()
+//                .map(coursePlace -> getPlacePreview(coursePlace.getPlace()))
+//                .toList();
+//    }
+private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
+    // 중복을 제거하기 위해 Set을 사용합니다.
+    Set<Place> uniquePlaces = new HashSet<>();
+
+    // 중복을 제거한 Place 객체들을 담을 리스트를 생성합니다.
+    List<PlacePreview> uniquePlacePreviews = coursePlaces.stream()
+            .map(coursePlace -> {
+                Place place = coursePlace.getPlace();
+                if (uniquePlaces.add(place)) {
+                    // Set에 추가된 경우에만 PlacePreview 객체를 생성합니다.
+                    return getPlacePreview(place);
+                }
+                return null;
+            })
+            .filter(placePreview -> placePreview != null) // null을 제거합니다.
+            .toList();
+
+    return uniquePlacePreviews;
+}
+
+
 
     private static PlacePreview getPlacePreview(Place place) {
         return new PlacePreview(

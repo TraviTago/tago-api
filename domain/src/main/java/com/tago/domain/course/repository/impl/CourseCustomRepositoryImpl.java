@@ -42,6 +42,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 .fetchFirst();
 
         return queryFactory.selectFrom(course)
+                .distinct()
                 .innerJoin(course.coursePlaces, coursePlace).fetchJoin()
                 .innerJoin(coursePlace.place, place).fetchJoin()
                 .where(courseEq(id))

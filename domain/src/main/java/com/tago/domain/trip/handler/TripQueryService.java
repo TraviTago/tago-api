@@ -22,25 +22,13 @@ public class TripQueryService {
     }
   
     public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
-        List<Trip> trips = tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit, sameGender, isPet);
-
-        if (trips.isEmpty()) {
-            throw new TripNotFoundException();
-        }
-
-        return trips;
+        return tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit, sameGender, isPet);
     }
 
     public List<Trip> searchByPlaceTitleKeyword(
             String keyword, Long cursorId, LocalDateTime cursorDate, int limit
     ) {
-        List<Trip> trips = tripRepository.findByPlaceTitleKeywordContain(keyword, cursorId, cursorDate, limit);
-
-        if (trips.isEmpty()) {
-            throw new TripNotFoundException();
-        }
-
-        return trips;
+        return tripRepository.findByPlaceTitleKeywordContain(keyword, cursorId, cursorDate, limit);
     }
 
     public Trip findByTripTag(Long memberId) {

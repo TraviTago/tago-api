@@ -83,7 +83,6 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .select(tripTag.trip.id)
                 .from(tripTag)
                 .where(tagIdIn(tagIds))
-                .where(trip.id.eq(100L))
                 .groupBy(tripTag.trip.id)
                 .orderBy(tripTag.tag.id.count().desc())
                 .fetchFirst();

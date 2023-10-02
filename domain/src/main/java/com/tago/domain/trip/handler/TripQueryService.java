@@ -20,6 +20,11 @@ public class TripQueryService {
         return tripRepository.findById(tripId)
                 .orElseThrow(TripNotFoundException::new);
     }
+
+    public Trip findByIdFetchTripMember(Long tripId) {
+        return tripRepository.findByIdFetchTripMember(tripId)
+                .orElseThrow(TripNotFoundException::new);
+    }
   
     public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
         return tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit, sameGender, isPet);

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
@@ -108,6 +109,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .where(memberEq(member))
                 .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
                 .fetch();
+    }
+
+    public Optional<Trip> findByIdFetchTripMember(Long tripId) {
+        return Optional.ofNullable(queryFactory.selectFrom(trip)
+                .leftJoin(trip.tripMembers, tripMember)
+                .where(tripIdEq(tripId))
+                .fetchOne());
     }
 
     private BooleanExpression cursorGt(Long cursorId, LocalDateTime cursorDate) {

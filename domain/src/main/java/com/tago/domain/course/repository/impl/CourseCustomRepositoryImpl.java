@@ -26,6 +26,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
     @Override
     public Course findByPlaceIdAndCourseTag(Long placeId, List<Favorite> tags) {
         List<Long> ids = queryFactory.select(course.id)
+                .distinct()
                 .from(coursePlace)
                 .innerJoin(coursePlace.course, course)
                 .innerJoin(coursePlace.place, place)
@@ -33,6 +34,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 .fetch();
 
         Long id = queryFactory.select(course.id)
+                .distinct()
                 .from(courseTag)
                 .innerJoin(courseTag.course, course)
                 .innerJoin(courseTag.tag, tag)

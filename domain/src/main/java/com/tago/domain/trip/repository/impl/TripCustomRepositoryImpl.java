@@ -1,16 +1,14 @@
 package com.tago.domain.trip.repository.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
-import com.tago.domain.tripmember.domain.QTripMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 import java.time.LocalDateTime;
@@ -47,7 +45,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .distinct()
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
                 .innerJoin(tripPlace.place, place).fetchJoin()
-                .innerJoin(trip.tripMembers, tripMember)
+                .leftJoin(trip.tripMembers, tripMember)
                 .where(trip.id.in(ids))
                 .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
                 .fetch();
@@ -85,6 +83,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .select(tripTag.trip.id)
                 .from(tripTag)
                 .where(tagIdIn(tagIds))
+                .where(trip.id.eq(100L))
                 .groupBy(tripTag.trip.id)
                 .orderBy(tripTag.tag.id.count().desc())
                 .fetchFirst();
@@ -94,8 +93,11 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
                 .innerJoin(tripPlace.place, place).fetchJoin()
                 .where(tripIdEq(tripId))
-                .orderBy(tripPlace.order.asc())
-                .fetchOne();
+                .orderBy(
+                        tripPlace.order.asc(),
+                        Expressions.numberTemplate(Double.class, "function('rand')").asc()
+                )
+                .fetchFirst();
     }
 
     public List<Trip> findAllByMember(Member member) {
@@ -131,7 +133,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     }
 
     private BooleanExpression tripIdEq(Long id) {
-        return trip.id.eq(id);
+        return id != null ? trip.id.eq(id) : null;
     }
 
     private BooleanExpression tagIdIn(List<Long> ids) {

@@ -45,20 +45,17 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 .distinct()
                 .innerJoin(course.coursePlaces, coursePlace).fetchJoin()
                 .innerJoin(coursePlace.place, place).fetchJoin()
-                .where(courseEq(id))
+                .where(courseIdEq(id, placeId))
                 .orderBy(coursePlace.order.asc())
-                .fetchOne();
+                .fetchFirst();
     }
 
     private BooleanExpression placeIdEq(Long placeId) {
         return placeId > 0 ? place.id.eq(placeId) : null;
     }
 
-    private BooleanExpression courseEq(Long courseId) {
-        if (courseId == null) {
-            throw new CourseNotFoundException();
-        }
-        return course.id.eq(courseId);
+    private BooleanExpression courseIdEq(Long courseId, Long placeId) {
+        return courseId != null ? course.id.eq(courseId) : placeIdEq(placeId);
     }
 
     private BooleanExpression courseIdIn(List<Long> courseIds) {

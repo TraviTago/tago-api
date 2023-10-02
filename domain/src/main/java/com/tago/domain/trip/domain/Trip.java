@@ -12,7 +12,6 @@ import org.hibernate.annotations.BatchSize;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Builder
@@ -60,12 +59,35 @@ public class Trip {
 
     @Default
     @BatchSize(size = 100)
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripMember> tripMembers = new ArrayList<>();
 
-    public void join() {
+    public void join(Member member) {
         if (isLimitMember()) throw new MaxMemberLimitException();
         this.currentCnt += 1;
+        addTripMember(member);
+    }
+
+    public void leave(Member member) {
+        this.currentCnt -= 1;
+        deleteTripMember(member);
+    }
+
+    private void addTripMember(Member member) {
+        this.tripMembers.add(TripMember.builder()
+                .trip(this)
+                .member(member)
+                .build()
+        );
+    }
+
+    private void deleteTripMember(Member member) {
+        List<TripMember> tripMembers = this.tripMembers.stream()
+                .filter(tripMember -> !tripMember.getMember().getId().equals(member.getId()))
+                .toList();
+
+        this.tripMembers.clear();
+        this.tripMembers.addAll(tripMembers);
     }
 
     private boolean isLimitMember() {

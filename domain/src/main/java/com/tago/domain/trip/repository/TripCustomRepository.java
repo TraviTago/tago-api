@@ -5,6 +5,7 @@ import com.tago.domain.trip.domain.Trip;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface TripCustomRepository {
 
@@ -14,5 +15,7 @@ public interface TripCustomRepository {
     Trip findByTripTag(Long memberId);
 
     List<Trip> findAllByMember(Member member);
+
+    Optional<Trip> findByIdFetchTripMember(Long tripId);
 }
 

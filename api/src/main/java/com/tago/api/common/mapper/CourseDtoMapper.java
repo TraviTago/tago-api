@@ -6,11 +6,9 @@ import com.tago.api.course.dto.response.CourseRecommendResponse.PlacePreview;
 import com.tago.domain.course.domain.Course;
 import com.tago.domain.course.domain.CoursePlace;
 import com.tago.domain.place.domain.Place;
-import com.tago.domain.place.exception.PlaceNotFoundException;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class CourseDtoMapper {
 
@@ -38,25 +36,11 @@ public class CourseDtoMapper {
                 .orElseThrow(MainPlaceNotFoundException::new);
     }
 
-private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
-    Set<Place> uniquePlaces = new HashSet<>();
-
-
-    List<PlacePreview> uniquePlacePreviews = coursePlaces.stream()
-            .map(coursePlace -> {
-                Place place = coursePlace.getPlace();
-                if (uniquePlaces.add(place)) {
-                    return getPlacePreview(place);
-                }
-                return null;
-            })
-            .filter(placePreview -> placePreview != null)
-            .toList();
-
-    return uniquePlacePreviews;
-}
-
-
+    private static List<PlacePreview> getPlaces(List<CoursePlace> coursePlaces) {
+        return coursePlaces.stream()
+                .map(coursePlace -> getPlacePreview(coursePlace.getPlace()))
+                .toList();
+    }
 
     private static PlacePreview getPlacePreview(Place place) {
         return new PlacePreview(

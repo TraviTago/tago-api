@@ -1,7 +1,7 @@
 package com.tago.api.common.security.resolver;
 
-import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.exception.ResolveArgumentException;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.domain.common.error.ErrorCode;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;
@@ -13,7 +13,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
-public class UserAuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
+public class DriverAuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {

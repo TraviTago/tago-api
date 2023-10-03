@@ -35,7 +35,7 @@ public class TripGetService {
     public PageResponseDto<TripGetResponse> getAll(
             Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Long memberId
     ) {
-        Member member = memberQueryService.findByMemberId(memberId);
+        Member member = memberQueryService.findByIdFetchMemberTag(memberId);
         List<Trip> trips = tripQueryService.findAll(cursorId, cursorDate, limit, sameGender, isPet);
         List<TripGetResponse> dto = TripDtoMapper.toDto(trips, member);
         return PageResponseDto.from(dto);
@@ -71,7 +71,7 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TripGetResponse recommend(Long memberId){
-        Member member = memberQueryService.findByMemberId(memberId);
+        Member member = memberQueryService.findByIdFetchMemberTag(memberId);
         Trip trips = tripQueryService.findByTripTag(memberId);
         return TripDtoMapper.getTripResponseDto(trips, member);
     }

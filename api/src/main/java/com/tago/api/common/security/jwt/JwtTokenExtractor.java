@@ -1,7 +1,7 @@
-package com.tago.api.auth.jwt;
+package com.tago.api.common.security.jwt;
 
-import com.tago.api.auth.jwt.exception.AuthenticateException;
-import com.tago.api.auth.jwt.exception.ErrorMessages;
+import com.tago.api.common.security.jwt.exception.AuthenticateException;
+import com.tago.api.common.security.jwt.exception.ErrorMessages;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

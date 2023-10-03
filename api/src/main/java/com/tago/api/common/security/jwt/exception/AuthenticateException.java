@@ -1,4 +1,4 @@
-package com.tago.api.auth.jwt.exception;
+package com.tago.api.common.security.jwt.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

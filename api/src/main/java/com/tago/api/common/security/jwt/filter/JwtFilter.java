@@ -1,8 +1,8 @@
-package com.tago.api.auth.jwt.filter;
+package com.tago.api.common.security.jwt.filter;
 
-import com.tago.api.auth.jwt.JwtProvider;
-import com.tago.api.auth.jwt.exception.AuthenticateException;
-import com.tago.api.auth.jwt.handler.JwtAuthenticationEntryPoint;
+import com.tago.api.common.security.jwt.JwtProvider;
+import com.tago.api.common.security.jwt.exception.AuthenticateException;
+import com.tago.api.common.security.jwt.handler.JwtAuthenticationEntryPoint;
 import com.tago.domain.common.error.BaseBusinessException;
 import com.tago.domain.common.error.ErrorCode;
 import jakarta.servlet.FilterChain;

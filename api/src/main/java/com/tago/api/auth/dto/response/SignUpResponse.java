@@ -1,6 +1,6 @@
 package com.tago.api.auth.dto.response;
 
-import com.tago.api.auth.jwt.dto.JwtTokenDto;
+import com.tago.api.common.security.jwt.dto.JwtTokenDto;
 import com.tago.domain.member.domain.vo.Authority;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

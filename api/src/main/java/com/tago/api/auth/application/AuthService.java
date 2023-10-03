@@ -4,7 +4,7 @@ import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.dto.request.SignUpRequest;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
-import com.tago.api.auth.jwt.JwtTokenPublisher;
+import com.tago.api.common.security.jwt.JwtTokenPublisher;
 import com.tago.api.common.exception.AlreadyExistsAccountException;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.service.MemberCreateService;

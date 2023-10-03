@@ -1,6 +1,6 @@
 package com.tago.api.tripmember.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.tripmember.application.TripMemberDeleteService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class TripMemberDeleteApi {
     @DeleteMapping("/trips/{tripId}/leave")
     public ResponseEntity<Void> leaveTrip(
             @PathVariable Long tripId,
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ){
         tripMemberDeleteService.leaveTrip(tripId,memberId);
         return ResponseDto.noContent();

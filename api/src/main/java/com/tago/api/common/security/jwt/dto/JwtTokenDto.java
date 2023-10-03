@@ -1,4 +1,4 @@
-package com.tago.api.auth.jwt.dto;
+package com.tago.api.common.security.jwt.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

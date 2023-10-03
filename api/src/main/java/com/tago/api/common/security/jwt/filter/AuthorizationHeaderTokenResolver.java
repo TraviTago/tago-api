@@ -1,7 +1,7 @@
-package com.tago.api.auth.jwt.filter;
+package com.tago.api.common.security.jwt.filter;
 
-import com.tago.api.auth.jwt.exception.AuthenticateException;
-import com.tago.api.auth.jwt.exception.ErrorMessages;
+import com.tago.api.common.security.jwt.exception.AuthenticateException;
+import com.tago.api.common.security.jwt.exception.ErrorMessages;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

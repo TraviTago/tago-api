@@ -1,6 +1,6 @@
 package com.tago.api.trip.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripSaveService;
 import com.tago.api.trip.dto.request.TripSaveRequest;
@@ -21,7 +21,7 @@ public class TripSaveApi {
 
     @PostMapping("/trips")
     public ResponseEntity<TripSaveResponse> create(
-            @LoginMember Long memberId,
+            @UserAuthentication Long memberId,
             @RequestBody TripSaveRequest request
     ) {
         TripSaveResponse response = tripSaveService.create(memberId, request);

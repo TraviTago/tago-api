@@ -1,6 +1,6 @@
 package com.tago.api.trip.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripGetService;
@@ -28,7 +28,7 @@ public class TripGetApi {
             @RequestParam("limit") int limit,
             @RequestParam(value = "sameGender", defaultValue = "false") Boolean sameGender,
             @RequestParam(value = "isPet", defaultValue = "false") Boolean isPet,
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ) {
         PageResponseDto<TripGetResponse> response = tripService.getAll(cursorId, cursorDate, limit, sameGender, isPet, memberId);
         return ResponseDto.ok(response);
@@ -36,7 +36,7 @@ public class TripGetApi {
 
     @GetMapping("/trips/{tripId}")
     public ResponseEntity<TripGetOneResponse> getOne(
-            @LoginMember Long memberId,
+            @UserAuthentication Long memberId,
             @PathVariable Long tripId
     ) {
         TripGetOneResponse response = tripService.getOne(memberId, tripId);
@@ -53,14 +53,14 @@ public class TripGetApi {
 
     @GetMapping("/trips/me")
     public ResponseEntity<MyTripGetResponse> getTripsByMember(
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ) {
         MyTripGetResponse response = tripService.getAllByMember(memberId);
         return ResponseDto.ok(response);
     }
 
     @GetMapping("/trips/recommend")
-    public ResponseEntity<TripGetResponse> recommend(@LoginMember Long memberId) {
+    public ResponseEntity<TripGetResponse> recommend(@UserAuthentication Long memberId) {
         TripGetResponse trip = tripService.recommend(memberId);
         return ResponseDto.ok(trip);
     }
@@ -71,7 +71,7 @@ public class TripGetApi {
             @RequestParam("cursorId") Long cursorId,
             @RequestParam("cursorDate") LocalDateTime cursorDate,
             @RequestParam("limit") int limit,
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ) {
         PageResponseDto<TripGetResponse> response = tripService.search(keyword, cursorId, cursorDate, limit, memberId);
         return ResponseDto.ok(response);

@@ -1,7 +1,7 @@
 package com.tago.api.auth.application;
 
 import com.tago.api.auth.dto.response.TokenReissueResponse;
-import com.tago.api.auth.jwt.JwtTokenGenerator;
+import com.tago.api.common.security.jwt.JwtTokenGenerator;
 import com.tago.domain.member.handler.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.tago.api.member.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.member.application.MemberService;
 import com.tago.api.member.dto.request.MemberUpdateRequest;
@@ -18,7 +18,7 @@ public class MemberApi {
 
     @GetMapping("/members/me")
     public ResponseEntity<MemberGetResponse> get(
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ) {
         MemberGetResponse response = memberService.get(memberId);
         return ResponseDto.ok(response);
@@ -26,7 +26,7 @@ public class MemberApi {
 
     @PatchMapping("/members/me")
     public ResponseEntity<Void> update(
-            @LoginMember Long memberId,
+            @UserAuthentication Long memberId,
             @RequestBody MemberUpdateRequest request
     ) {
         memberService.update(memberId, request);

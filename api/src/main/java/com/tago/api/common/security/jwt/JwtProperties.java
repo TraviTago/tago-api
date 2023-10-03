@@ -1,4 +1,4 @@
-package com.tago.api.auth.jwt;
+package com.tago.api.common.security.jwt;
 
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

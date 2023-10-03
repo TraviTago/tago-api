@@ -1,4 +1,4 @@
-package com.tago.api.auth.jwt.handler;
+package com.tago.api.common.security.jwt.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

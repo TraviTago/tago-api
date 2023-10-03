@@ -1,4 +1,4 @@
-package com.tago.api.auth.jwt;
+package com.tago.api.common.security.jwt;
 
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Authority;

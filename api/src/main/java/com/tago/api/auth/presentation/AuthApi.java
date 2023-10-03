@@ -7,7 +7,7 @@ import com.tago.api.auth.dto.request.SignUpRequest;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
 import com.tago.api.auth.dto.response.TokenReissueResponse;
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class AuthApi {
     }
 
     @PostMapping("/auth/token/reissue")
-    public ResponseEntity<TokenReissueResponse> reissue(@LoginMember Long memberId) {
+    public ResponseEntity<TokenReissueResponse> reissue(@UserAuthentication Long memberId) {
         TokenReissueResponse response = tokenReissueService.reissue(memberId);
         return ResponseDto.ok(response);
     }

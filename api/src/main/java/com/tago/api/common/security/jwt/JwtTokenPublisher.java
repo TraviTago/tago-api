@@ -1,7 +1,6 @@
-package com.tago.api.auth.jwt;
+package com.tago.api.common.security.jwt;
 
-import com.tago.api.auth.dto.response.LoginResponse;
-import com.tago.api.auth.jwt.dto.JwtTokenDto;
+import com.tago.api.common.security.jwt.dto.JwtTokenDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -18,8 +18,8 @@ public class MemberQueryService {
                 .orElseThrow(MemberNotFoundException::new);
     }
 
-    public Member findByMemberId(Long memberId) {
-        return memberRepository.findByMemberId(memberId)
+    public Member findByIdFetchMemberTag(Long memberId) {
+        return memberRepository.findByIdFetchMemberTag(memberId)
                 .orElseThrow(MemberNotFoundException::new);
     }
 

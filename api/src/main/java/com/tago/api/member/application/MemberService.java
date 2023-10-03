@@ -19,7 +19,7 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public MemberGetResponse get(Long memberId) {
-        Member member = memberQueryService.findByMemberId(memberId);
+        Member member = memberQueryService.findByIdFetchMemberTag(memberId);
         return MemberDtoMapper.toDto(member);
     }
 

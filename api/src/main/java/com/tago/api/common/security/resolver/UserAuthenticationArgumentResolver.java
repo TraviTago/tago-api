@@ -1,6 +1,6 @@
 package com.tago.api.common.handler;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.exception.ResolveArgumentException;
 import com.tago.domain.common.error.ErrorCode;
 import org.springframework.core.MethodParameter;
@@ -17,7 +17,7 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean isLoginMemberAnnotation = parameter.hasParameterAnnotation(LoginMember.class);
+        boolean isLoginMemberAnnotation = parameter.hasParameterAnnotation(UserAuthentication.class);
         boolean isLongType = Long.class.isAssignableFrom(parameter.getParameterType());
         return isLoginMemberAnnotation && isLongType;
     }

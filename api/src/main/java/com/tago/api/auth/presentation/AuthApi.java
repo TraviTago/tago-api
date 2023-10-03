@@ -6,9 +6,9 @@ import com.tago.api.auth.application.TokenReissueService;
 import com.tago.api.auth.dto.request.SignUpRequest;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
-import com.tago.api.auth.dto.response.TokenReissueResponse;
 import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
+import com.tago.api.common.security.jwt.dto.JwtTokenDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +33,8 @@ public class AuthApi {
     }
 
     @PostMapping("/auth/token/reissue")
-    public ResponseEntity<TokenReissueResponse> reissue(@UserAuthentication Long memberId) {
-        TokenReissueResponse response = tokenReissueService.reissue(memberId);
+    public ResponseEntity<JwtTokenDto> reissue(@UserAuthentication Long memberId) {
+        JwtTokenDto response = tokenReissueService.reissue(memberId);
         return ResponseDto.ok(response);
     }
 }

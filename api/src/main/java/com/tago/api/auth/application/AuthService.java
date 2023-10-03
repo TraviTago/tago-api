@@ -4,9 +4,10 @@ import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.dto.request.SignUpRequest;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
-import com.tago.api.auth.jwt.JwtTokenPublisher;
+import com.tago.api.common.security.jwt.JwtTokenPublisher;
 import com.tago.api.common.exception.AlreadyExistsAccountException;
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.vo.Role;
 import com.tago.domain.member.service.MemberCreateService;
 import com.tago.domain.member.handler.MemberQueryService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class AuthService {
     @Transactional
     public LoginResponse login(LoginRequest request){
         Member member = memberQueryService.findByPhone(request.getNumber());
-        return new LoginResponse(jwtTokenPublisher.generateTokens(member.getId()));
+        return new LoginResponse(jwtTokenPublisher.generateTokens(member.getId(), member.getRole()));
     }
 
     @Transactional
@@ -34,8 +35,8 @@ public class AuthService {
 
         return new SignUpResponse(
                 member.getId(),
-                member.getAuthority(),
-                jwtTokenPublisher.generateTokens(member.getId())
+                member.getRole(),
+                jwtTokenPublisher.generateTokens(member.getId(), member.getRole())
         );
     }
 

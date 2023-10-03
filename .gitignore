@@ -38,3 +38,6 @@ out/
 
 ### generated ###
 domain/src/main/generated/
+
+### docker ###
+docker/docker-compose.yml

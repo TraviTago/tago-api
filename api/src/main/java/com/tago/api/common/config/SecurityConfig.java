@@ -1,9 +1,9 @@
 package com.tago.api.common.config;
 
-import com.tago.api.auth.jwt.JwtProvider;
-import com.tago.api.auth.jwt.config.JwtSecurityConfig;
-import com.tago.api.auth.jwt.filter.AuthorizationHeaderTokenResolver;
-import com.tago.api.auth.jwt.handler.JwtAuthenticationEntryPoint;
+import com.tago.api.common.security.jwt.JwtProvider;
+import com.tago.api.common.security.jwt.config.JwtSecurityConfig;
+import com.tago.api.common.security.jwt.filter.AuthorizationHeaderTokenResolver;
+import com.tago.api.common.security.jwt.handler.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

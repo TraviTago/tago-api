@@ -1,6 +1,6 @@
 package com.tago.api.issue.presentation;
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.issue.application.IssueReportService;
 import com.tago.domain.issue.domain.Issue;
 import com.tago.domain.issue.dto.IssueDto;
@@ -18,7 +18,7 @@ public class IssueReportApi {
     public final IssueReportService issueReportService;
 
     @PostMapping("/report")
-    public Issue reportIssue(@LoginMember Long memberId, @RequestBody IssueDto issueDto) {
+    public Issue reportIssue(@UserAuthentication Long memberId, @RequestBody IssueDto issueDto) {
         return issueReportService.reportIssue(memberId, issueDto);
     }
 

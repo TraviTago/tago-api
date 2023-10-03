@@ -13,6 +13,7 @@ public enum ErrorCode {
     INVALID_AUTHORIZATION_HEADER(400, "AU005", "잘돗된 형식의 Authorization 헤더입니다."),
     PRINCIPAL_TYPE_NOT_MATCH(400, "AU006", "Authorization의 principal 객체가 Long 타입이 아닙니다."),
     ALREADY_EXISTS_ACCOUNT(400, "A007", "이미 가입된 번호입니다."),
+    INVALID_AUTHORITY(403, "A008", "권한이 없는 역할입니다."),
 
     // SMS
     SMS_BAD_REQUEST(400, "S001", "잘못된 형식의 SMS 요청입니다."),

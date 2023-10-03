@@ -1,7 +1,7 @@
 package com.tago.domain.member.service;
 
 import com.tago.domain.member.domain.Member;
-import com.tago.domain.member.domain.vo.Authority;
+import com.tago.domain.member.domain.vo.Role;
 import com.tago.domain.member.domain.vo.Profile;
 import com.tago.domain.member.dto.MemberCreateDto;
 import com.tago.domain.member.handler.MemberCommandService;
@@ -27,7 +27,7 @@ public class MemberCreateService {
         Member member = Member.builder()
                 .phoneNumber(dto.getNumber())
                 .name(dto.getName())
-                .authority(Authority.USER)
+                .role(Role.USER)
                 .profile(profile)
                 .build();
 

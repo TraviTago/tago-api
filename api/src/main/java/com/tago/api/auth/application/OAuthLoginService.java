@@ -1,11 +1,7 @@
 package com.tago.api.auth.application;
 
-import com.tago.api.auth.infra.OAuthInfoResponse;
-import com.tago.api.auth.infra.OAuthLoginParams;
-import com.tago.api.auth.dto.response.LoginResponse;
-import com.tago.api.auth.jwt.JwtTokenGenerator;
+import com.tago.api.common.security.jwt.JwtTokenGenerator;
 import com.tago.domain.member.repository.MemberRepository;
-import com.tago.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,7 @@ create table member (
     phone_number varchar(255) not null unique,
     `name` varchar(255) not null,
     img_url varchar(255) not null,
-    authority varchar(255) not null,
+    role varchar(255) not null,
     age_range int,
     gender varchar(255),
     mbti varchar(255),
@@ -127,5 +127,34 @@ create table issue(
       type varchar(255),
       detail varchar(255),
       primary key(id)
+);
+
+drop table if exists driver;
+create table driver (
+    id bigint auto_increment,
+    code varchar(255) not null unique,
+    phone_number varchar(255),
+    name varchar(255),
+    license varchar(255),
+    comment longtext,
+    img_url varchar(255),
+    primary key (id)
+);
+
+drop table if exists dispatch;
+create table dispatch (
+    id bigint auto_increment,
+    trip_id bigint not null,
+    driver_id bigint not null,
+    primary key (id)
+);
+
+drop table if exists car;
+create table car (
+     id bigint auto_increment,
+     number varchar(255) not null unique,
+     seater int not null,
+     driver_id bigint not null,
+     primary key (id)
 );
 

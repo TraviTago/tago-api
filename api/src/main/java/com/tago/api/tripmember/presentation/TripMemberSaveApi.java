@@ -1,7 +1,7 @@
 package com.tago.api.tripmember.presentation;
 
 
-import com.tago.api.common.annotation.LoginMember;
+import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.tripmember.application.TripMemberSaveService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class TripMemberSaveApi {
     @PostMapping("/trips/{tripId}/join")
     public ResponseEntity<Void> joinTrip(
             @PathVariable Long tripId,
-            @LoginMember Long memberId
+            @UserAuthentication Long memberId
     ){
         tripMemberService.joinTrip(tripId, memberId);
         return ResponseDto.noContent();

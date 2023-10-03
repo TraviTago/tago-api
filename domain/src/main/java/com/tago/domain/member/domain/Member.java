@@ -27,7 +27,7 @@ public class Member {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Authority authority;
+    private Role role;
 
     @Embedded
     private Profile profile;

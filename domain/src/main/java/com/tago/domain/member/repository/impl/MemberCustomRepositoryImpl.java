@@ -24,7 +24,7 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Optional<Member> findByMemberId(Long memberId) {
+    public Optional<Member> findByIdFetchMemberTag(Long memberId) {
         return Optional.ofNullable(queryFactory.selectFrom(member)
                 .leftJoin(member.memberTags, memberTag).fetchJoin()
                 .leftJoin(memberTag.tag, tag).fetchJoin()

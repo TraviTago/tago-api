@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface MemberCustomRepository {
 
-    Optional<Member> findByMemberId(Long memberId);
+    Optional<Member> findByIdFetchMemberTag(Long memberId);
 }

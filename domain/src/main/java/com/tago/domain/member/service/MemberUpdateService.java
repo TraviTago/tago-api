@@ -15,7 +15,7 @@ public class MemberUpdateService {
     private final MemberTagCreateService memberTagCreateService;
 
     public void updateMemberInfo(Long memberId, MemberUpdateDto dto) {
-        Member member = memberQueryService.findByMemberId(memberId);
+        Member member = memberQueryService.findByIdFetchMemberTag(memberId);
         member.updateInfo(
                 dto.getMbti(),
                 dto.getImgUrl(),

@@ -11,6 +11,7 @@ public class AuthorizationHeaderTokenResolver {
     private static final String AUTHORIZATION_SCHEMA = "Bearer";
 
     public String resolve(String value) {
+        if (value == null) throw new AuthenticateException("Authorization 헤더값이 존재하지 않습니다.");
         String[] values = value.split(" ");
         validate(values);
         return values[1];

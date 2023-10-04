@@ -27,4 +27,12 @@ public class Driver {
 
     @OneToMany(mappedBy = "driver")
     private List<Car> cars = new ArrayList<>();
+
+    public String getImgUrl() {
+        return info.getImgUrl();
+    }
+
+    public String getName() {
+        return info.getName();
+    }
 }

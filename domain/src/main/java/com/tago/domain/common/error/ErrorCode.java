@@ -47,6 +47,7 @@ public enum ErrorCode {
     DRIVER_NOT_FOUND(404, "D001", "존재하지 않는 기사입니다."),
     CAR_NOT_FOUND(404, "D002", "존재하지 않는 차입니다."),
     DISPATCH_NOT_FOUND(404, "D003", "존재하지 않는 배차입니다."),
+    ALREADY_EXISTS_DISPATCH(400, "D004", "이미 배차된 여행입니다."),
 
     // ETC
     DEFAULT(500, "-1", "INTERNAL_SERVER_ERROR")

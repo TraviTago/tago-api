@@ -1,7 +1,6 @@
 # tago-api
 ## CI/CD
-![image](https://github.com/TraviTago/tago-api/assets/50009240/abe1423b-e4e8-460b-9e4d-1144796c0e54)
-
+![image](https://github.com/TraviTago/tago-api/assets/50009240/e036207d-3026-4cbd-81c7-3194dd57eef3)
 
 
 

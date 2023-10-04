@@ -1,6 +1,7 @@
 package com.tago.domain.driver.handler;
 
 import com.tago.domain.driver.domain.Driver;
+import com.tago.domain.driver.dto.DriverInfoDto;
 import com.tago.domain.driver.exception.DriverNotFoundException;
 import com.tago.domain.driver.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class DriverQueryService {
 
     public Driver findById(Long id) {
         return driverRepository.findById(id)
+                .orElseThrow(DriverNotFoundException::new);
+    }
+
+    public DriverInfoDto findById(int cnt, Long id) {
+        return driverRepository.findById(cnt, id)
                 .orElseThrow(DriverNotFoundException::new);
     }
 }

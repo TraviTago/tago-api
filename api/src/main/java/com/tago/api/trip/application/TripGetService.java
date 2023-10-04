@@ -36,7 +36,7 @@ public class TripGetService {
             Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Long memberId
     ) {
         Member member = memberQueryService.findByIdFetchMemberTag(memberId);
-        List<Trip> trips = tripQueryService.findAll(cursorId, cursorDate, limit, sameGender, isPet);
+        List<Trip> trips = tripQueryService.findAll(cursorId, cursorDate, limit, sameGender, isPet, member.getGender());
         List<TripGetResponse> dto = TripDtoMapper.toDto(trips, member);
         return PageResponseDto.from(dto);
     }

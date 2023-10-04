@@ -7,6 +7,7 @@ import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.driver.domain.QDriver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
+import com.tago.domain.member.domain.vo.Gender;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.tago.domain.driver.domain.QDispatch.dispatch;
-import static com.tago.domain.driver.domain.QDriver.driver;
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.trip.domain.QTrip.trip;
@@ -34,13 +34,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+    public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Gender memberGender) {
         List<Long> ids = queryFactory.select(trip.id)
                 .from(trip)
                 .where(
                         isNotDone(),
                         cursorGt(cursorId, cursorDate),
-                        isSameGender(sameGender),
+                        isSameGender(sameGender, memberGender),
                         isPet(isPet)
                 )
                 .orderBy(trip.dateTime.asc(), trip.id.asc())
@@ -187,8 +187,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         return tripTag.tag.id.in(ids);
     }
 
-    private BooleanExpression isSameGender(Boolean sameGender){
-        return sameGender ? trip.condition.sameGender.eq(true) : null ;
+    private BooleanExpression isSameGender(Boolean sameGender, Gender memberGender){
+        return sameGender ? trip.condition.sameGender.eq(true).and(isSameGenderTripAndMember(memberGender))
+                : trip.condition.sameGender.eq(false).or(isSameGenderTripAndMember(memberGender));
+    }
+
+    private BooleanExpression isSameGenderTripAndMember(Gender memberGender) {
+        return trip.member.profile.gender.eq(memberGender);
     }
 
     private BooleanExpression isPet(Boolean isPet) {

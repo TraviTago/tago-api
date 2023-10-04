@@ -2,6 +2,7 @@ package com.tago.domain.trip.handler;
 
 import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.vo.Gender;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.trip.repository.TripRepository;
@@ -27,8 +28,8 @@ public class TripQueryService {
                 .orElseThrow(TripNotFoundException::new);
     }
   
-    public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
-        return tripRepository.findAll(cursorId, cursorDate, limit, sameGender, isPet);
+    public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Gender memberGender) {
+        return tripRepository.findAll(cursorId, cursorDate, limit, sameGender, isPet, memberGender);
     }
 
     public List<Trip> findAllByNotDispatch(Long cursorId, LocalDateTime cursorDate, int limit) {

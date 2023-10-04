@@ -1,5 +1,7 @@
 # tago-api
-tago repository
+## CI/CD
+![image](https://github.com/TraviTago/tago-api/assets/50009240/abe1423b-e4e8-460b-9e4d-1144796c0e54)
+
 
 
 

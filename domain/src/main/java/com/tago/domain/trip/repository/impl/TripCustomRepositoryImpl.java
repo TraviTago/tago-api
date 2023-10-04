@@ -3,6 +3,8 @@ package com.tago.domain.trip.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.tago.domain.driver.domain.Driver;
+import com.tago.domain.driver.domain.QDriver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
 import com.tago.domain.trip.domain.Trip;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static com.tago.domain.driver.domain.QDispatch.dispatch;
+import static com.tago.domain.driver.domain.QDriver.driver;
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.trip.domain.QTrip.trip;
@@ -30,7 +34,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Trip> findAllFetchTripPlaceAndPlace(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
+    public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
         List<Long> ids = queryFactory.select(trip.id)
                 .from(trip)
                 .where(
@@ -39,6 +43,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                         isSameGender(sameGender),
                         isPet(isPet)
                 )
+                .orderBy(trip.dateTime.asc(), trip.id.asc())
                 .limit(limit)
                 .fetch();
 
@@ -48,7 +53,30 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .innerJoin(tripPlace.place, place).fetchJoin()
                 .leftJoin(trip.tripMembers, tripMember)
                 .where(trip.id.in(ids))
-                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
+                .orderBy(trip.dateTime.asc(), trip.id.asc(), tripPlace.order.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<Trip> findAllByNotDispatch(Long cursorId, LocalDateTime cursorDate, int limit) {
+        List<Long> ids = queryFactory.select(trip.id)
+                .from(trip)
+                .leftJoin(dispatch).on(trip.id.eq(dispatch.trip.id))
+                .where(
+                        isNotDone(),
+                        cursorGt(cursorId, cursorDate),
+                        notExistsDispatch()
+                )
+                .orderBy(trip.dateTime.asc(), trip.id.asc())
+                .limit(limit)
+                .fetch();
+
+        return queryFactory.selectFrom(trip)
+                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
+                .innerJoin(tripPlace.place, place).fetchJoin()
+                .leftJoin(trip.tripMembers, tripMember)
+                .where(trip.id.in(ids))
+                .orderBy(trip.dateTime.asc(), trip.id.asc(), tripPlace.order.asc())
                 .fetch();
     }
 
@@ -112,6 +140,18 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
+    public List<Trip> findAllByDriver(Driver driver) {
+        return queryFactory.select(trip)
+                .from(dispatch)
+                .innerJoin(dispatch.trip, trip)
+                .innerJoin(dispatch.driver, QDriver.driver)
+                .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
+                .innerJoin(tripPlace.place, place).fetchJoin()
+                .where(driverEq(driver))
+                .orderBy(trip.dateTime.asc(), tripPlace.order.asc())
+                .fetch();
+    }
+
     public Optional<Trip> findByIdFetchTripMember(Long tripId) {
         return Optional.ofNullable(queryFactory.selectFrom(trip)
                 .leftJoin(trip.tripMembers, tripMember)
@@ -157,5 +197,13 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression memberEq(Member member) {
         return QMember.member.eq(member);
+    }
+
+    private BooleanExpression driverEq(Driver driver) {
+        return QDriver.driver.eq(driver);
+    }
+
+    private BooleanExpression notExistsDispatch() {
+        return dispatch.id.isNull();
     }
 }

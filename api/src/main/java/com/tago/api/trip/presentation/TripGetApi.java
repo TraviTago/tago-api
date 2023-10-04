@@ -52,7 +52,7 @@ public class TripGetApi {
     }
 
     @GetMapping("/trips/me")
-    public ResponseEntity<MyTripGetResponse> getTripsByMember(
+    public ResponseEntity<MyTripGetResponse> getAllByMember(
             @UserAuthentication Long memberId
     ) {
         MyTripGetResponse response = tripService.getAllByMember(memberId);

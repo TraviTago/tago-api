@@ -15,10 +15,13 @@ public class DriverInfo {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
     @Column(columnDefinition = "TEXT")
     private String comment;
 
     private String license;
 
-    private String img_url;
+    private String imgUrl;
 }

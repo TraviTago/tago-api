@@ -5,8 +5,11 @@ import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.driver.exception.DispatchNotFoundException;
 import com.tago.domain.driver.repository.DispatchRepository;
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.exception.TripNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +20,9 @@ public class DispatchQueryService {
     public Dispatch findByTripAndDriver(Trip trip, Driver driver) {
         return dispatchRepository.findByTripAndDriver(trip, driver)
                 .orElseThrow(DispatchNotFoundException::new);
+    }
+
+    public Optional<Dispatch> findOptionalByTrip(Trip trip) {
+        return dispatchRepository.findByTrip(trip);
     }
 }

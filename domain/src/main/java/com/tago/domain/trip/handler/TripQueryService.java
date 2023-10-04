@@ -1,5 +1,6 @@
 package com.tago.domain.trip.handler;
 
+import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
@@ -27,7 +28,11 @@ public class TripQueryService {
     }
   
     public List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet) {
-        return tripRepository.findAllFetchTripPlaceAndPlace(cursorId, cursorDate, limit, sameGender, isPet);
+        return tripRepository.findAll(cursorId, cursorDate, limit, sameGender, isPet);
+    }
+
+    public List<Trip> findAllByNotDispatch(Long cursorId, LocalDateTime cursorDate, int limit) {
+        return tripRepository.findAllByNotDispatch(cursorId, cursorDate, limit);
     }
 
     public List<Trip> searchByPlaceTitleKeyword(
@@ -42,5 +47,9 @@ public class TripQueryService {
 
     public List<Trip> findAllByMember(Member member) {
         return tripRepository.findAllByMember(member);
+    }
+
+    public List<Trip> findAllByDriver(Driver driver) {
+        return tripRepository.findAllByDriver(driver);
     }
 }

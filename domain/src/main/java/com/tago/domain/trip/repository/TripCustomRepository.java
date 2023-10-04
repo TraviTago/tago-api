@@ -2,6 +2,7 @@ package com.tago.domain.trip.repository;
 
 import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.domain.vo.Gender;
 import com.tago.domain.trip.domain.Trip;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public interface TripCustomRepository {
 
-    List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet);
+    List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Gender memberGender);
     List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit);
 
     Trip findByTripTag(Long memberId);

@@ -4,7 +4,8 @@ import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.common.security.annotation.DriverAuthentication;
 import com.tago.api.driver.application.DriverTripService;
-import com.tago.api.driver.dto.response.DriverTripResponse;
+import com.tago.api.driver.dto.response.DriverTripGetAllResponse;
+import com.tago.api.driver.dto.response.TripGetOneResponse;
 import com.tago.api.driver.dto.response.TripGetResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +40,20 @@ public class DriverTripApi {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("/trips/me")
-    public ResponseEntity<DriverTripResponse> getAllByDriver(
+    @GetMapping("/trips/{tripId}")
+    public ResponseEntity<TripGetOneResponse> getOne(
+            @PathVariable("tripId") Long tripId,
             @DriverAuthentication Long driverId
     ) {
-        DriverTripResponse response = driverTripService.getAllByDriver(driverId);
+        TripGetOneResponse response = driverTripService.getOne(tripId, driverId);
+        return ResponseDto.ok(response);
+    }
+
+    @GetMapping("/trips/me")
+    public ResponseEntity<DriverTripGetAllResponse> getAllByDriver(
+            @DriverAuthentication Long driverId
+    ) {
+        DriverTripGetAllResponse response = driverTripService.getAllByDriver(driverId);
         return ResponseDto.ok(response);
     }
 }

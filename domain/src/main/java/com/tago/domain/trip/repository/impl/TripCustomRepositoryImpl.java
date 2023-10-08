@@ -125,7 +125,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                         tripPlace.order.asc(),
                         Expressions.numberTemplate(Double.class, "function('rand')").asc()
                 )
-                .fetchFirst();
+                .fetchOne();
     }
 
     public List<Trip> findAllByMember(Member member) {

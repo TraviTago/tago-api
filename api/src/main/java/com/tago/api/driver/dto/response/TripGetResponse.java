@@ -10,8 +10,8 @@ import java.util.List;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class TripGetResponse {
     private Long tripId;
     private LocalDateTime dateTime;

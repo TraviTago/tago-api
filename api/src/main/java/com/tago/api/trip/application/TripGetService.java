@@ -7,6 +7,7 @@ import com.tago.api.trip.dto.response.MyTripGetResponse;
 import com.tago.api.trip.dto.response.TripGetResponse;
 import com.tago.api.trip.dto.response.TripGetOneResponse;
 import com.tago.api.trip.dto.response.TripStatusResponse;
+import com.tago.domain.driver.repository.DispatchRepository;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
@@ -30,6 +31,7 @@ public class TripGetService {
     private final MemberQueryService memberQueryService;
     private final TripPlaceQueryService tripPlaceQueryService;
     private final TripMemberQueryService tripMemberQueryService;
+    private final DispatchRepository dispatchRepository;
 
     @Transactional(readOnly = true)
     public PageResponseDto<TripGetResponse> getAll(
@@ -53,12 +55,15 @@ public class TripGetService {
         Trip trip = tripQueryService.findById(tripId);
         List<TripPlaceDto> tripPlaces = tripPlaceQueryService.findAll(trip);
 
+        boolean isDispatched = dispatchRepository.existsByTripId(tripId);
+
         return new TripGetOneResponse(
                 trip.getName(),
                 trip.getCurrentCnt(),
                 trip.getMaxCnt(),
                 isJoined(tripId, memberId),
-                tripPlaces
+                tripPlaces,
+                isDispatched
         );
     }
 

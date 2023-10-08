@@ -53,9 +53,7 @@ public class NcloudSmsClient implements SmsClient {
     }
 
     private String generateVerificationCode(SmsRequest.Send dto) {
-        return verificationCodeUtil.generate(
-                dto.getNumber(),
-                60 * 3L
-        );
+        String code = verificationCodeUtil.generate(dto.getNumber(), 60 * 3L);
+        return "Your verification code is: <#> " + code;
     }
 }

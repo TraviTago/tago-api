@@ -2,16 +2,17 @@ package com.tago.api.driver.application;
 
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.mapper.DriverTripDtoMapper;
-import com.tago.api.common.mapper.TripDtoMapper;
-import com.tago.api.driver.dto.response.DriverTripResponse;
+import com.tago.api.driver.dto.response.DriverTripGetAllResponse;
+import com.tago.api.driver.dto.response.TripGetOneResponse;
 import com.tago.api.driver.dto.response.TripGetResponse;
-import com.tago.api.trip.dto.response.MyTripGetResponse;
 import com.tago.domain.driver.domain.Driver;
+import com.tago.domain.driver.handler.DispatchQueryService;
 import com.tago.domain.driver.handler.DriverQueryService;
 import com.tago.domain.driver.service.factory.dispatch.DispatchService;
 import com.tago.domain.driver.service.factory.dispatch.DispatchServiceFactory;
-import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.dto.TripPlaceDto;
+import com.tago.domain.trip.handler.TripPlaceQueryService;
 import com.tago.domain.trip.handler.TripQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,9 @@ import java.util.List;
 public class DriverTripService {
 
     private final TripQueryService tripQueryService;
+    private final TripPlaceQueryService tripPlaceQueryService;
     private final DriverQueryService driverQueryService;
+    private final DispatchQueryService dispatchQueryService;
     private final DispatchServiceFactory dispatchServiceFactory;
 
     @Transactional
@@ -44,9 +47,27 @@ public class DriverTripService {
     }
 
     @Transactional(readOnly = true)
-    public DriverTripResponse getAllByDriver(Long driverId) {
+    public TripGetOneResponse getOne(Long tripId, Long driverId) {
+        Trip trip = tripQueryService.findById(tripId);
+        List<TripPlaceDto> places = tripPlaceQueryService.findAll(trip);
+
+        return TripGetOneResponse.builder()
+                .tripName(trip.getName())
+                .currentCnt(trip.getCurrentCnt())
+                .maxCnt(trip.getMaxCnt())
+                .isDispatched(isDispatched(tripId, driverId))
+                .places(places)
+                .build();
+    }
+
+    private Boolean isDispatched(Long tripId, Long driverId) {
+        return dispatchQueryService.existsTripIdAndDriverId(tripId, driverId);
+    }
+
+    @Transactional(readOnly = true)
+    public DriverTripGetAllResponse getAllByDriver(Long driverId) {
         Driver driver = driverQueryService.findById(driverId);
         List<Trip> trips = tripQueryService.findAllByDriver(driver);
-        return new DriverTripResponse(DriverTripDtoMapper.toDto(trips));
+        return new DriverTripGetAllResponse(DriverTripDtoMapper.toDto(trips));
     }
 }

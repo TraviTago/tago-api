@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverTripResponse {
+public class DriverTripGetAllResponse {
     List<TripGetResponse> trips;
 }

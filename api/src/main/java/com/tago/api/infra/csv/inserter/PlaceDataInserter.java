@@ -17,7 +17,8 @@ public class PlaceDataInserter {
 
         try (
                 Connection connection = DatabaseUtil.getConnection();
-                Reader in = new FileReader("/Users/yell/Documents/final_place_info.csv");
+                //Reader in = new FileReader("/Users/yell/Documents/final_place_info.csv");
+                Reader in = new FileReader("/Users/yell/Documents/restaurant_info.csv");
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
         ) {
 

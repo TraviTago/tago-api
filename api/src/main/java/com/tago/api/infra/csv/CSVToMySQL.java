@@ -8,8 +8,8 @@ public class CSVToMySQL {
     public static void main(String[] args) throws ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        PlaceTagDataInserter.insertPlaceTagData();
-        //PlaceDataInserter.insertPlaceData();
+        //PlaceTagDataInserter.insertPlaceTagData();
+        PlaceDataInserter.insertPlaceData();
         //CourseDataInserter.insertCourseData();
         //CoursePlaceDataInserter.insertCoursePlaceData();
         //CourseTagDataInserter.insertCourseTagData();

@@ -23,4 +23,5 @@ public class PassengerGetService {
         List<PassengerDto> members = passengerQueryService.findPassengerByTrip(trip);
         return new PassengerGetResponse(members);
     }
+
 }

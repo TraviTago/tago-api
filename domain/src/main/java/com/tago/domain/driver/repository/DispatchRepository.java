@@ -11,5 +11,7 @@ public interface DispatchRepository extends JpaRepository<Dispatch,Long> {
     Optional<Dispatch> findByTripAndDriver(Trip trip, Driver driver);
     Optional<Dispatch> findByTrip(Trip trip);
 
+    Boolean existsByTripId(Long tripId);
+
     Boolean existsByTripIdAndDriverId(Long tripId, Long driverId);
 }

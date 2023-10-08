@@ -25,4 +25,8 @@ public class DispatchQueryService {
     public Optional<Dispatch> findOptionalByTrip(Trip trip) {
         return dispatchRepository.findByTrip(trip);
     }
+
+    public Boolean existsTripIdAndDriverId(Long tripId, Long driverId) {
+        return dispatchRepository.existsByTripIdAndDriverId(tripId, driverId);
+    }
 }

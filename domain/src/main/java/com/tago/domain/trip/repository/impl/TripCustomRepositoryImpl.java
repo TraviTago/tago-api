@@ -113,6 +113,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .from(tripTag)
                 .where(tagIdIn(tagIds))
                 .groupBy(tripTag.trip.id)
+                .having(tripTag.trip.dateTime.after(LocalDateTime.now()))
                 .orderBy(tripTag.tag.id.count().desc())
                 .fetchFirst();
 

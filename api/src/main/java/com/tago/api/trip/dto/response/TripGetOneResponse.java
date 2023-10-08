@@ -16,4 +16,5 @@ public class TripGetOneResponse {
     private int maxCnt;
     private Boolean isJoined;
     private List<TripPlaceDto> places;
+    private Boolean isMatch;
 }

@@ -80,7 +80,6 @@ public class Trip {
                 .build()
         );
     }
-
     private void deleteTripMember(Member member) {
         List<TripMember> tripMembers = this.tripMembers.stream()
                 .filter(tripMember -> !tripMember.getMember().getId().equals(member.getId()))

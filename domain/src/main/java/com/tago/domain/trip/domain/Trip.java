@@ -9,11 +9,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.Builder.Default;
 import org.hibernate.annotations.BatchSize;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@Builder
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Trip {
 

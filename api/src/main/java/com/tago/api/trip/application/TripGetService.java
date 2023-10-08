@@ -55,7 +55,7 @@ public class TripGetService {
         Trip trip = tripQueryService.findById(tripId);
         List<TripPlaceDto> tripPlaces = tripPlaceQueryService.findAll(trip);
 
-        boolean isMatch = dispatchRepository.existsByTripId(tripId);
+        boolean isDispatched = dispatchRepository.existsByTripId(tripId);
 
         return new TripGetOneResponse(
                 trip.getName(),
@@ -63,7 +63,7 @@ public class TripGetService {
                 trip.getMaxCnt(),
                 isJoined(tripId, memberId),
                 tripPlaces,
-                isMatch
+                isDispatched
         );
     }
 

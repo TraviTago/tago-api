@@ -111,7 +111,10 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         Long tripId = queryFactory
                 .select(tripTag.trip.id)
                 .from(tripTag)
-                .where(tagIdIn(tagIds))
+                .where(
+                        tagIdIn(tagIds),
+                        isNotDone()
+                )
                 .groupBy(tripTag.trip.id)
                 .orderBy(tripTag.tag.id.count().desc())
                 .fetchFirst();

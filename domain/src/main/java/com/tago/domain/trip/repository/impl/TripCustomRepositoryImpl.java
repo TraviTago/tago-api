@@ -8,6 +8,7 @@ import com.tago.domain.driver.domain.QDriver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
 import com.tago.domain.member.domain.vo.Gender;
+import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
@@ -198,7 +199,6 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     private BooleanExpression isSameGenderTripAndMember(Gender memberGender) {
         return trip.member.profile.gender.eq(memberGender);
     }
-
     private BooleanExpression isPet(Boolean isPet) {
         return isPet ? trip.condition.isPet.eq(true) : null;
     }

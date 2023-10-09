@@ -21,10 +21,9 @@ public class DriverApi {
 
     @GetMapping("/trips/{tripId}/driver")
     public ResponseEntity<DriverInfoDto> getByTrip(
-            @PathVariable("tripId") Long tripId,
-            @DriverAuthentication Long driverId
+            @PathVariable("tripId") Long tripId
     ) {
-        DriverInfoDto response = driverService.getByTrip(tripId, driverId);
+        DriverInfoDto response = driverService.getByTrip(tripId);
         return ResponseDto.ok(response);
     }
 

@@ -23,5 +23,6 @@ public interface TripCustomRepository {
     List<Trip> findAllByNotDispatch(Long cursorId, LocalDateTime cursorDate, int limit);
 
     List<Trip> findAllByDriver(Driver driver);
+    List<Trip> findByName(String name);
 }
 

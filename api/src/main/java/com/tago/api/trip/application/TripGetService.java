@@ -96,7 +96,7 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TagoTripResponse getOriginTrips() {
-        List<TagoTrip> trips = tagoTripRepository.findAll();
+        List<TagoTrip> trips = tripQueryService.findAll();
         List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
                 .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url()))
                 .collect(Collectors.toList());
@@ -106,7 +106,7 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TagoTripOneResponse getOriginTripByName(String name) {
-        List<Trip> trips = tripRepository.findByName(name);
+        List<Trip> trips = tripQueryService.findByName(name);
         List<TagoTripOneDto> tagotrips = trips.stream()
                 .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
                 .collect(Collectors.toList());

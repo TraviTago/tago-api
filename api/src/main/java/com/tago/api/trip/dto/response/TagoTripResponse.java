@@ -5,13 +5,6 @@ import lombok.Data;
 
 import java.util.List;
 
-//@Data
-//@AllArgsConstructor
-//public class TagoTripResponse {
-//    private String name;
-//    private String img_url;
-//}
-
 @Data
 @AllArgsConstructor
 public class TagoTripResponse {

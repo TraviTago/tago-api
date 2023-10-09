@@ -9,9 +9,11 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.dto.TagoTripOneDto;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.handler.TripPlaceQueryService;
 import com.tago.domain.trip.repository.TagoTripRepository;
+import com.tago.domain.trip.repository.TripRepository;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.trip.handler.TripQueryService;
 import com.tago.domain.tripmember.handler.TripMemberQueryService;
@@ -34,6 +36,7 @@ public class TripGetService {
     private final TripMemberQueryService tripMemberQueryService;
     private final DispatchRepository dispatchRepository;
     private final TagoTripRepository tagoTripRepository;
+    private final TripRepository tripRepository;
 
     @Transactional(readOnly = true)
     public PageResponseDto<TripGetResponse> getAll(
@@ -91,14 +94,6 @@ public class TripGetService {
         return PageResponseDto.from(dto);
     }
 
-//    @Transactional(readOnly = true)
-//    public List<TagoTripResponse> getOriginTrips() {
-//        List<TagoTrip> trips = tagoTripRepository.findAll();
-//        return trips.stream()
-//                .map(trip -> new TagoTripResponse(trip.getName(), trip.getImg_url()))
-//                .collect(Collectors.toList());
-//    }
-
     @Transactional(readOnly = true)
     public TagoTripResponse getOriginTrips() {
         List<TagoTrip> trips = tagoTripRepository.findAll();
@@ -109,6 +104,14 @@ public class TripGetService {
         return new TagoTripResponse(tagotrips);
     }
 
+    @Transactional(readOnly = true)
+    public TagoTripOneResponse getOriginTripByName(String name) {
+        List<Trip> trips = tripRepository.findByName(name);
+        List<TagoTripOneDto> tagotrips = trips.stream()
+                .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
+                .collect(Collectors.toList());
+        return new TagoTripOneResponse(tagotrips);
+    }
 
     private Boolean isJoined(Long tripId, Long memberId) {
         return tripMemberQueryService.existsByTripIdAndMemberId(tripId, memberId);

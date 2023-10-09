@@ -7,6 +7,5 @@ import com.tago.domain.trip.dto.TripPlaceDto;
 import java.util.List;
 
 public interface TripPlaceCustomRepository {
-
     List<TripPlaceDto> findAllByTrip(Trip trip);
 }

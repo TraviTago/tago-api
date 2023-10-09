@@ -1,8 +1,10 @@
 package com.tago.api.driver.application;
 
 import com.tago.api.driver.dto.response.DriverGetResponse;
+import com.tago.domain.driver.domain.Dispatch;
 import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.driver.dto.DriverInfoDto;
+import com.tago.domain.driver.handler.DispatchQueryService;
 import com.tago.domain.driver.handler.DriverQueryService;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.handler.TripQueryService;
@@ -14,13 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class DriverService {
 
-    private final DriverQueryService driverQueryService;
     private final TripQueryService tripQueryService;
+    private final DriverQueryService driverQueryService;
+    private final DispatchQueryService dispatchQueryService;
 
     @Transactional(readOnly = true)
-    public DriverInfoDto getByTrip(Long tripId, Long driverId) {
+    public DriverInfoDto getByTrip(Long tripId) {
         Trip trip = tripQueryService.findById(tripId);
-        return driverQueryService.findById(trip.getCurrentCnt(), driverId);
+        Dispatch dispatch = dispatchQueryService.findByTrip(trip);
+        return driverQueryService.findByDriverAndCar(trip.getCurrentCnt(), dispatch.getDriver());
     }
 
     @Transactional(readOnly = true)

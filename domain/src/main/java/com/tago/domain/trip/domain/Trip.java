@@ -49,6 +49,9 @@ public class Trip {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Column(name = "origin")
+    private Boolean origin;
+
     @Default
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<TripPlace> tripPlaces = new ArrayList<>();
@@ -61,6 +64,8 @@ public class Trip {
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripMember> tripMembers = new ArrayList<>();
+
+
 
     public void join(Member member) {
         if (isLimitMember()) throw new MaxMemberLimitException();

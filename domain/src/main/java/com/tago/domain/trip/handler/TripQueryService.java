@@ -3,8 +3,10 @@ package com.tago.domain.trip.handler;
 import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Gender;
+import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
+import com.tago.domain.trip.repository.TagoTripRepository;
 import com.tago.domain.trip.repository.TripRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.List;
 public class TripQueryService {
 
     private final TripRepository tripRepository;
+    private final TagoTripRepository tagoTripRepository;
 
     public Trip findById(Long tripId) {
         return tripRepository.findById(tripId)
@@ -53,4 +56,10 @@ public class TripQueryService {
     public List<Trip> findAllByDriver(Driver driver) {
         return tripRepository.findAllByDriver(driver);
     }
+
+    public List<Trip> findByName(String name) {return tripRepository.findByName(name);}
+
+    public List<TagoTrip> findAll() {return tagoTripRepository.findAll();}
+
+
 }

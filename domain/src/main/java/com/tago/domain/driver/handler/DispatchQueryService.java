@@ -29,4 +29,9 @@ public class DispatchQueryService {
     public Boolean existsTripIdAndDriverId(Long tripId, Long driverId) {
         return dispatchRepository.existsByTripIdAndDriverId(tripId, driverId);
     }
+
+    public Dispatch findByTrip(Trip trip) {
+        return dispatchRepository.findByTrip(trip)
+                .orElseThrow(DispatchNotFoundException::new);
+    }
 }

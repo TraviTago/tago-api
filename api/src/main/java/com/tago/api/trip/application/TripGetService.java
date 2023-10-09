@@ -3,25 +3,26 @@ package com.tago.api.trip.application;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.mapper.TripDtoMapper;
 import com.tago.api.common.mapper.TripStatusDtoMapper;
-import com.tago.api.trip.dto.response.MyTripGetResponse;
-import com.tago.api.trip.dto.response.TripGetResponse;
-import com.tago.api.trip.dto.response.TripGetOneResponse;
-import com.tago.api.trip.dto.response.TripStatusResponse;
+import com.tago.api.trip.dto.response.*;
 import com.tago.domain.driver.repository.DispatchRepository;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.handler.MemberQueryService;
+import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.handler.TripPlaceQueryService;
+import com.tago.domain.trip.repository.TagoTripRepository;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.trip.handler.TripQueryService;
 import com.tago.domain.tripmember.handler.TripMemberQueryService;
+import jakarta.transaction.TransactionScoped;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class TripGetService {
     private final TripPlaceQueryService tripPlaceQueryService;
     private final TripMemberQueryService tripMemberQueryService;
     private final DispatchRepository dispatchRepository;
+    private final TagoTripRepository tagoTripRepository;
 
     @Transactional(readOnly = true)
     public PageResponseDto<TripGetResponse> getAll(
@@ -88,6 +90,25 @@ public class TripGetService {
         List<TripGetResponse> dto = TripDtoMapper.toDto(trips, member);
         return PageResponseDto.from(dto);
     }
+
+//    @Transactional(readOnly = true)
+//    public List<TagoTripResponse> getOriginTrips() {
+//        List<TagoTrip> trips = tagoTripRepository.findAll();
+//        return trips.stream()
+//                .map(trip -> new TagoTripResponse(trip.getName(), trip.getImg_url()))
+//                .collect(Collectors.toList());
+//    }
+
+    @Transactional(readOnly = true)
+    public TagoTripResponse getOriginTrips() {
+        List<TagoTrip> trips = tagoTripRepository.findAll();
+        List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
+                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url()))
+                .collect(Collectors.toList());
+
+        return new TagoTripResponse(tagotrips);
+    }
+
 
     private Boolean isJoined(Long tripId, Long memberId) {
         return tripMemberQueryService.existsByTripIdAndMemberId(tripId, memberId);

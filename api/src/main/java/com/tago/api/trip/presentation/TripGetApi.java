@@ -4,15 +4,13 @@ import com.tago.api.common.security.annotation.UserAuthentication;
 import com.tago.api.common.dto.PageResponseDto;
 import com.tago.api.common.dto.ResponseDto;
 import com.tago.api.trip.application.TripGetService;
-import com.tago.api.trip.dto.response.MyTripGetResponse;
-import com.tago.api.trip.dto.response.TripGetOneResponse;
-import com.tago.api.trip.dto.response.TripGetResponse;
-import com.tago.api.trip.dto.response.TripStatusResponse;
+import com.tago.api.trip.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -76,4 +74,11 @@ public class TripGetApi {
         PageResponseDto<TripGetResponse> response = tripService.search(keyword, cursorId, cursorDate, limit, memberId);
         return ResponseDto.ok(response);
     }
+
+    @GetMapping("/trips/origin")
+    public ResponseEntity<TagoTripResponse> getOriginTrips() {
+        TagoTripResponse response = tripService.getOriginTrips();
+        return ResponseDto.ok(response);
+    }
+
 }

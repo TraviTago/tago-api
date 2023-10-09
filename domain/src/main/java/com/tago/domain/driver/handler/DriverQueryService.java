@@ -23,8 +23,8 @@ public class DriverQueryService {
                 .orElseThrow(DriverNotFoundException::new);
     }
 
-    public DriverInfoDto findById(int cnt, Long id) {
-        return driverRepository.findById(cnt, id)
+    public DriverInfoDto findByDriverAndCar(int cnt, Driver driver) {
+        return driverRepository.findByDriverAndCar(cnt, driver)
                 .orElseThrow(DriverNotFoundException::new);
     }
 }

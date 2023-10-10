@@ -35,8 +35,6 @@ public class TripGetService {
     private final TripPlaceQueryService tripPlaceQueryService;
     private final TripMemberQueryService tripMemberQueryService;
     private final DispatchRepository dispatchRepository;
-    private final TagoTripRepository tagoTripRepository;
-    private final TripRepository tripRepository;
 
     @Transactional(readOnly = true)
     public PageResponseDto<TripGetResponse> getAll(
@@ -98,7 +96,7 @@ public class TripGetService {
     public TagoTripResponse getOriginTrips() {
         List<TagoTrip> trips = tripQueryService.findAll();
         List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
-                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url(), trip.getDetail()))
+                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url()))
                 .collect(Collectors.toList());
 
         return new TagoTripResponse(tagotrips);
@@ -106,11 +104,12 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TagoTripOneResponse getOriginTripByName(String name) {
+        String source = tripQueryService.findSourceByName(name);
         List<Trip> trips = tripQueryService.findByName(name);
         List<TagoTripOneDto> tagotrips = trips.stream()
                 .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
                 .collect(Collectors.toList());
-        return new TagoTripOneResponse(tagotrips);
+        return new TagoTripOneResponse(source,tagotrips);
     }
 
     private Boolean isJoined(Long tripId, Long memberId) {

@@ -58,8 +58,7 @@ public class TripQueryService {
     }
 
     public List<Trip> findByName(String name) {return tripRepository.findByName(name);}
+    public String findSourceByName(String name) {return tagoTripRepository.findSourceByName(name);}
 
     public List<TagoTrip> findAll() {return tagoTripRepository.findAll();}
-
-
 }

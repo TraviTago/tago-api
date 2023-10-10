@@ -15,6 +15,5 @@ public class TagoTripResponse {
     public static class TagotripDTO {
         private String name;
         private String img_url;
-        private String detail;
     }
 }

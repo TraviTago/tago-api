@@ -18,5 +18,4 @@ public class TagoTrip {
 
     private String name;
     private String img_url;
-    private String detail;
 }

@@ -98,7 +98,7 @@ public class TripGetService {
     public TagoTripResponse getOriginTrips() {
         List<TagoTrip> trips = tripQueryService.findAll();
         List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
-                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url()))
+                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url(), trip.getDetail()))
                 .collect(Collectors.toList());
 
         return new TagoTripResponse(tagotrips);

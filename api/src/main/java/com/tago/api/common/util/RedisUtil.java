@@ -22,6 +22,11 @@ public class RedisUtil {
         return valueOperations.getOperations().hasKey(key);
     }
 
+    public void delete(String key) {
+        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        valueOperations.getOperations().delete(key);
+    }
+
     public void setData(String key, String value) {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         valueOperations.set(key, value);

@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TagoTripOneResponse {
     private String source;
+    private String overview;
     private List<TagoTripOneDto> tagotrips;
 }
 

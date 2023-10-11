@@ -10,5 +10,8 @@ public interface TagoTripRepository extends JpaRepository<TagoTrip, Long>{
     @Query(value = "SELECT source FROM tago_trip WHERE name = :name", nativeQuery = true)
     String findSourceByName(@Param("name") String name);
 
+    @Query(value = "SELECT overview FROM tago_trip WHERE name = :name", nativeQuery = true)
+    String findOverviewByName(@Param("name")String name);
+
 
 }

@@ -1,13 +1,13 @@
 package com.tago.domain.driver.service.factory.dispatch;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 public class DispatchServiceFactory {
 
     private final Map<String, DispatchService> services;

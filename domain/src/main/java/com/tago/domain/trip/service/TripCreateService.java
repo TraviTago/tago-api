@@ -39,7 +39,7 @@ public class TripCreateService {
 
         trip.addTripPlaces(tripPlaceCreateService.createTripPlaces(trip, dto.getPlaces()));
         trip.addTripTags(tripTagCreateService.createTripTags(trip, dto.getTypes()));
-        tripMemberCreateService.create(trip, member);
+        tripMemberCreateService.action(trip, member);
 
         return tripCommandService.save(trip);
     }

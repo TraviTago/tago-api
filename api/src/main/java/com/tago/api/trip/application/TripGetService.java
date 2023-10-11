@@ -12,12 +12,9 @@ import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TagoTripOneDto;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.handler.TripPlaceQueryService;
-import com.tago.domain.trip.repository.TagoTripRepository;
-import com.tago.domain.trip.repository.TripRepository;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.trip.handler.TripQueryService;
 import com.tago.domain.tripmember.handler.TripMemberQueryService;
-import jakarta.transaction.TransactionScoped;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,16 +52,16 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TripGetOneResponse getOne(Long memberId, Long tripId) {
-        Trip trip = tripQueryService.findById(tripId);
+        Member member = memberQueryService.findById(memberId);
+        Trip trip = tripQueryService.findByIdFetchTripMember(tripId);
         List<TripPlaceDto> tripPlaces = tripPlaceQueryService.findAll(trip);
-
         boolean isDispatched = dispatchRepository.existsByTripId(tripId);
 
         return new TripGetOneResponse(
                 trip.getName(),
                 trip.getCurrentCnt(),
                 trip.getMaxCnt(),
-                isJoined(tripId, memberId),
+                trip.isJoined(member),
                 tripPlaces,
                 isDispatched
         );
@@ -111,9 +108,5 @@ public class TripGetService {
                 .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
                 .collect(Collectors.toList());
         return new TagoTripOneResponse(source,overview,tagotrips);
-    }
-
-    private Boolean isJoined(Long tripId, Long memberId) {
-        return tripMemberQueryService.existsByTripIdAndMemberId(tripId, memberId);
     }
 }

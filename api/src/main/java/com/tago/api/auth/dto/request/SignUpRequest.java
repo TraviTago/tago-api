@@ -28,6 +28,7 @@ public class SignUpRequest {
     private String mbti;
     private List<String> favorites;
     private List<String> tripTypes;
+    private String firebaseToken;
 
     public MemberCreateDto toMemberInfoDto() {
         return MemberCreateDto.builder()

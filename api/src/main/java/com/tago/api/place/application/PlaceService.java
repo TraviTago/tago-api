@@ -47,12 +47,6 @@ public class PlaceService {
         return new PlaceRecommendResponse(places);
     }
 
-//    @Transactional
-//    public void savePlaceFromCsv(String csvFilePath) throws Exception {
-//        List<Place> places = csvService.readCsv(csvFilePath);
-//        placeRepository.saveAll(places);
-//    }
-
     public List<PlacePreviewDto> findPopularPlaces(){
         return placeQueryService.findPopularPlaces();
     }

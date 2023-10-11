@@ -32,6 +32,7 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
                     place.overview
                 )).from(place)
                 .where(cursorGt(cursorId))
+                .orderBy(place.id.desc())
                 .limit(limit)
                 .fetch();
     }

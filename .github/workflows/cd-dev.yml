@@ -57,6 +57,7 @@ jobs:
           echo NCLOUD_SMS_BASE_URL=${{ secrets.NCLOUD_SMS_BASE_URL }} >> $ENV_PATH
           echo NCLOUD_SMS_CALLING_NUMBER=${{ secrets.NCLOUD_SMS_CALLING_NUMBER }} >> $ENV_PATH
           echo NCLOUD_SMS_SERVICE_ID=${{ secrets.NCLOUD_SMS_SERVICE_ID }} >> $ENV_PATH
+          echo FCM_CERTIFICATION_PATH=${{ secrets.FCM_CERTIFICATION_PATH }} >> $ENV_PATH
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

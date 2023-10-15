@@ -49,9 +49,6 @@ public class Trip {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "origin")
-    private Boolean origin;
-
     @Default
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<TripPlace> tripPlaces = new ArrayList<>();

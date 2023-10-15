@@ -16,4 +16,5 @@ public class LoginRequest {
 
     @PhoneNumberPattern
     private String number;
+    private String firebaseToken;
 }

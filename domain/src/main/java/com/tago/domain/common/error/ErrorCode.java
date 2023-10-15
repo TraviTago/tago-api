@@ -49,6 +49,11 @@ public enum ErrorCode {
     DISPATCH_NOT_FOUND(404, "D003", "존재하지 않는 배차입니다."),
     ALREADY_EXISTS_DISPATCH(400, "D004", "이미 배차된 여행입니다."),
 
+    // FCM
+    NOT_MATCH_FCM_ACTION(400, "F001", "존재하지 않는 FCM Type입니다."),
+    NOT_EXISTS_FIREBASE_TOKEN(401, "F002", "Firebase RefreshToken이 존재하지 않습니다"),
+    FAILED_SEND_FCM(400, "F003", "FCM 전송에 실패했습니다."),
+
     // ETC
     DEFAULT(500, "-1", "INTERNAL_SERVER_ERROR")
     ;

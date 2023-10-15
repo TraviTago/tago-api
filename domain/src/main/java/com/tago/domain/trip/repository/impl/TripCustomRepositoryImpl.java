@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.tago.domain.driver.domain.QDispatch.dispatch;
+import static com.tago.domain.member.domain.QMember.member;
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
 import static com.tago.domain.trip.domain.QTrip.trip;
@@ -159,6 +160,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
     public Optional<Trip> findByIdFetchTripMember(Long tripId) {
         return Optional.ofNullable(queryFactory.selectFrom(trip)
                 .leftJoin(trip.tripMembers, tripMember)
+                .leftJoin(tripMember.member, member)
                 .where(tripIdEq(tripId))
                 .fetchOne());
     }

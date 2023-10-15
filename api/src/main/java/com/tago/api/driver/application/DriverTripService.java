@@ -33,7 +33,7 @@ public class DriverTripService {
 
     @Transactional
     public void dispatch(Long tripId, Long driverId, String state) {
-        Trip trip = tripQueryService.findById(tripId);
+        Trip trip = tripQueryService.findByIdFetchTripMember(tripId);
         Driver driver = driverQueryService.findById(driverId);
         DispatchService service = dispatchServiceFactory.getInstance(state);
         service.dispatch(trip, driver);

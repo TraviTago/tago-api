@@ -4,6 +4,8 @@ import com.tago.api.auth.dto.request.LoginRequest;
 import com.tago.api.auth.dto.request.SignUpRequest;
 import com.tago.api.auth.dto.response.LoginResponse;
 import com.tago.api.auth.dto.response.SignUpResponse;
+import com.tago.api.auth.event.AuthEvent;
+import com.tago.api.auth.event.producer.AuthEventProducer;
 import com.tago.api.common.security.jwt.JwtTokenPublisher;
 import com.tago.api.common.exception.AlreadyExistsAccountException;
 import com.tago.domain.member.domain.Member;
@@ -21,10 +23,12 @@ public class AuthService {
     private final MemberQueryService memberQueryService;
     private final MemberCreateService memberCreateService;
     private final JwtTokenPublisher jwtTokenPublisher;
+    private final AuthEventProducer authEventProducer;
 
     @Transactional
     public LoginResponse login(LoginRequest request){
         Member member = memberQueryService.findByPhone(request.getNumber());
+        authEventProducer.produceEvent(new AuthEvent(member.getPhoneNumber(), request.getFirebaseToken()));
         return new LoginResponse(jwtTokenPublisher.generateTokens(member.getId(), member.getRole()));
     }
 
@@ -32,6 +36,7 @@ public class AuthService {
     public SignUpResponse signUp(SignUpRequest request) {
         checkExistsPhoneNumber(request.getNumber());
         Member member = memberCreateService.create(request.toMemberInfoDto());
+        authEventProducer.produceEvent(new AuthEvent(member.getPhoneNumber(), request.getFirebaseToken()));
 
         return new SignUpResponse(
                 member.getId(),

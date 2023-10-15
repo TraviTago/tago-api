@@ -1,4 +1,4 @@
-package com.tago.api.common.exception;
+package com.tago.domain.tripmember.exception;
 
 import com.tago.domain.common.error.BaseBusinessException;
 import com.tago.domain.common.error.ErrorCode;

@@ -96,7 +96,7 @@ public class TripGetService {
     public TagoTripResponse getOriginTrips() {
         List<TagoTrip> trips = tripQueryService.findAll();
         List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
-                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url()))
+                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url(), trip.getSource()))
                 .collect(Collectors.toList());
 
         return new TagoTripResponse(tagotrips);
@@ -104,13 +104,12 @@ public class TripGetService {
 
     @Transactional(readOnly = true)
     public TagoTripOneResponse getOriginTripByName(String name) {
-        String source = tripQueryService.findSourceByName(name);
         String overview = tripQueryService.findOverviewByName(name);
         List<Trip> trips = tripQueryService.findByName(name);
         List<TagoTripOneDto> tagotrips = trips.stream()
                 .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
                 .collect(Collectors.toList());
-        return new TagoTripOneResponse(source,overview,tagotrips);
+        return new TagoTripOneResponse(overview,tagotrips);
     }
 
     private Boolean isJoined(Long tripId, Long memberId) {

@@ -94,7 +94,7 @@ public class Trip {
         this.tripMembers.addAll(tripMembers);
     }
 
-    private boolean isLimitMember() {
+    public boolean isLimitMember() {
         return this.currentCnt >= this.maxCnt;
     }
 

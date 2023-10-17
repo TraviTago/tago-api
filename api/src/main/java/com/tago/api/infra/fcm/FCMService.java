@@ -16,6 +16,7 @@ public class FCMService {
     public void sendByTripMemberEvent(TripMemberEvent event) {
         FCMType type = FCMType.from(event.getAction());
         fcmClient.send(FCMSendDto.builder()
+                .payload(String.valueOf(event.getTripId()))
                 .title(type.getTitle())
                 .content(type.getContent(event.getName()))
                 .phoneNumber(event.getPhoneNumber())

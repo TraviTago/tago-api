@@ -35,4 +35,8 @@ public class MemberQueryService {
     public boolean existsById(Long memberId) {
         return memberRepository.existsById(memberId);
     }
+
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return memberRepository.existsByPhoneNumber(phoneNumber);
+    }
 }

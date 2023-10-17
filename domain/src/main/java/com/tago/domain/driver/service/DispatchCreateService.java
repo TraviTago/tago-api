@@ -8,6 +8,7 @@ import com.tago.domain.driver.exception.AlreadyExistsDispatchException;
 import com.tago.domain.driver.handler.DispatchCommandService;
 import com.tago.domain.driver.handler.DispatchQueryService;
 import com.tago.domain.driver.service.factory.dispatch.DispatchService;
+import com.tago.domain.member.domain.Member;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.exception.TripNotFoundException;
 import com.tago.domain.tripmember.domain.TripMember;
@@ -37,7 +38,7 @@ public class DispatchCreateService implements DispatchService {
                 .build();
 
         dispatchCommandService.save(dispatch);
-        producerEvent(trip);
+        publishEvent(trip);
     }
 
     private void validateDispatchAble(Trip trip) {
@@ -45,14 +46,15 @@ public class DispatchCreateService implements DispatchService {
                 .ifPresent(dispatch -> {throw new AlreadyExistsDispatchException();});
     }
 
-    private void producerEvent(Trip trip) {
-        trip.getTripMembers().forEach(this::publish);
+    private void publishEvent(Trip trip) {
+        trip.getTripMembers().forEach(tripMember -> publish(trip, tripMember.getMember()));
     }
 
-    public void publish(TripMember tripMember) {
+    public void publish(Trip trip, Member member) {
         dispatchEventProducer.produceEvent(DispatchEvent.builder()
-                .name(tripMember.getMember().getName())
-                .phoneNumber(tripMember.getMember().getPhoneNumber())
+                .tripId(trip.getId())
+                .name(member.getName())
+                .phoneNumber(member.getPhoneNumber())
                 .action(DispatchEvent.Action.CREATE)
                 .build()
         );

@@ -11,6 +11,7 @@ public class SmsResponse {
     @AllArgsConstructor
     @Schema(name = "AuthSmsVerifyCodeResponse")
     public static class VerifyCode {
-        private boolean isVerify;
+        private Boolean isVerify;
+        private Boolean isSignUp;
     }
 }

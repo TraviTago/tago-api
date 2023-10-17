@@ -1,6 +1,6 @@
 package com.tago.domain.tag.domain;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,5 +17,6 @@ public class Tag {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Favorite type;
+    @Column(name = "type")
+    private TagType type;
 }

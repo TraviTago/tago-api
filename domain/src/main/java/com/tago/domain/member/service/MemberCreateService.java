@@ -31,7 +31,7 @@ public class MemberCreateService {
                 .profile(profile)
                 .build();
 
-        member.addMemberTags(memberTagCreateService.createMemberTags(member, dto.getFavorites()));
+        member.addMemberTags(memberTagCreateService.createMemberTags(member, dto.getTagTypes()));
 
         return memberCommandService.save(member);
     }

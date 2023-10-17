@@ -2,6 +2,7 @@ package com.tago.domain.member.domain;
 
 
 import com.tago.domain.member.domain.vo.*;
+import com.tago.domain.tag.domain.vo.TagType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -84,7 +85,7 @@ public class Member {
         this.memberTags.addAll(memberTags);
     }
 
-    public List<Favorite> getMemberTags() {
+    public List<TagType> getMemberTags() {
         return memberTags.stream()
                 .map(memberTag -> memberTag.getTag().getType())
                 .toList();

@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagoTripGetResponse {
+public class OriginTripGetResponse {
     private String overview;
     private List<TagoTripDetail> tagotrips;
 

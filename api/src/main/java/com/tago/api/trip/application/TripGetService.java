@@ -7,9 +7,7 @@ import com.tago.api.trip.dto.response.*;
 import com.tago.domain.driver.repository.DispatchRepository;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.handler.MemberQueryService;
-import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
-import com.tago.domain.trip.dto.TagoTripOneDto;
 import com.tago.domain.trip.dto.TripPlaceDto;
 import com.tago.domain.trip.handler.TripPlaceQueryService;
 import com.tago.domain.tripmember.dto.TripMemberDto;
@@ -21,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -87,25 +84,5 @@ public class TripGetService {
         List<Trip> trips = tripQueryService.searchByPlaceTitleKeyword(keyword, cursorId, cursorDate, limit);
         List<TripGetResponse> dto = TripDtoMapper.toDto(trips, member);
         return PageResponseDto.from(dto);
-    }
-
-    @Transactional(readOnly = true)
-    public TagoTripResponse getOriginTrips() {
-        List<TagoTrip> trips = tripQueryService.findAll();
-        List<TagoTripResponse.TagotripDTO> tagotrips = trips.stream()
-                .map(trip -> new TagoTripResponse.TagotripDTO(trip.getName(), trip.getImg_url(), trip.getSource()))
-                .collect(Collectors.toList());
-
-        return new TagoTripResponse(tagotrips);
-    }
-
-    @Transactional(readOnly = true)
-    public TagoTripOneResponse getOriginTripByName(String name) {
-        String overview = tripQueryService.findOverviewByName(name);
-        List<Trip> trips = tripQueryService.findByName(name);
-        List<TagoTripOneDto> tagotrips = trips.stream()
-                .map(trip -> new TagoTripOneDto(trip.getId(), trip.getDateTime(), trip.getMaxCnt(), trip.getCurrentCnt()))
-                .collect(Collectors.toList());
-        return new TagoTripOneResponse(overview,tagotrips);
     }
 }

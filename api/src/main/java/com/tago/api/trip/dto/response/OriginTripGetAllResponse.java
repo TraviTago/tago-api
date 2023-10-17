@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagoTripGetAllResponse {
+public class OriginTripGetAllResponse {
     private List<TagoTripInfo> tagotrips;
 
 

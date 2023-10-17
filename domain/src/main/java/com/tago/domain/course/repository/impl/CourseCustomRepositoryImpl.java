@@ -3,9 +3,8 @@ package com.tago.domain.course.repository.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.course.domain.Course;
-import com.tago.domain.course.exception.CourseNotFoundException;
 import com.tago.domain.course.repository.CourseCustomRepository;
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +23,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
     public final JPAQueryFactory queryFactory;
 
     @Override
-    public Course findByPlaceIdAndCourseTag(Long placeId, List<Favorite> tags) {
+    public Course findByPlaceIdAndCourseTag(Long placeId, List<TagType> tagTypes) {
         List<Long> ids = queryFactory.select(course.id)
                 .distinct()
                 .from(coursePlace)
@@ -38,7 +37,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 .from(courseTag)
                 .innerJoin(courseTag.course, course)
                 .innerJoin(courseTag.tag, tag)
-                .where(courseIdIn(ids), tagTypeIn(tags))
+                .where(courseIdIn(ids), tagTypeIn(tagTypes))
                 .groupBy(course.id)
                 .orderBy(tag.id.count().desc())
                 .fetchFirst();
@@ -64,7 +63,7 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         return course.id.in(courseIds);
     }
 
-    private BooleanExpression tagTypeIn(List<Favorite> tags) {
-        return tag.type.in(tags);
+    private BooleanExpression tagTypeIn(List<TagType> tagTypes) {
+        return tag.type.in(tagTypes);
     }
 }

@@ -1,6 +1,6 @@
 package com.tago.domain.member.dto;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import com.tago.domain.member.domain.vo.Gender;
 import com.tago.domain.member.domain.vo.Mbti;
 import com.tago.domain.member.domain.vo.TripType;
@@ -22,6 +22,6 @@ public class MemberCreateDto {
     private int ageRange;
     private Gender gender;
     private Mbti mbti;
-    private List<Favorite> favorites;
+    private List<TagType> tagTypes;
     private List<TripType> tripTypes;
 }

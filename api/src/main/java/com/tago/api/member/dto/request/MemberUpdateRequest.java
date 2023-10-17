@@ -1,6 +1,6 @@
 package com.tago.api.member.dto.request;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import com.tago.domain.member.domain.vo.Mbti;
 import com.tago.domain.member.domain.vo.TripType;
 import com.tago.domain.member.dto.MemberUpdateDto;
@@ -25,7 +25,7 @@ public class MemberUpdateRequest {
         return MemberUpdateDto.builder()
                 .imgUrl(imgUrl)
                 .mbti(Mbti.valueOf(mbti))
-                .favorites(Favorite.from(favorites))
+                .tagTypes(TagType.from(favorites))
                 .tripTypes(TripType.from(tripTypes))
                 .build();
     }

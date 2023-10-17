@@ -20,7 +20,7 @@ public class MemberUpdateService {
                 dto.getMbti(),
                 dto.getImgUrl(),
                 dto.getTripTypes(),
-                memberTagCreateService.createMemberTags(member, dto.getFavorites())
+                memberTagCreateService.createMemberTags(member, dto.getTagTypes())
         );
     }
 }

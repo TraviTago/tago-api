@@ -1,4 +1,4 @@
-package com.tago.domain.member.domain.vo;
+package com.tago.domain.tag.domain.vo;
 
 import com.tago.domain.common.error.ErrorCode;
 import com.tago.domain.member.exception.EnumNotFoundException;
@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Getter
-public enum Favorite {
+public enum TagType {
     CAMERA("사진촬영"),
     HOT_PLACE("핫플"),
     FOOD("맛집탐방"),
@@ -26,30 +26,31 @@ public enum Favorite {
     CAFE("카페"),
     SHOPPING("쇼핑"),
 
+    MANAGE("관리")
     ;
 
     private String description;
 
-    private Favorite(String description) {
+    private TagType(String description) {
         this.description = description;
     }
 ;
-    public static List<Favorite> from(List<String> favorites) {
-        return favorites.stream()
-                .map(Favorite::of)
+    public static List<TagType> from(List<String> types) {
+        return types.stream()
+                .map(TagType::of)
                 .toList();
     }
 
-    private static Favorite of(String favorite) {
-        return Arrays.stream(Favorite.values())
-                .filter(value -> value.description.equals(favorite))
+    private static TagType of(String type) {
+        return Arrays.stream(TagType.values())
+                .filter(value -> value.description.equals(type))
                 .findFirst()
                 .orElseThrow(() -> new EnumNotFoundException(ErrorCode.FAVORITE_NOT_FOUND));
     }
 
-    public static List<String> toString(List<Favorite> favorites) {
-        return favorites.stream()
-                .map(Favorite::getDescription)
+    public static List<String> toString(List<TagType> tagTypes) {
+        return tagTypes.stream()
+                .map(TagType::getDescription)
                 .toList();
     }
 }

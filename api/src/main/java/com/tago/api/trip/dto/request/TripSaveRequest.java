@@ -1,11 +1,10 @@
 package com.tago.api.trip.dto.request;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import com.tago.domain.trip.dto.TripCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,7 +42,7 @@ public class TripSaveRequest {
                 .sameAge(sameAge)
                 .isPet(isPet)
                 .meetPlace(meetPlace)
-                .types(Favorite.from(types))
+                .types(TagType.from(types))
                 .places(toPlaceDto())
                 .build();
     }

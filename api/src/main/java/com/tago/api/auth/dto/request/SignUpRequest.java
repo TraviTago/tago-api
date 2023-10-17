@@ -1,7 +1,7 @@
 package com.tago.api.auth.dto.request;
 
 import com.tago.api.common.annotation.PhoneNumberPattern;
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import com.tago.domain.member.domain.vo.Gender;
 import com.tago.domain.member.domain.vo.Mbti;
 import com.tago.domain.member.domain.vo.TripType;
@@ -38,7 +38,7 @@ public class SignUpRequest {
                 .ageRange(ageRange)
                 .gender(Gender.from(gender))
                 .mbti(Mbti.valueOf(mbti))
-                .favorites(Favorite.from(favorites))
+                .tagTypes(TagType.from(favorites))
                 .tripTypes(TripType.from(tripTypes))
                 .build();
     }

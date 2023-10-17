@@ -1,6 +1,6 @@
 package com.tago.domain.common.converter;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Converter
-public class FavoriteEnumArrayConverter implements AttributeConverter<List<Favorite>, String> {
+public class FavoriteEnumArrayConverter implements AttributeConverter<List<TagType>, String> {
 
     private static final String DELIMITER = ",";
 
     @Override
-    public String convertToDatabaseColumn(List<Favorite> attribute) {
+    public String convertToDatabaseColumn(List<TagType> attribute) {
         if (attribute == null || attribute.isEmpty()) {
             return "";
         }
@@ -25,16 +25,16 @@ public class FavoriteEnumArrayConverter implements AttributeConverter<List<Favor
     }
 
     @Override
-    public List<Favorite> convertToEntityAttribute(String dbData) {
+    public List<TagType> convertToEntityAttribute(String dbData) {
         if (dbData == null || dbData.isBlank()) {
             return new ArrayList<>();
         }
         return Arrays.stream(dbData.split(DELIMITER))
-                .map(Favorite::valueOf)
+                .map(TagType::valueOf)
                 .collect(Collectors.toList());
     }
 
-    private List<String> convertEnumToString(List<Favorite> attribute) {
+    private List<String> convertEnumToString(List<TagType> attribute) {
         return attribute.stream()
                 .map(Enum::name)
                 .collect(Collectors.toList());

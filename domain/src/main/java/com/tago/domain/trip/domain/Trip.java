@@ -1,5 +1,6 @@
 package com.tago.domain.trip.domain;
 
+import com.tago.domain.common.model.entity.BaseTimeEntity;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.exception.MaxMemberLimitException;
 import com.tago.domain.trip.domain.vo.Condition;
@@ -16,10 +17,10 @@ import java.util.List;
 @Getter
 @Builder
 @Entity
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Trip {
+public class Trip extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,12 +46,12 @@ public class Trip {
     @Embedded
     private Condition condition;
 
+    @Column(name = "origin")
+    private boolean origin;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @Column(name = "origin")
-    private Boolean origin;
 
     @Default
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
@@ -64,7 +65,6 @@ public class Trip {
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripMember> tripMembers = new ArrayList<>();
-
 
 
     public void join(Member member) {

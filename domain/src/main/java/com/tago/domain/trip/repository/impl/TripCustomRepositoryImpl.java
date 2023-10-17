@@ -8,7 +8,6 @@ import com.tago.domain.driver.domain.QDriver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
 import com.tago.domain.member.domain.vo.Gender;
-import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +41,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .where(
                         isNotDone(),
                         cursorGt(cursorId, cursorDate),
+                        isNotOrigin(),
                         isSameGender(sameGender, memberGender),
                         isPet(isPet)
                 )
@@ -125,7 +125,11 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .selectFrom(trip)
                 .innerJoin(trip.tripPlaces, tripPlace).fetchJoin()
                 .innerJoin(tripPlace.place, place).fetchJoin()
-                .where(tripIdEq(tripId))
+                .where(
+                        tripIdEq(tripId),
+                        isNotOrigin(),
+                        isNotDone()
+                )
                 .orderBy(
                         tripPlace.order.asc(),
                         Expressions.numberTemplate(Double.class, "function('rand')").asc()
@@ -215,5 +219,9 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression notExistsDispatch() {
         return dispatch.id.isNull();
+    }
+
+    private BooleanExpression isNotOrigin() {
+        return trip.origin.eq(false);
     }
 }

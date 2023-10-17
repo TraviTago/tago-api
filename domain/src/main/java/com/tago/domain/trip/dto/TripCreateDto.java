@@ -1,6 +1,6 @@
 package com.tago.domain.trip.dto;
 
-import com.tago.domain.member.domain.vo.Favorite;
+import com.tago.domain.tag.domain.vo.TagType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class TripCreateDto {
     private Boolean sameAge;
     private Boolean isPet;
     private String meetPlace;
-    private List<Favorite> types;
+    private List<TagType> types;
     private List<Place> places;
 
     @Getter

@@ -80,19 +80,4 @@ public class TripGetApi {
         PageResponseDto<TripGetResponse> response = tripService.search(keyword, cursorId, cursorDate, limit, memberId);
         return ResponseDto.ok(response);
     }
-
-    @GetMapping("/trips/origin")
-    public ResponseEntity<TagoTripResponse> getOriginTrips() {
-        TagoTripResponse response = tripService.getOriginTrips();
-        return ResponseDto.ok(response);
-    }
-
-    @GetMapping("/trips/origin/detail")
-    public ResponseEntity<TagoTripOneResponse> getOriginTripDetail(
-            @RequestParam(name = "name") String name
-    ) {
-        TagoTripOneResponse tagoTrips = tripService.getOriginTripByName(name);
-        return ResponseDto.ok(tagoTrips);
-    }
-
 }

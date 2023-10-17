@@ -28,13 +28,14 @@ public class TripMemberDeleteService implements TripMemberService {
     @Override
     public void action(Trip trip, Member member) {
         trip.leave(member);
-        trip.getTripMembers().forEach(this::publish);
+        trip.getTripMembers().forEach(tripMember -> publish(trip, tripMember.getMember()));
     }
 
-    private void publish(TripMember tripMember) {
+    private void publish(Trip trip, Member member) {
         tripMemberEventProducer.produceEvent(TripMemberEvent.builder()
-                .name(tripMember.getMember().getName())
-                .phoneNumber(tripMember.getMember().getPhoneNumber())
+                .tripId(trip.getId())
+                .name(member.getName())
+                .phoneNumber(member.getPhoneNumber())
                 .action(TripMemberEvent.Action.DELETE)
                 .build()
         );

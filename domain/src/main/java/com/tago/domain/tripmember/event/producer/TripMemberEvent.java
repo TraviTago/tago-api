@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
 public class TripMemberEvent implements Event {
+    private Long tripId;
     private String name;
     private String phoneNumber;
     private Action action;

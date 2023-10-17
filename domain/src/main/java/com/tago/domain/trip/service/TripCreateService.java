@@ -35,6 +35,7 @@ public class TripCreateService {
                 .currentCnt(dto.getCurrentCnt())
                 .condition(condition)
                 .member(member)
+                .origin(false)
                 .build();
 
         trip.addTripPlaces(tripPlaceCreateService.createTripPlaces(trip, dto.getPlaces()));

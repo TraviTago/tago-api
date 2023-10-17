@@ -21,13 +21,15 @@ public class FCMClient {
 
         String token = fcmTokenUtil.get(dto.getPhoneNumber());
         Message message = Message.builder()
+                .putData("payload", dto.getPayload())
                 .putData("title", dto.getTitle())
                 .putData("content", dto.getContent())
                 .setToken(token)
                 .build();
 
         try {
-            FirebaseMessaging.getInstance().send(message);
+            String response = FirebaseMessaging.getInstance().send(message);
+            log.info("## SUCCESS SEND FCM ## " + response);
         } catch (FirebaseMessagingException e) {
             throw new FailedSendFCMException(e);
         }

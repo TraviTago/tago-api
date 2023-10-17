@@ -13,4 +13,5 @@ public class FCMSendDto {
     private String title;
     private String content;
     private String phoneNumber;
+    private String payload;
 }

@@ -3,7 +3,6 @@ package com.tago.domain.trip.repository;
 import com.tago.domain.driver.domain.Driver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Gender;
-import com.tago.domain.trip.domain.TagoTrip;
 import com.tago.domain.trip.domain.Trip;
 
 import java.time.LocalDateTime;

@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DispatchEvent implements Event {
+    private Long tripId;
     private String phoneNumber;
     private String name;
     private Action action;

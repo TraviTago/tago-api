@@ -17,10 +17,11 @@ public class CoursePlaceDataInserter {
 
         try (
                 Connection connection = DatabaseUtil.getConnection();
-                Reader in = new FileReader("/Users/yell/Documents/course_info.csv");
+                Reader in = new FileReader("/Users/yell/Downloads/course_place.csv");
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
         ) {
             Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
+
 
             for (CSVRecord record : records) {
                 long courseId = Long.parseLong(record.get("Id"));

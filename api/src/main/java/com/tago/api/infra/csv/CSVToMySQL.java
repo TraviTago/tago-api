@@ -9,9 +9,9 @@ public class CSVToMySQL {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         //PlaceTagDataInserter.insertPlaceTagData();
-        PlaceDataInserter.insertPlaceData();
+        //PlaceDataInserter.insertPlaceData();
         //CourseDataInserter.insertCourseData();
-        //CoursePlaceDataInserter.insertCoursePlaceData();
+        CoursePlaceDataInserter.insertCoursePlaceData();
         //CourseTagDataInserter.insertCourseTagData();
 
     }

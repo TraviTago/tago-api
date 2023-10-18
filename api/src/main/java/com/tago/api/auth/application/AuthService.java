@@ -45,6 +45,12 @@ public class AuthService {
         );
     }
 
+    @Transactional
+    public void withdraw(Long memberId) {
+        Member member = memberQueryService.findById(memberId);
+        memberQueryService.delete(member);
+    }
+
     private void checkExistsPhoneNumber(String number) {
         memberQueryService.findOptionalByPhoneNumber(number)
                 .ifPresent(member -> {throw new AlreadyExistsAccountException();});

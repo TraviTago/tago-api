@@ -32,6 +32,10 @@ public class MemberQueryService {
         return memberRepository.findByPhoneNumber(phoneNumber);
     }
 
+    public void delete(Member member) {
+        memberRepository.delete(member);
+    }
+
     public boolean existsById(Long memberId) {
         return memberRepository.existsById(memberId);
     }

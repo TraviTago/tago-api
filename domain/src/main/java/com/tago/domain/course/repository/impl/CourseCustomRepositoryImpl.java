@@ -1,6 +1,7 @@
 package com.tago.domain.course.repository.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tago.domain.course.domain.Course;
 import com.tago.domain.course.repository.CourseCustomRepository;
@@ -46,8 +47,11 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 .distinct()
                 .innerJoin(course.coursePlaces, coursePlace).fetchJoin()
                 .innerJoin(coursePlace.place, place).fetchJoin()
-                .where(courseIdEq(id, placeId))
-                .orderBy(coursePlace.order.asc())
+                .where(courseIdEq(id, ids))
+                .orderBy(
+                        coursePlace.order.asc(),
+                        Expressions.numberTemplate(Double.class, "function('rand')").asc()
+                )
                 .fetchFirst();
     }
 
@@ -55,8 +59,8 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         return placeId > 0 ? place.id.eq(placeId) : null;
     }
 
-    private BooleanExpression courseIdEq(Long courseId, Long placeId) {
-        return courseId != null ? course.id.eq(courseId) : placeIdEq(placeId);
+    private BooleanExpression courseIdEq(Long courseId, List<Long> courseIds) {
+        return courseId != null ? course.id.eq(courseId) : courseIdIn(courseIds);
     }
 
     private BooleanExpression courseIdIn(List<Long> courseIds) {

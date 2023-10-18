@@ -206,7 +206,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         return trip.member.profile.gender.eq(memberGender);
     }
     private BooleanExpression isPet(Boolean isPet) {
-        return isPet ? trip.condition.isPet.eq(true) : null;
+        return isPet ? trip.condition.isPet.eq(false) : null;
     }
 
     private BooleanExpression memberEq(Member member) {

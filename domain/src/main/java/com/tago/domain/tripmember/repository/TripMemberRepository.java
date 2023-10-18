@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface TripMemberRepository extends JpaRepository<TripMember,Long>, TripMemberCustomRepository {
 
     Boolean existsByTripAndMember(Trip trip, Member member);
+    void deleteByMemberId(Long memberId);
 }

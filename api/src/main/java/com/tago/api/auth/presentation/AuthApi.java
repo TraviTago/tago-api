@@ -37,4 +37,10 @@ public class AuthApi {
         JwtTokenDto response = tokenReissueService.reissue(memberId);
         return ResponseDto.ok(response);
     }
+
+    @DeleteMapping("/auth/withdraw")
+    public ResponseEntity<?> withdraw(@UserAuthentication Long memberId) {
+        authService.withdraw(memberId);
+        return ResponseEntity.noContent().build();
+    }
 }

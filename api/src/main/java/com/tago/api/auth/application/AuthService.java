@@ -12,6 +12,7 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Role;
 import com.tago.domain.member.service.MemberCreateService;
 import com.tago.domain.member.handler.MemberQueryService;
+import com.tago.domain.tripmember.repository.TripMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class AuthService {
     private final MemberCreateService memberCreateService;
     private final JwtTokenPublisher jwtTokenPublisher;
     private final AuthEventProducer authEventProducer;
+    private final TripMemberRepository tripMemberRepository;
 
     @Transactional
     public LoginResponse login(LoginRequest request){
@@ -43,6 +45,14 @@ public class AuthService {
                 member.getRole(),
                 jwtTokenPublisher.generateTokens(member.getId(), member.getRole())
         );
+    }
+
+    @Transactional
+    public void withdraw(Long memberId) {
+        Member member = memberQueryService.findById(memberId);
+        tripMemberRepository.deleteByMemberId(memberId);
+        memberQueryService.delete(member);
+
     }
 
     private void checkExistsPhoneNumber(String number) {

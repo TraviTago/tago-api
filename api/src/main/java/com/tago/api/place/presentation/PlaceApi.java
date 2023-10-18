@@ -38,6 +38,14 @@ public class PlaceApi {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/place/")
+    public ResponseEntity<PlaceInfoResponse> getByTitle(
+            @RequestParam("placeName")String title
+    ){
+        PlaceInfoResponse response = placeService.getByTitle(title);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/places/search")
     public ResponseEntity<PlaceSearchResponse> search(
             @RequestParam("keyword") String keyword

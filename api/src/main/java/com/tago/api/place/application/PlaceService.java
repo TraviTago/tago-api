@@ -36,6 +36,12 @@ public class PlaceService {
     }
 
     @Transactional(readOnly = true)
+    public PlaceInfoResponse getByTitle(String title){
+        Place place = placeQueryService.findByTitle(title);
+        return PlaceDtoMapper.mapToplaceInfoResponse(place);
+    }
+
+    @Transactional(readOnly = true)
     public PlaceSearchResponse search(String title){
         List<PlacePreviewDto> places = placeQueryService.findByTitleKeyword(title);
         return new PlaceSearchResponse(places);

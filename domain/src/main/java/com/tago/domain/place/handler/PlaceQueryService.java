@@ -28,6 +28,10 @@ public class PlaceQueryService {
                 .orElseThrow(PlaceNotFoundException::new);
     }
 
+    public Place findByTitle(String title){
+        return placeRepository.findByTitle(title).orElse(null);
+    }
+
     public List<PlacePreviewDto> findByPlaceTag(Long memberId){
         return placeRepository.findByPlaceTag(memberId);
     }

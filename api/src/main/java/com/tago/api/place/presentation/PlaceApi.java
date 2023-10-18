@@ -38,7 +38,7 @@ public class PlaceApi {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/place/")
+    @GetMapping("/place")
     public ResponseEntity<PlaceInfoResponse> getByTitle(
             @RequestParam("placeName")String title
     ){

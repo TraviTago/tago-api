@@ -38,6 +38,10 @@ public class PlaceService {
     @Transactional(readOnly = true)
     public PlaceInfoResponse getByTitle(String title){
         Place place = placeQueryService.findByTitle(title);
+
+        if (place == null) {
+            return null;
+        }
         return PlaceDtoMapper.mapToplaceInfoResponse(place);
     }
 

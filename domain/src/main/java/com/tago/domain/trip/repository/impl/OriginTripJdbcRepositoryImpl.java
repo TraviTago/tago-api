@@ -20,10 +20,11 @@ public class OriginTripJdbcRepositoryImpl implements OriginTripJdbcRepository {
 
     @Override
     public void saveAll(List<OriginTripCreateDto> commands) {
-        String SQL = "INSERT INTO trip(name, date_time, meet_place, total_time, max_cnt, current_cnt, " +
+        String TRIP_SQL = "INSERT INTO trip(name, date_time, meet_place, total_time, max_cnt, current_cnt, " +
                 "same_gender, same_age, is_pet, origin, member_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())";
 
-        jdbcTemplate.batchUpdate(SQL, new BatchPreparedStatementSetter() {
+        String TRIP_PLACE_SQL = "INSERT INTO trip_place()";
+        jdbcTemplate.batchUpdate(TRIP_SQL, new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
                     OriginTripCreateDto command = commands.get(i);

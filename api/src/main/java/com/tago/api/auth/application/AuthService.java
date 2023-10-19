@@ -12,6 +12,7 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.vo.Role;
 import com.tago.domain.member.service.MemberCreateService;
 import com.tago.domain.member.handler.MemberQueryService;
+import com.tago.domain.trip.repository.TripRepository;
 import com.tago.domain.tripmember.repository.TripMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class AuthService {
     private final JwtTokenPublisher jwtTokenPublisher;
     private final AuthEventProducer authEventProducer;
     private final TripMemberRepository tripMemberRepository;
+    private final TripRepository tripRepository;
 
     @Transactional
     public LoginResponse login(LoginRequest request){
@@ -49,6 +51,11 @@ public class AuthService {
 
     @Transactional
     public void withdraw(Long memberId) {
+
+        if(tripRepository.existsByMemberId(memberId)) {
+            throw new IllegalStateException("멤버가 여행에 참여 중이므로 탈퇴할 수 없습니다.");
+        }
+
         Member member = memberQueryService.findById(memberId);
         tripMemberRepository.deleteByMemberId(memberId);
         memberQueryService.delete(member);

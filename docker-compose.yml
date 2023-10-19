@@ -1,17 +1,9 @@
 version: '3.7'
 
 services:
-  redis:
-    image: redis:latest
-    command: redis-server
-    container_name: tago-redis
-    ports:
-      - "6379:6379"
   spring:
     image: 121284569119.dkr.ecr.ap-northeast-2.amazonaws.com/tago-dev:latest
     restart: always
-    depends_on:
-      - redis
     ports:
       - "8080:8080"
     container_name: tago-spring

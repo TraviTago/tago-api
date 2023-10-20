@@ -12,10 +12,11 @@ public class VerificationCodeUtil {
 
     private final RedisUtil redisUtil;
     private final VerificationCodeGenerator verificationCodeGenerator;
+    private static final String REDIS_KEY_TYPE = "verify-code::";
 
     public String generate(String key, long duration) {
         String code = verificationCodeGenerator.generate();
-        redisUtil.setDataExpire(key, code, duration);
+        redisUtil.setDataExpire(REDIS_KEY_TYPE + key, code, duration);
         return code;
     }
 
@@ -25,13 +26,13 @@ public class VerificationCodeUtil {
     }
 
     private void validateKey(String key) {
-        if(!redisUtil.hasKey(key)) {
+        if(!redisUtil.hasKey(REDIS_KEY_TYPE + key)) {
             throw new VerificationCodeBusinessException(ErrorCode.VERIFICATION_CODE_EXPIRED);
         }
     }
 
     private void validateCode(String key, String inputCode) {
-        String code = redisUtil.getData(key);
+        String code = redisUtil.getData(REDIS_KEY_TYPE + key);
         if(!code.equals(inputCode)) {
             throw new VerificationCodeBusinessException(ErrorCode.VERIFICATION_CODE_INVALID);
         }

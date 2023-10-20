@@ -36,7 +36,7 @@ public class TripSaveRequest {
         return TripCreateDto.builder()
                 .name(name)
                 .dateTime(dateTime)
-                .currentCnt(currentCnt)
+                .currentCnt(0)
                 .maxCnt(maxCnt)
                 .sameGender(sameGender)
                 .sameAge(sameAge)

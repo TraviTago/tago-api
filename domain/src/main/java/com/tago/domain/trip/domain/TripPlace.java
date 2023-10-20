@@ -1,5 +1,6 @@
 package com.tago.domain.trip.domain;
 
+import com.tago.domain.common.model.entity.BaseTimeEntity;
 import com.tago.domain.place.domain.Place;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,11 +8,11 @@ import lombok.*;
 @Getter
 @Builder
 @Entity
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "trip_place")
-public class TripPlace {
+public class TripPlace extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

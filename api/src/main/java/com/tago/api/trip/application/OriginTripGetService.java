@@ -29,7 +29,7 @@ public class OriginTripGetService {
     @Transactional(readOnly = true)
     public OriginTripGetResponse getByName(String name) {
         OriginTrip originTripInfo = originTripQueryService.findByName(name);
-        List<Trip> trips = tripQueryService.findByName(name);
+        List<Trip> trips = tripQueryService.findByNameAndDateTimeAfter(name);
 
         return new OriginTripGetResponse(
                 originTripInfo.getOverview(),

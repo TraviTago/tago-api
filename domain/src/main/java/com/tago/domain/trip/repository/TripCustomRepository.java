@@ -14,7 +14,7 @@ public interface TripCustomRepository {
     List<Trip> findAll(Long cursorId, LocalDateTime cursorDate, int limit, Boolean sameGender, Boolean isPet, Gender memberGender);
     List<Trip> findByPlaceTitleKeywordContain(String keyword, Long cursorId, LocalDateTime cursorDate, int limit);
 
-    Trip findByTripTag(Long memberId);
+    Trip findByTripTag(Long memberId, Gender memberGender);
 
     List<Trip> findAllByMember(Member member);
 

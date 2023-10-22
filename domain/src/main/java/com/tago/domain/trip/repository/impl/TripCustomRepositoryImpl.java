@@ -105,13 +105,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
-    public Trip findByTripTag(Long memberId){
-        List<Long> tagIds = queryFactory
-                .select(memberTag.tag.id)
-                .from(memberTag)
-                .where(memberTag.member.id.eq(memberId))
-                .fetch();
-
+    public Trip findByTripTag(Long memberId, Gender memberGender){
         List<Long> joinedTripIds = queryFactory
                 .select(trip.id)
                 .from(tripMember)
@@ -126,15 +120,17 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .where(
                         isNotOrigin(),
                         isNotDone(),
-                        trip.id.notIn(joinedTripIds)
+                        trip.id.notIn(joinedTripIds),
+                        isSameGender(false, memberGender)
                 )
                 .fetch();
 
         Long tripId = queryFactory
                 .select(tripTag.trip.id)
                 .from(tripTag)
+                .innerJoin(memberTag).on(memberTag.tag.eq(tripTag.tag))
                 .where(
-                        tagIdIn(tagIds),
+                        memberTag.member.id.eq(memberId),
                         tripIdIn(tripIds)
                 )
                 .groupBy(tripTag.trip.id)
@@ -214,10 +210,6 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression tripIdIn(List<Long> ids) {
         return ids.isEmpty() ? null : trip.id.in(ids);
-    }
-
-    private BooleanExpression tagIdIn(List<Long> ids) {
-        return tripTag.tag.id.in(ids);
     }
 
     private BooleanExpression isSameGender(Boolean sameGender, Gender memberGender){

@@ -56,5 +56,7 @@ public class TripQueryService {
         return tripRepository.findAllByDriver(driver);
     }
 
-    public List<Trip> findByName(String name) {return tripRepository.findByName(name);}
+    public List<Trip> findByNameAndDateTimeAfter(String name) {
+        return tripRepository.findByNameAndDateTimeAfter(name, LocalDateTime.now());
+    }
 }

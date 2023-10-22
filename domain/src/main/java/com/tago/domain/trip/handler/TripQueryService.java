@@ -44,8 +44,8 @@ public class TripQueryService {
         return tripRepository.findByPlaceTitleKeywordContain(keyword, cursorId, cursorDate, limit);
     }
 
-    public Trip findByTripTag(Long memberId) {
-        return tripRepository.findByTripTag(memberId);
+    public Trip findByTripTag(Long memberId, Gender memberGender) {
+        return tripRepository.findByTripTag(memberId, memberGender);
     }
 
     public List<Trip> findAllByMember(Member member) {
@@ -56,5 +56,7 @@ public class TripQueryService {
         return tripRepository.findAllByDriver(driver);
     }
 
-    public List<Trip> findByName(String name) {return tripRepository.findByName(name);}
+    public List<Trip> findByNameAndDateTimeAfter(String name) {
+        return tripRepository.findByNameAndDateTimeAfter(name, LocalDateTime.now());
+    }
 }

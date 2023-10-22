@@ -8,6 +8,7 @@ import com.tago.domain.driver.domain.QDriver;
 import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.domain.QMember;
 import com.tago.domain.member.domain.vo.Gender;
+import com.tago.domain.tag.domain.QTag;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.repository.TripCustomRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import static com.tago.domain.driver.domain.QDispatch.dispatch;
 import static com.tago.domain.member.domain.QMember.member;
 import static com.tago.domain.member.domain.QMemberTag.memberTag;
 import static com.tago.domain.place.domain.QPlace.place;
+import static com.tago.domain.tag.domain.QTag.tag;
 import static com.tago.domain.trip.domain.QTrip.trip;
 import static com.tago.domain.trip.domain.QTripPlace.tripPlace;
 import static com.tago.domain.trip.domain.QTripTag.tripTag;
@@ -103,19 +105,33 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .fetch();
     }
 
-    public Trip findByTripTag(Long memberId){
-        List<Long> tagIds = queryFactory
-                .select(memberTag.tag.id)
-                .from(memberTag)
-                .where(memberTag.member.id.eq(memberId))
+    public Trip findByTripTag(Long memberId, Gender memberGender){
+        List<Long> joinedTripIds = queryFactory
+                .select(trip.id)
+                .from(tripMember)
+                .innerJoin(tripMember.trip, trip)
+                .innerJoin(tripMember.member, member)
+                .where(isJoined(memberId))
+                .fetch();
+
+        List<Long> tripIds = queryFactory
+                .select(trip.id)
+                .from(trip)
+                .where(
+                        isNotOrigin(),
+                        isNotDone(),
+                        trip.id.notIn(joinedTripIds),
+                        isSameGender(false, memberGender)
+                )
                 .fetch();
 
         Long tripId = queryFactory
                 .select(tripTag.trip.id)
                 .from(tripTag)
+                .innerJoin(memberTag).on(memberTag.tag.eq(tripTag.tag))
                 .where(
-                        tagIdIn(tagIds),
-                        isNotDone()
+                        memberTag.member.id.eq(memberId),
+                        tripIdIn(tripIds)
                 )
                 .groupBy(tripTag.trip.id)
                 .orderBy(tripTag.tag.id.count().desc())
@@ -127,8 +143,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
                 .innerJoin(tripPlace.place, place).fetchJoin()
                 .where(
                         tripIdEq(tripId),
-                        isNotOrigin(),
-                        isNotDone()
+                        tripIdIn(tripIds)
                 )
                 .orderBy(
                         tripPlace.order.asc(),
@@ -193,8 +208,8 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         return id != null ? trip.id.eq(id) : null;
     }
 
-    private BooleanExpression tagIdIn(List<Long> ids) {
-        return tripTag.tag.id.in(ids);
+    private BooleanExpression tripIdIn(List<Long> ids) {
+        return ids.isEmpty() ? null : trip.id.in(ids);
     }
 
     private BooleanExpression isSameGender(Boolean sameGender, Gender memberGender){
@@ -223,5 +238,9 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
 
     private BooleanExpression isNotOrigin() {
         return trip.origin.eq(false);
+    }
+
+    private BooleanExpression isJoined(Long memberId) {
+        return tripMember.member.id.eq(memberId);
     }
 }

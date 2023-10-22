@@ -77,7 +77,7 @@ public class TripGetService {
     @Transactional(readOnly = true)
     public TripGetResponse recommend(Long memberId){
         Member member = memberQueryService.findByIdFetchMemberTag(memberId);
-        Trip trips = tripQueryService.findByTripTag(memberId);
+        Trip trips = tripQueryService.findByTripTag(memberId, member.getGender());
         return TripDtoMapper.getTripResponseDto(trips, member);
     }
 

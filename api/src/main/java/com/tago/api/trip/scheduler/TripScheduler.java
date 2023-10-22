@@ -15,7 +15,7 @@ public class TripScheduler {
 
     private final TripJobFactory tripJobFactory;
 
-    @Scheduled(cron = "0 0 12 ? * MON,SUN")
+    @Scheduled(cron = "0 0 12 ? * SAT,SUN")
     public void run() {
         tripJobFactory.getInstance(TripJobType.CREATE_ORIGIN_TRIP).run();
     }

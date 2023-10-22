@@ -83,7 +83,7 @@ public class OriginTripCreateService {
 
     private LocalDateTime getDateTime() {
         return LocalDateTime.of(
-                LocalDate.now().plusWeeks(1).minusDays(1),
+                LocalDate.now().plusWeeks(2),
                 LocalTime.of(12, 0)
         );
     }

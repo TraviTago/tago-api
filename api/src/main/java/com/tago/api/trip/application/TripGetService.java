@@ -1,6 +1,7 @@
 package com.tago.api.trip.application;
 
 import com.tago.api.common.dto.PageResponseDto;
+import com.tago.api.common.mapper.MyTripDtoMapper;
 import com.tago.api.common.mapper.TripDtoMapper;
 import com.tago.api.common.mapper.TripStatusDtoMapper;
 import com.tago.api.trip.dto.response.*;
@@ -9,6 +10,7 @@ import com.tago.domain.member.domain.Member;
 import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.dto.TripPlaceDto;
+import com.tago.domain.trip.handler.OriginTripQueryService;
 import com.tago.domain.trip.handler.TripPlaceQueryService;
 import com.tago.domain.tripmember.dto.TripMemberDto;
 import com.tago.domain.trip.handler.TripQueryService;
@@ -29,6 +31,7 @@ public class TripGetService {
     private final TripPlaceQueryService tripPlaceQueryService;
     private final TripMemberQueryService tripMemberQueryService;
     private final DispatchRepository dispatchRepository;
+    private final OriginTripQueryService originTripQueryService;
 
     @Transactional(readOnly = true)
     public PageResponseDto<TripGetResponse> getAll(
@@ -68,7 +71,7 @@ public class TripGetService {
     public MyTripGetResponse getAllByMember(Long memberId) {
         Member member = memberQueryService.findById(memberId);
         List<Trip> trips = tripQueryService.findAllByMember(member);
-        return new MyTripGetResponse(TripDtoMapper.toDto(trips, member));
+        return new MyTripGetResponse(MyTripDtoMapper.toDto(trips, member, originTripQueryService));
     }
 
     @Transactional(readOnly = true)

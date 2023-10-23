@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 public enum Favorite {
     CAMERA("사진촬영"),
-    HOT_PLACE("핫플"),
     FOOD("맛집탐방"),
+    HOT_PLACE("핫플"),
     STROLL("산책"),
     ART("미술/예술"),
     BOOK("독서"),

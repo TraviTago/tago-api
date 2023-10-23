@@ -32,7 +32,7 @@ public class PlaceTagDataInserter {
 
                 for (String tag : tags) {
 
-                    int tagId = Favorite.of(tag.trim()).ordinal();
+                    int tagId = Favorite.of(tag.trim()).ordinal()+1;
 
                     preparedStatement.setLong(1, placeId);
                     preparedStatement.setInt(2, tagId);

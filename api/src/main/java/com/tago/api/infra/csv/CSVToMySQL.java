@@ -7,11 +7,10 @@ public class CSVToMySQL {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-
-        //PlaceTagDataInserter.insertPlaceTagData();
+        PlaceTagDataInserter.insertPlaceTagData();
         //PlaceDataInserter.insertPlaceData();
         //CourseDataInserter.insertCourseData();
-        CoursePlaceDataInserter.insertCoursePlaceData();
+        //CoursePlaceDataInserter.insertCoursePlaceData();
         //CourseTagDataInserter.insertCourseTagData();
 
     }

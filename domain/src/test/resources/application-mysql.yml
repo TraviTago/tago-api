@@ -25,6 +25,11 @@ server:
     connection-timeout: 300s
     keep-alive-timeout: 300s
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
 jwt:
   secretKey: testtest!!
 

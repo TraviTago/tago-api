@@ -2,7 +2,9 @@ package com.tago.domain.tripmember.service;
 
 
 import com.tago.domain.member.domain.Member;
+import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
+import com.tago.domain.trip.handler.TripQueryService;
 import com.tago.domain.tripmember.domain.TripMember;
 import com.tago.domain.tripmember.event.producer.TripMemberEvent;
 import com.tago.domain.tripmember.event.producer.TripMemberEventProducer;
@@ -22,7 +24,8 @@ public class TripMemberDeleteService implements TripMemberService {
 
     private static final String state = "CANCEL";
     private final TripMemberEventProducer tripMemberEventProducer;
-    private final RedissonClient redissonClient;
+    private final TripQueryService tripQueryService;
+    private final MemberQueryService memberQueryService;
 
     @Override
     public String getState() {
@@ -30,26 +33,10 @@ public class TripMemberDeleteService implements TripMemberService {
     }
 
     @Override
-    public void action(Trip trip, Member member) {
-        String key = "LOCK-" + state + trip.getId();
-        RLock lock = redissonClient.getLock(key);
+    public void action(Long tripId, Long memberId) {
+        Trip trip = tripQueryService.findById(tripId);
+        Member member = memberQueryService.findById(memberId);
 
-        try {
-            boolean availableLock = lock.tryLock(3, 5, TimeUnit.SECONDS);
-
-            if (!availableLock) {
-                System.out.println("LOCK 획득 실패");
-                return;
-            }
-            delete(trip, member);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void delete(Trip trip, Member member) {
         trip.leave(member);
         trip.getTripMembers().forEach(tripMember -> publish(trip, tripMember.getMember()));
     }

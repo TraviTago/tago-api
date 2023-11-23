@@ -8,8 +8,7 @@ import com.tago.domain.member.handler.MemberQueryService;
 import com.tago.domain.trip.domain.Trip;
 import com.tago.domain.trip.handler.TripQueryService;
 import com.tago.domain.tripmember.handler.TripMemberQueryService;
-import com.tago.domain.tripmember.service.factory.TripMemberService;
-import com.tago.domain.tripmember.service.factory.TripMemberServiceFactory;
+import com.tago.domain.tripmember.service.TripMemberFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TripMemberSaveService {
 
-    private final TripMemberServiceFactory tripMemberServiceFactory;
+    private final TripMemberFacade tripMemberFacade;
     private final TripMemberQueryService tripMemberQueryService;
     private final TripQueryService tripQueryService;
-    private final MemberQueryService memberQueryService;
 
     @Transactional
     public void joinOrLeave(Long tripId, Long memberId, String state){
-        Trip trip = tripQueryService.findByIdFetchTripMember(tripId);
-        Member member = memberQueryService.findById(memberId);
-        TripMemberService service = tripMemberServiceFactory.getInstance(state);
-        service.action(trip, member);
+        tripMemberFacade.createOrDelete(tripId, memberId, state);
     }
 
     @Transactional(readOnly = true)

@@ -2,6 +2,8 @@
 ## CI/CD
 ![image](https://github.com/TraviTago/tago-api/assets/50009240/e036207d-3026-4cbd-81c7-3194dd57eef3)
 
+## Serverless chatGPT chatbot
+![image](https://github.com/TraviTago/tago-api/assets/50009240/29223600-bf5b-43b9-806e-1619056c2401)
 
 
 ## commmit message
